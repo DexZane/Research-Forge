@@ -1,5 +1,7 @@
 # Research Forge
 
+[English](README.md) · [简体中文](README.zh-CN.md)
+
 > **Do not ask whether a research idea sounds novel. Try to prove that it is not.**
 
 Research Forge is a stateful, adversarial research-direction Skill for AI and deep-learning method research. It turns a vague topic or a favored idea into an evidence-linked `GO`, `HOLD`, `REFINE`, `HOLD_RESOURCE`, or `KILL` decision—before expensive experiments begin.
@@ -287,6 +289,12 @@ Run the scientific structure and behavior acceptance suite:
 
 ```bash
 python3 tests/run_acceptance.py --skill-root .
+```
+
+Run the bilingual README check:
+
+```bash
+python3 tests/check_bilingual_readme.py
 ```
 
 The acceptance material also includes human-readable cases for state transitions, evidence propagation, novelty attacks, reasoning integrity, and adversarial pressure under [`tests/`](tests/acceptance-tests.md).
