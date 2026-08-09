@@ -1,0 +1,30 @@
+experiment:
+  id: EX-0001
+  stage: E0
+  cost_tier: F0
+  title: Cheapest discriminating test
+  hypothesis_id: H-0001
+  competing_hypothesis_ids: []
+  prediction_ids: []
+  variable:
+    manipulated: null
+    observed: null
+  controls: []
+  baseline_ids: []
+  diagnostic_metric_ids: []
+  primary_setting: null
+  primary_stratification: []
+  expected_if_true: null
+  expected_if_false: null
+  go_if: []
+  hold_if: []
+  kill_if: []
+  refine_if: []
+  ambiguity_action: HOLD
+  estimated_cost:
+    compute: null
+    time: null
+    engineering: null
+  prerequisites: []
+  preregistration_status: DRAFT
+  execution_status: NOT_RUN

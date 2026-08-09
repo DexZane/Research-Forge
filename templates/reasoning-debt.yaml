@@ -1,0 +1,16 @@
+reasoning_debt:
+  id: RD-0001
+  type: MISSING_PRIMARY_SOURCE
+  statement: Decision-relevant uncertainty
+  severity: BLOCKING
+  affected_ids: []
+  blocks:
+    states: []
+    gates: []
+    decisions: []
+  evidence_needed: null
+  resolution_action: null
+  status: OPEN
+  created_at: "2026-08-09T00:00:00Z"
+  resolved_at: null
+  resolution_evidence_ids: []

@@ -1,0 +1,18 @@
+diagnostic_metric:
+  id: DM-0001
+  name: Mechanism diagnostic
+  definition: null
+  scientific_question: null
+  construct: null
+  computation: null
+  baseline_applicable: true
+  method_independent: true
+  boundary_interpretation: null
+  expected_if_hypothesis_true: null
+  expected_if_hypothesis_false: null
+  confounders: []
+  alternative_metric_ids: []
+  linked_prediction_ids: []
+  required_hooks: []
+  construct_validity: UNASSESSED
+  status: DRAFT

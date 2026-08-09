@@ -1,0 +1,24 @@
+research_state:
+  project_id: research-project-0001
+  schema_version: "1.0"
+  state: S00_INTAKE
+  state_iteration: 1
+  status: ACTIVE
+  mode: EXPLORATION
+  pending_gate: NONE
+  active_candidate_ids: []
+  primary_candidate_id: null
+  backup_candidate_ids: []
+  active_hypothesis_ids: []
+  critical_threat_ids: []
+  open_contradiction_ids: []
+  blocking_reasoning_debt_ids: []
+  search_status: ACTIVE
+  search_cutoff_date: "2026-08-09"
+  scientific_decision: UNDECIDED
+  execution_decision: UNDECIDED
+  publication_tier: UNASSESSED
+  latest_snapshot_id: null
+  last_committed_transaction: null
+  version: 1
+  updated_at: "2026-08-09T00:00:00Z"

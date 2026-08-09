@@ -1,0 +1,15 @@
+contradiction:
+  id: CT-0001
+  type: EVIDENCE_CONFLICT
+  statement: Conflicting bounded statements
+  side_a_evidence_ids: []
+  side_b_evidence_ids: []
+  affected_claim_ids: []
+  affected_decisions: []
+  scope_comparison: null
+  status: OPEN
+  severity: HIGH
+  blocking: true
+  reconciliation_action: null
+  resolution_evidence_ids: []
+  confidence_impact: DOWNGRADE

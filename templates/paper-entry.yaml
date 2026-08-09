@@ -1,0 +1,21 @@
+paper:
+  id: P-0001
+  family_id: PF-0001
+  canonical: true
+  title: Example paper title
+  authors: []
+  year: 2026
+  publication_status: PREPRINT
+  venue: arXiv
+  identifiers:
+    doi: null
+    arxiv: null
+    url: null
+  versions: []
+  official_code:
+    url: null
+    commit: null
+  reading_tier: R0
+  research_lines: []
+  source_verified: false
+  notes: null

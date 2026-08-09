@@ -1,0 +1,20 @@
+claim:
+  id: CL-0001
+  statement: Bounded claim statement
+  claim_type: FACTUAL
+  epistemic_status: FACT
+  scope:
+    task: null
+    population_or_data: null
+    model: null
+    conditions: []
+  supporting_evidence_ids: []
+  opposing_evidence_ids: []
+  limiting_evidence_ids: []
+  parent_claim_ids: []
+  dependency_edges: []
+  status: ACTIVE
+  confidence: MEDIUM
+  confidence_rationale: null
+  version: 1
+  supersedes: null

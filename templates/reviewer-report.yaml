@@ -1,0 +1,16 @@
+reviewer_report:
+  id: PV-0001
+  role: R_N_NOVELTY
+  dossier_snapshot_id: SNAP-0001
+  independent_first_pass: true
+  verdict: MAJOR_CONCERNS
+  strongest_attack: null
+  fatal_issues: []
+  major_issues: []
+  minor_issues: []
+  required_evidence: []
+  affected_ids: []
+  evidence_backed_defense: null
+  confidence: MEDIUM
+  recommendation: REFINE
+  frozen_at: "2026-08-09T00:00:00Z"

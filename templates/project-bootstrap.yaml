@@ -1,0 +1,38 @@
+project:
+  id: research-project-0001
+  slug: example-project
+  title: Example research project
+  mode: EXPLORATION
+  created_at: "2026-08-09T00:00:00Z"
+  research_forge_version: "1.0.0"
+  root: ./example-project
+  scope_status: DRAFT
+  user_constraints: []
+  user_preferences: []
+workspace:
+  project_file: PROJECT.md
+  directories:
+    - state
+    - reports
+    - papers
+    - history
+    - snapshots
+    - checkpoints
+    - handoff
+    - results
+  state_files:
+    - state/research_state.yaml
+    - state/paper_registry.yaml
+    - state/evidence_ledger.yaml
+    - state/claim_graph.yaml
+    - state/threat_ledger.yaml
+    - state/contradiction_ledger.yaml
+    - state/candidate_registry.yaml
+    - state/hypothesis_ledger.yaml
+    - state/prediction_registry.yaml
+    - state/diagnostic_registry.yaml
+    - state/experiment_registry.yaml
+    - state/reasoning_debt.yaml
+    - state/search_registry.yaml
+    - state/resource_profile.yaml
+    - state/decision_log.yaml

@@ -1,0 +1,28 @@
+evidence_unit:
+  id: EU-0001
+  source_type: PAPER
+  source_id: P-0001
+  source_version: null
+  locator:
+    section: null
+    page: null
+    figure_table_equation: null
+    code_path_commit: null
+  evidence_type: TEXTUAL_CLAIM
+  content_summary: null
+  scope:
+    task: null
+    dataset: null
+    model: null
+    conditions: []
+  directness: DIRECT
+  strength: MODERATE
+  polarity: SUPPORTS
+  epistemic_interpretation: FACT
+  reading_tier: R2
+  verification_status: VERIFIED
+  independence_group: IG-0001
+  affected_claim_ids: []
+  contradiction_ids: []
+  extracted_by: ORCHESTRATOR
+  extracted_at: "2026-08-09T00:00:00Z"

@@ -1,0 +1,19 @@
+candidate:
+  id: C-0001
+  parent_candidate_ids: []
+  relation_to_parent: ORIGIN
+  title: Mechanism-oriented candidate
+  research_question: null
+  mechanism_question: null
+  initial_gap: null
+  observable_prediction_ids: []
+  closest_known_work_ids: []
+  threat_ids: []
+  obvious_risks: []
+  implementation_guess: null
+  novelty_status: UNVERIFIED
+  residual_gap_class: UNASSESSED
+  status: ACTIVE
+  kill_reason: null
+  evidence_ids: []
+  version: 1

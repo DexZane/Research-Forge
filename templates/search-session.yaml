@@ -1,0 +1,20 @@
+search_session:
+  id: SS-0001
+  intent: SI5_ADVERSARIAL_NOVELTY
+  decision_question: null
+  candidate_ids: []
+  concepts: []
+  scope: null
+  cutoff_date: "2026-08-09"
+  sources: []
+  queries: []
+  exclusions: []
+  paper_family_ids_added: []
+  evidence_ids_added: []
+  coverage_cells_updated: []
+  decision_impact: NONE
+  saturation_before: ACTIVE
+  saturation_after: ACTIVE
+  uncovered_cells: []
+  next_queries: []
+  executed_at: "2026-08-09T00:00:00Z"

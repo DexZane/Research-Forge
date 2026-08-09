@@ -1,0 +1,16 @@
+prediction:
+  id: PR-0001
+  hypothesis_id: H-0001
+  construct: null
+  operationalization: null
+  condition_or_stratum: null
+  expected_if_true: null
+  expected_if_false: null
+  expected_pattern_type: DIRECTIONAL
+  diagnostic_metric_ids: []
+  alternative_metric_ids: []
+  confounders: []
+  falsifier_id: null
+  decision_impact: null
+  primary: true
+  status: PREREGISTERED

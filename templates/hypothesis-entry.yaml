@@ -1,0 +1,22 @@
+hypothesis:
+  id: H-0001
+  candidate_id: C-0001
+  version: 1
+  ladder_level: H1_ASSOCIATIONAL
+  statement: Method-free, scoped relationship
+  observation_gap: null
+  known_mechanism_a_claim_ids: []
+  known_mechanism_b_claim_ids: []
+  missing_link: null
+  scope_conditions: []
+  mechanism_chain: []
+  prediction_ids: []
+  competing_hypothesis_ids: []
+  falsifier_ids: []
+  supporting_evidence_ids: []
+  opposing_evidence_ids: []
+  epistemic_status: HYPOTHESIS
+  status: DRAFT
+  confidence: LOW
+  preregistration_version: null
+  supersedes: null

@@ -1,0 +1,25 @@
+threat:
+  id: TH-0001
+  candidate_id: C-0001
+  source_id: P-0001
+  source_family_id: PF-0001
+  level: T3
+  status: PRELIMINARY
+  reading_tier: R2
+  overlap:
+    problem: NONE
+    observation: PARTIAL
+    hypothesis: NONE
+    task: PARTIAL
+    mathematical_formulation: NONE
+    mechanism: PARTIAL
+    training: NONE
+    inference: NONE
+    experiment: NONE
+  evidence_ids: []
+  affected_claim_ids: []
+  strongest_reasonable_interpretation: null
+  residual_gap: null
+  confidence: MEDIUM
+  formal_verification_complete: false
+  history: []
