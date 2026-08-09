@@ -157,7 +157,7 @@ Research Forge 定义协议，但不会自动获得数据库访问、自动下�
 当主机支持按名称调用已安装的 Skill 时，使用：
 
 ```text
-$research-forge
+/research-forge
 ```
 
 如果主机使用菜单或其他调用约定，请按名称选择 `research-forge`。输入可以是宽泛研究方向、已有想法，或需要恢复的项目绝对路径。
