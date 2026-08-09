@@ -159,7 +159,7 @@ Installing the Skill and creating a research project are different operations. D
 When the host exposes installed Skills by name, invoke:
 
 ```text
-$research-forge
+/research-forge
 ```
 
 If the host uses a menu or another invocation convention, select `research-forge` by name. Provide either a broad research direction, an existing idea, or the absolute path of a project to resume.
