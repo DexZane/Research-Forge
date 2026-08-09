@@ -169,7 +169,7 @@ Research Forge 会创建或恢复独立的 **research-project workspace**。Skil
 当你想在承诺一个具体想法之前先梳理主题，使用 `EXPLORATION`。
 
 ```text
-$research-forge
+/research-forge
 
 Use EXPLORATION mode.
 Topic: robust tiny-object detection for edge deployment.
@@ -189,7 +189,7 @@ human gate. Do not treat the starting observation as a verified cause.
 当你已经有候选方法或新颖性主张时，使用 `IDEA_VALIDATION`。
 
 ```text
-$research-forge
+/research-forge
 
 Use IDEA_VALIDATION mode.
 Candidate idea: replace the YOLO feature-fusion block with a state-space module
@@ -211,7 +211,7 @@ innovation peeling. Stop at every human gate.
 从项目根目录恢复，而不是依靠记忆重新口述研究历史。
 
 ```text
-$research-forge
+/research-forge
 
 Resume the Research Forge project at:
 /absolute/path/to/tiny-object-research
