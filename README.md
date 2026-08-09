@@ -171,7 +171,7 @@ Research Forge creates or resumes a separate **research-project workspace**. The
 Use `EXPLORATION` when you want to map a topic before committing to an idea.
 
 ```text
-$research-forge
+/research-forge
 
 Use EXPLORATION mode.
 Topic: robust tiny-object detection for edge deployment.
@@ -191,7 +191,7 @@ Expected early behavior: S00 records the observation as unverified, G1 locks the
 Use `IDEA_VALIDATION` when you already have a candidate method or novelty claim.
 
 ```text
-$research-forge
+/research-forge
 
 Use IDEA_VALIDATION mode.
 Candidate idea: replace the YOLO feature-fusion block with a state-space module
@@ -213,7 +213,7 @@ The mode does not assume the idea is novel. It preserves the original candidate 
 Resume from the project root rather than restating the research history from memory.
 
 ```text
-$research-forge
+/research-forge
 
 Resume the Research Forge project at:
 /absolute/path/to/tiny-object-research
