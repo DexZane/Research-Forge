@@ -157,7 +157,7 @@ Research Forge 定义协议，但不会自动获得数据库访问、自动下�
 当主机支持按名称调用已安装的 Skill 时，使用：
 
 ```text
-$research-forge
+/research-forge
 ```
 
 如果主机使用菜单或其他调用约定，请按名称选择 `research-forge`。输入可以是宽泛研究方向、已有想法，或需要恢复的项目绝对路径。
@@ -169,7 +169,7 @@ Research Forge 会创建或恢复独立的 **research-project workspace**。Skil
 当你想在承诺一个具体想法之前先梳理主题，使用 `EXPLORATION`。
 
 ```text
-$research-forge
+/research-forge
 
 Use EXPLORATION mode.
 Topic: robust tiny-object detection for edge deployment.
@@ -189,7 +189,7 @@ human gate. Do not treat the starting observation as a verified cause.
 当你已经有候选方法或新颖性主张时，使用 `IDEA_VALIDATION`。
 
 ```text
-$research-forge
+/research-forge
 
 Use IDEA_VALIDATION mode.
 Candidate idea: replace the YOLO feature-fusion block with a state-space module
@@ -211,7 +211,7 @@ innovation peeling. Stop at every human gate.
 从项目根目录恢复，而不是依靠记忆重新口述研究历史。
 
 ```text
-$research-forge
+/research-forge
 
 Resume the Research Forge project at:
 /absolute/path/to/tiny-object-research

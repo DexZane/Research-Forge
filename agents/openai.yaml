@@ -1,4 +1,4 @@
 interface:
   display_name: "Research Forge"
   short_description: "Forge evidence-backed, falsifiable AI research projects"
-  default_prompt: "Use $research-forge to investigate this AI-method research direction and produce an experiment-ready decision dossier."
+  default_prompt: "Use /research-forge to investigate this AI-method research direction and produce an experiment-ready decision dossier."

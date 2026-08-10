@@ -45,7 +45,7 @@ def main() -> int:
     required_terms = (
         "EXPLORATION",
         "IDEA_VALIDATION",
-        "$research-forge",
+        "/research-forge",
         "G1_SCOPE_LOCK",
         "G2_PORTFOLIO_REVIEW",
         "G3_HYPOTHESIS_LOCK",
