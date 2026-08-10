@@ -4,6 +4,10 @@
 
 > **不要问一个研究想法听起来是否新颖；先尝试证明它并不新颖。**
 
+<p align="center">
+  <img src="assets/research-forge-banner-zh.png" alt="Research Forge——面向 AI 与深度学习的对抗式科研选题 Skill" width="100%">
+</p>
+
 ## 概述
 
 Research Forge 是一套面向 AI 与深度学习方法研究的、有状态的对抗式科研选题 Skill。它把一个宽泛的研究方向或一个已经被偏爱的想法，推进为有证据链接的 `GO`、`HOLD`、`REFINE`、`HOLD_RESOURCE` 或 `KILL` 决策，并把高成本实验放到后面。
@@ -276,6 +280,7 @@ research-forge/
 ├── protocols/            # 跨状态科研规则
 ├── states/               # S00–S18 状态契约
 ├── domain/ai-methods/    # AI 方法诊断知识
+├── assets/               # README 横幅与宣传海报素材
 ├── templates/            # 记录与报告形状
 ├── schemas/              # ID、枚举、有效性和跨记录约束
 ├── runtime/              # 启动、上下文、Gate、事务、恢复、交接、BibTeX 导出

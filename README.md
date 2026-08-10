@@ -4,6 +4,10 @@
 
 > **Do not ask whether a research idea sounds novel. Try to prove that it is not.**
 
+<p align="center">
+  <img src="assets/research-forge-banner-en.png" alt="Research Forge — adversarial research direction for AI and deep learning" width="100%">
+</p>
+
 Research Forge is a stateful, adversarial research-direction Skill for AI and deep-learning method research. It turns a vague topic or a favored idea into an evidence-linked `GO`, `HOLD`, `REFINE`, `HOLD_RESOURCE`, or `KILL` decision—before expensive experiments begin.
 
 **Status:** v1 protocol implementation. The repository contains deterministic contract checks, but it does not claim an empirical performance advantage over other Skills or guarantee research success.
@@ -278,6 +282,7 @@ research-forge/
 ├── protocols/            # Cross-state scientific rules
 ├── states/               # S00–S18 state contracts
 ├── domain/ai-methods/    # AI-method diagnostic knowledge
+├── assets/               # README banners and promotional artwork
 ├── templates/            # Record and report shapes
 ├── schemas/              # IDs, enums, validity, cross-record constraints
 ├── runtime/              # Boot, context, gates, transactions, recovery, handoff, BibTeX export
