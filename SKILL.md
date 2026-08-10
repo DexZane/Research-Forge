@@ -188,7 +188,7 @@ Before every gate, formal threat upgrade, candidate kill, project decision, or h
 - `schemas/`: validity and cross-record constraints.
 - `runtime/`: lifecycle, recovery, commit, gates, handoff.
 - `runtime/bibliography.md`: project-level BibTeX capture/export lifecycle; generated `.bib` files never live in the Skill repository.
-- `examples/`: correct execution patterns.
-- `tests/`: acceptance contracts and deterministic validation.
+
+This install-only distribution intentionally contains only the runtime Skill files above. Examples, acceptance tests, design notes, and promotional assets remain in the source repository and are not required for execution.
 
 Keep generated project data outside this Skill in a dedicated research-project workspace.
