@@ -6,7 +6,7 @@ G4 explicitly approved GO; S18 dossier validates; final freshness/integrity chec
 
 ## Package
 
-Deliver human dossier plus `experiment-handoff.yaml` with project/snapshot/version, candidate, locked hypotheses/predictions/diagnostics, first E0 experiment, controls, fair baselines, datasets, hooks, preregistered decisions, resource assumptions, unknowns, and exact next action.
+Deliver human dossier plus `experiment-handoff.yaml` with project/snapshot/version, candidate, locked hypotheses/predictions/diagnostics, first E0 experiment, controls, fair baselines, datasets, hooks, preregistered decisions, resource assumptions, unknowns, exact next action, and a link to the validated `exports/references.bib` plus its record count and excluded paper IDs.
 
 ## Downstream Contract
 
@@ -20,4 +20,4 @@ Return experiment ID/version, preregistration version, code/data/environment ide
 
 ## Completion
 
-Handoff is complete when both artifacts resolve all referenced IDs/versions and the downstream first action is executable without inventing scientific choices.
+Handoff is complete when both artifacts resolve all referenced IDs/versions, the bibliography export is deterministic and metadata-only, and the downstream first action is executable without inventing scientific choices.

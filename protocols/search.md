@@ -50,6 +50,10 @@ Verify venue and publication year; distinguish preprint date, online date, confe
 
 Search three circles: exact task, exact mechanism, mechanism intersection. For anchor and T4/T5 papers perform backward, forward, lateral, author, and sequel chaining. Group duplicate versions into paper families.
 
+## Paper-family normalization
+
+Merge paper records by normalized DOI first. If DOI is absent, use a normalized arXiv/OpenReview/PMID identifier; otherwise compare normalized title tokens and first-author surname, treating records as the same family only when the surnames match and title Jaccard similarity is at least `0.90`. Normalize DOI prefixes and case, remove punctuation/English stopwords from title tokens, and collapse whitespace. Preserve every source, version, and search-session provenance after a merge; unresolved metadata disagreement becomes a contradiction or reasoning debt.
+
 ## Mechanism-neighborhood Expansion
 
 Cross domains only after writing a transfer question: what mathematical object or mechanism is shared, and which task assumptions differ? Cross-domain work can weaken mechanism originality while leaving task-specific question novelty intact.
@@ -83,3 +87,7 @@ Track coverage over task, failure mode, mechanism, mathematical object, historic
 ## Reproducibility
 
 Save exact query, date, source, filters, results reviewed, paper families added, decision impact, and next query. Never report a search as complete from memory or a single search engine.
+
+## Bibliographic capture
+
+During the same search pass, create or merge a `P-` paper record and capture its DOI/arXiv/OpenReview/PMID identifier, source URL, ordered authors, title, venue, publication-year semantics, and `SS-` search-session provenance. Apply [Bibliography](bibliography.md) immediately: provisional records may support discovery and threat search, but only `VERIFIED` records with no unresolved conflicts become `export_eligible` and enter the final `exports/references.bib` Zotero artifact. BibTeX export does not upgrade reading depth or evidence status.

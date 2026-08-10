@@ -77,6 +77,10 @@ States are `S00_INTAKE` through `S18_EXPERIMENT_DOSSIER`. Gates: `NONE`, `G1_SCO
 - Evidence type: `TEXTUAL_CLAIM`, `EQUATION`, `ALGORITHM`, `EXPERIMENT`, `ABLATION`, `FIGURE`, `TABLE`, `LIMITATION`, `FAILURE_CASE`, `CODE`, `CONFIG`, `DATASET_SPEC`, `NEGATIVE_RESULT`, `REPLICATION`.
 - Verification: `UNVERIFIED`, `PARTIALLY_VERIFIED`, `VERIFIED`.
 
+## Bibliography
+
+Bibliography records reuse the immutable `P-` paper ID and the existing verification enum. The canonical project artifact is `exports/references.bib`; `export_eligible` is a derived boolean, not a new epistemic or lifecycle status. A `VERIFIED` citation is bibliographic metadata only and does not promote evidence, claims, threats, hypotheses, or reading tier.
+
 ## Claims, Threats, and Contradictions
 
 - Claim type: `FACTUAL`, `INTERPRETIVE`, `MECHANISTIC`, `NOVELTY`, `FEASIBILITY`, `DECISION`, `BOUNDARY`.

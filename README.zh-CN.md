@@ -250,6 +250,24 @@ Research Forge 必须在每个 Gate 停下来，等待明确决定：
 
 在 G4 之前，主要输出是有版本的 evidence、claim、threat、candidate、hypothesis、contradiction、search 和 decision 记录。明确 GO 后，[S18](states/S18-experiment-dossier.md) 生成 experiment dossier 和机器可读的 handoff。
 
+## Zotero/BibTeX 文献导出
+
+Research Forge 会在建立证据图和新颖性地图的同一轮文献检索中记录书目信息。每篇文献都保留稳定的 `P-` ID、标识符、来源 URL、检索会话 provenance、核验状态、阅读层级和冲突链接。这与 evidence 明确分开：已核验的书目并不自动成为某个 claim 的证据。
+
+只有经过去重、`verification_status: VERIFIED`、必需字段齐全、存在权威来源或稳定标识符、且没有未解决元数据冲突的记录，才会导出。临时记录或仅来自搜索摘要的结果会留在项目 registry 中，不会进入引用文件。
+
+在 S18，或用户明确请求中间导出时，编排器会在项目 workspace 生成一个确定性的用户文件：
+
+```text
+<research-project>/exports/references.bib
+```
+
+在 Zotero 中选择 `File → Import → A file`，选中该 BibTeX 文件并指定 collection 即可导入。之后由用户使用 Zotero 和全文阅读工作流获取 PDF、做批注和精读。Research Forge 不会自动获取付费论文，不会补写猜测的引用字段，也不会把 BibTeX 当作科研证据。
+
+项目 registry 仍然是 provenance、evidence ID、阅读优先级、被排除的 `P-` 记录和冲突的审计来源。单一 `.bib` 文件保持轻量，便于导入，同时不扁平化 Research Forge 的不确定性模型。
+
+具体的记录、核验和交接顺序见[从检索到 Zotero 的示例](examples/zotero-export.md)。
+
 ## 仓库结构
 
 ```text
@@ -260,7 +278,7 @@ research-forge/
 ├── domain/ai-methods/    # AI 方法诊断知识
 ├── templates/            # 记录与报告形状
 ├── schemas/              # ID、枚举、有效性和跨记录约束
-├── runtime/              # 启动、上下文、Gate、事务、恢复、交接
+├── runtime/              # 启动、上下文、Gate、事务、恢复、交接、BibTeX 导出
 ├── examples/             # 正确执行模式
 └── tests/                # 确定性与场景验收契约
 ```
@@ -281,6 +299,12 @@ python3 tests/check_repository.py
 
 ```bash
 python3 tests/check_readme.py
+```
+
+运行 BibTeX/Zotero 契约检查：
+
+```bash
+python3 tests/check_bibliography.py
 ```
 
 运行科研结构和行为验收套件：

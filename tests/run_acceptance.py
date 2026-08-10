@@ -10,6 +10,8 @@ from pathlib import Path
 
 import yaml
 
+from check_bibliography import run as run_bibliography
+
 
 STATE_FILES = [
     "S00-intake.md", "S01-scope.md", "S02-landscape.md",
@@ -94,6 +96,9 @@ def check_relative_links(root: Path) -> None:
 
 def run(root: Path) -> list[str]:
     passed: list[str] = []
+
+    run_bibliography(root)
+    passed.append("BibTeX/Zotero export contract")
 
     actual_dirs = {p.name for p in root.iterdir() if p.is_dir()}
     assert REQUIRED_TOP_DIRS <= actual_dirs

@@ -252,6 +252,24 @@ GO means “worth testing,” not “guaranteed to work.” It is also not a pub
 
 Before G4, the main outputs are versioned evidence, claim, threat, candidate, hypothesis, contradiction, search, and decision records. After explicit GO, [S18](states/S18-experiment-dossier.md) produces the experiment dossier and machine-readable handoff.
 
+## Zotero/BibTeX reference export
+
+Research Forge records citation metadata during the same literature search that builds its evidence and novelty maps. Each paper keeps a stable `P-` ID, identifiers, source URLs, search-session provenance, verification state, reading tier, and conflict links. This is deliberately separate from evidence: a verified citation is not automatically evidence for a claim.
+
+Only deduplicated records with `verification_status: VERIFIED`, required fields, an authoritative source or stable identifier, and no unresolved metadata conflict are exported. Provisional or snippet-only results stay in the project registry and are excluded from the citation file.
+
+At S18, or when the user explicitly requests an intermediate export, the orchestrator writes one deterministic artifact in the project workspace:
+
+```text
+<research-project>/exports/references.bib
+```
+
+Import it into Zotero with `File → Import → A file`, select the BibTeX file, and choose a collection. Then use Zotero and a full-text reading workflow for PDF acquisition, annotation, and deep reading. Research Forge does not download paywalled papers, add invented citation fields, or turn BibTeX into scientific evidence.
+
+The project registry remains the audit source for provenance, evidence IDs, reading priorities, excluded `P-` records, and conflicts. The single `.bib` artifact is intentionally lightweight so it can be imported without flattening Research Forge’s uncertainty model.
+
+See the concrete [search-to-Zotero example](examples/zotero-export.md) for the record, verification, and handoff sequence.
+
 ## Repository architecture
 
 ```text
@@ -262,7 +280,7 @@ research-forge/
 ├── domain/ai-methods/    # AI-method diagnostic knowledge
 ├── templates/            # Record and report shapes
 ├── schemas/              # IDs, enums, validity, cross-record constraints
-├── runtime/              # Boot, context, gates, transactions, recovery, handoff
+├── runtime/              # Boot, context, gates, transactions, recovery, handoff, BibTeX export
 ├── examples/             # Correct execution patterns
 └── tests/                # Deterministic and scenario acceptance contracts
 ```
@@ -283,6 +301,12 @@ Run the public README contract check:
 
 ```bash
 python3 tests/check_readme.py
+```
+
+Run the BibTeX/Zotero contract check:
+
+```bash
+python3 tests/check_bibliography.py
 ```
 
 Run the scientific structure and behavior acceptance suite:

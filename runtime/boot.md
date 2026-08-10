@@ -3,13 +3,13 @@
 ## New Project
 
 1. Select a separate project root; never write project state inside the Skill.
-2. Instantiate `project-bootstrap.yaml` and required directories/registries.
+2. Instantiate `project-bootstrap.yaml` and required directories/registries, including the paper bibliography fields and `exports/references.bib` artifact path.
 3. Create `PROJECT.md`, `research_state.yaml` at S00, initial decision log, and immutable bootstrap snapshot.
 4. Validate IDs, paths, schema version, and permissions.
 
 ## Existing Project
 
-Load research state, latest immutable snapshot, active candidates/hypotheses, T4/T5 threats, active claims, contradictions, blocking debt, search status/cutoff, and last decisions. Compare state/registry/report versions and pending gate. Resume only after validation.
+Load research state, latest immutable snapshot, active candidates/hypotheses, T4/T5 threats, active claims, contradictions, blocking debt, search status/cutoff, bibliography registry/export status, and last decisions. Compare state/registry/report versions and pending gate. Resume only after validation.
 
 ## Corrupted or Partial Project
 

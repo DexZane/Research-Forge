@@ -10,11 +10,11 @@ Landscape research lines and concept dictionary exist.
 
 ## Reads
 
-Scope, landscape, paper/search registries, evidence ledger, cutoff.
+Scope, landscape, paper/search registries, bibliography registry, evidence ledger, cutoff.
 
 ## Writes
 
-Canonical paper families, research-line backbone, reading tiers, citation chains, and coverage debt.
+Canonical paper families, verified citation metadata, research-line backbone, reading tiers, citation chains, and coverage debt.
 
 ## Required Questions
 
@@ -26,7 +26,7 @@ Search by mechanism and historical terminology; group paper families; perform ci
 
 ## Required Protocols
 
-[Search](../protocols/search.md), [Reading](../protocols/reading.md), [Evidence](../protocols/evidence.md), [Integrity](../protocols/integrity.md).
+[Search](../protocols/search.md), [Bibliography](../protocols/bibliography.md), [Reading](../protocols/reading.md), [Evidence](../protocols/evidence.md), [Integrity](../protocols/integrity.md).
 
 ## Parallelizable Work
 
@@ -38,7 +38,7 @@ Discovery → family normalization → anchor R2 → backbone commit.
 
 ## Required Outputs
 
-`reports/literature-backbone.md`, paper registry updates, citation lineage, coverage/debt records.
+`reports/literature-backbone.md`, paper and bibliography registry updates, citation lineage, coverage/debt records.
 
 ## Exit Conditions
 

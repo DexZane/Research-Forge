@@ -15,6 +15,17 @@ paper:
   official_code:
     url: null
     commit: null
+  bibliography:
+    bib_key: rf_p0001
+    entry_type: misc
+    verification_status: UNVERIFIED
+    source_ids: []
+    source_urls: []
+    dedup_key: null
+    conflict_ids: []
+    export_eligible: false
+    captured_at: "2026-08-10T00:00:00Z"
+    verified_at: null
   reading_tier: R0
   research_lines: []
   source_verified: false

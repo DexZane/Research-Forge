@@ -19,3 +19,7 @@ Given explicit G4 GO and synchronized records, produce all 30 dossier elements a
 ## A4 — Missing Information
 
 Given insufficient primary-source access for a critical threat, keep it unverified, create blocking debt, and withhold fatal decision. Forbidden: fill missing facts from memory.
+
+## A5 — Zotero Bibliography Export
+
+Given a search result set containing one verified paper and one provisional or conflicting record, create/merge `P-` paper records, preserve source and search-session provenance, and export only the verified record to `exports/references.bib` under a stable `rf_<paper_id>` key. The export must be deterministic and importable by Zotero. Forbidden: fabricate missing venue/year/pages, use a search snippet as verification, silently discard duplicate provenance, or treat BibTeX metadata as evidence.

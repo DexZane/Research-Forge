@@ -63,7 +63,8 @@ Read [runtime/boot.md](runtime/boot.md). For an existing project, load in this o
 6. active claims and open contradictions
 7. blocking/high reasoning debt
 8. search saturation/freshness state
-9. last major decisions and pending gate
+9. bibliography registry/export status
+10. last major decisions and pending gate
 
 Validate before resuming. If state is partial or corrupt, follow [runtime/recovery.md](runtime/recovery.md); do not silently reconstruct uncertain facts.
 
@@ -97,7 +98,7 @@ Do not skip a state whose exit artifacts are required downstream. A state may re
 
 ## Active Context
 
-Load only decision-relevant records. Use [runtime/context-loading.md](runtime/context-loading.md). Always include current state, primary candidates, critical claims, open T4/T5 threats, open contradictions, blocking debt, pending gate, and evidence required for the next decision. Reference stable IDs instead of copying whole ledgers.
+Load only decision-relevant records. Use [runtime/context-loading.md](runtime/context-loading.md). Always include current state, primary candidates, critical claims, open T4/T5 threats, open contradictions, blocking debt, bibliography export status, pending gate, and evidence required for the next decision. Reference stable IDs instead of copying whole ledgers.
 
 ## Protocol Routing
 
@@ -108,6 +109,7 @@ Load a protocol when the state or decision needs it:
 | Epistemic and decision reasoning | [protocols/reasoning.md](protocols/reasoning.md) |
 | Evidence units, provenance, independence | [protocols/evidence.md](protocols/evidence.md) |
 | Query graph, freshness, saturation | [protocols/search.md](protocols/search.md) |
+| Bibliographic capture, deduplication, and Zotero export | [protocols/bibliography.md](protocols/bibliography.md) and [runtime/bibliography.md](runtime/bibliography.md) |
 | R0–R4 reading depth | [protocols/reading.md](protocols/reading.md) |
 | T0–T5, peeling, boundaries, collisions | [protocols/novelty.md](protocols/novelty.md) |
 | Mechanism bridge, H0–H3, predictions | [protocols/hypothesis.md](protocols/hypothesis.md) |
@@ -185,6 +187,7 @@ Before every gate, formal threat upgrade, candidate kill, project decision, or h
 - `templates/`: blank/example record shapes.
 - `schemas/`: validity and cross-record constraints.
 - `runtime/`: lifecycle, recovery, commit, gates, handoff.
+- `runtime/bibliography.md`: project-level BibTeX capture/export lifecycle; generated `.bib` files never live in the Skill repository.
 - `examples/`: correct execution patterns.
 - `tests/`: acceptance contracts and deterministic validation.
 

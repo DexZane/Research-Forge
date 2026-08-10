@@ -14,7 +14,7 @@ Paper registry/families, evidence ledger, landscape taxonomy, R2 notes.
 
 ## Writes
 
-Mechanism matrix, normalized claims, not-addressed inferences, contradiction records, and preliminary cross-line gaps.
+Mechanism matrix, normalized claims, synchronized citation metadata, not-addressed inferences, contradiction records, and preliminary cross-line gaps.
 
 ## Required Questions
 
@@ -26,7 +26,7 @@ Require R2 for formal entries; distinguish author-stated limitations from orches
 
 ## Required Protocols
 
-[Reading](../protocols/reading.md), [Evidence](../protocols/evidence.md), [Reasoning](../protocols/reasoning.md), [Contradiction](../protocols/contradiction.md).
+[Reading](../protocols/reading.md), [Bibliography](../protocols/bibliography.md), [Evidence](../protocols/evidence.md), [Reasoning](../protocols/reasoning.md), [Contradiction](../protocols/contradiction.md).
 
 ## Parallelizable Work
 
@@ -38,7 +38,7 @@ Entity normalization and contradiction reconciliation before matrix synthesis.
 
 ## Required Outputs
 
-`reports/paper-matrix.md`, matrix records, normalized claim/evidence links, candidate-gap list.
+`reports/paper-matrix.md`, matrix records, normalized claim/evidence links, synchronized bibliography records, candidate-gap list.
 
 ## Exit Conditions
 

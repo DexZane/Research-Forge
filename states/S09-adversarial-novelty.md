@@ -10,11 +10,11 @@ G2 explicitly selected 1–3 finalists and search scope/cutoff are current.
 
 ## Reads
 
-Finalists, genealogy, claims, all search/paper/evidence/threat records, concept dictionary, latest snapshot.
+Finalists, genealogy, claims, all search/paper/bibliography/evidence/threat records, concept dictionary, latest snapshot.
 
 ## Writes
 
-Combination query graph, deep evidence, closest-competitor set, formal T0–T5 threats, saturation state, contradictions, emergency packet if triggered.
+Combination query graph, verified competitor citation metadata, deep evidence, closest-competitor set, formal T0–T5 threats, saturation state, contradictions, emergency packet if triggered.
 
 ## Required Questions
 
@@ -26,7 +26,7 @@ Decompose A+B+C+D; expand synonyms/history/neighbors; prioritize last 24 months;
 
 ## Required Protocols
 
-[Search](../protocols/search.md), [Reading](../protocols/reading.md), [Novelty](../protocols/novelty.md), [Evidence](../protocols/evidence.md), [Contradiction](../protocols/contradiction.md), [Integrity](../protocols/integrity.md).
+[Search](../protocols/search.md), [Bibliography](../protocols/bibliography.md), [Reading](../protocols/reading.md), [Novelty](../protocols/novelty.md), [Evidence](../protocols/evidence.md), [Contradiction](../protocols/contradiction.md), [Integrity](../protocols/integrity.md).
 
 ## Parallelizable Work
 

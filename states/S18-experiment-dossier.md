@@ -10,11 +10,11 @@ G4 explicitly approved GO; integrity and freshness checks are current.
 
 ## Reads
 
-All active registries/reports, G4 decision, immutable snapshot, handoff/dossier templates.
+All active registries/reports, bibliography registry, G4 decision, immutable snapshot, handoff/dossier templates.
 
 ## Writes
 
-Final dossier, machine-readable experiment handoff, final snapshot, remaining unknowns, exact next action.
+Final dossier, validated `exports/references.bib`, machine-readable experiment handoff, final snapshot, remaining unknowns, exact next action.
 
 ## Required Questions
 
@@ -26,7 +26,7 @@ Assemble all 30 required elements; run final freshness and integrity sweeps; lin
 
 ## Required Protocols
 
-[Integrity](../protocols/integrity.md), [Falsification](../protocols/falsification.md), [Baseline Fairness](../protocols/baseline-fairness.md), [Handoff](../runtime/handoff.md).
+[Integrity](../protocols/integrity.md), [Bibliography](../protocols/bibliography.md), [Falsification](../protocols/falsification.md), [Baseline Fairness](../protocols/baseline-fairness.md), [Handoff](../runtime/handoff.md), [Bibliography Runtime](../runtime/bibliography.md).
 
 ## Parallelizable Work
 
@@ -34,11 +34,11 @@ Read-only synchronization checks by dossier section; one orchestrator assembles 
 
 ## Sequential Work
 
-Freshness sweep → registry sync → dossier assembly → integrity → immutable snapshot → handoff.
+Freshness sweep → registry sync → bibliography export → dossier assembly → integrity → immutable snapshot → handoff.
 
 ## Required Outputs
 
-Experiment dossier with: title, problem, scope, target, tier; backbone, matrix, red-ocean map, competitors, threats; genealogy, killed claims, boundary, residual, unknowns; hypothesis, known mechanisms, missing link, predictions, alternatives; diagnostics, minimal falsification experiments, controls, baselines, datasets, hooks, decision thresholds; resource estimate, reviewer result, and exact next action. Also `handoff/experiment-handoff.yaml`.
+Experiment dossier with: title, problem, scope, target, tier; backbone, matrix, red-ocean map, competitors, threats; genealogy, killed claims, boundary, residual, unknowns; hypothesis, known mechanisms, missing link, predictions, alternatives; diagnostics, minimal falsification experiments, controls, baselines, datasets, hooks, decision thresholds; resource estimate, reviewer result, exact next action, and the record count/path for `exports/references.bib`. Also `handoff/experiment-handoff.yaml`.
 
 ## Exit Conditions
 

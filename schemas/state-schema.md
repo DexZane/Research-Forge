@@ -20,6 +20,7 @@ Any state may return to the earliest invalid dependency when a decision record c
 - T4/T5 critical IDs require threat records meeting threat schema.
 - Active hypothesis IDs require G3 at or after S13.
 - `COMPLETE` requires S18 validation and immutable snapshot.
+- At S18, `bibliography.export_path` is `exports/references.bib` and the final snapshot records the validated export timestamp, count, and excluded paper IDs.
 - State version increments once per committed transaction.
 
 ## Recovery

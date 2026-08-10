@@ -1,0 +1,34 @@
+bibliography_record:
+  paper_id: P-0001
+  family_id: PF-0001
+  bib_key: rf_p0001
+  entry_type: inproceedings
+  title: Attention Is All You Need
+  authors:
+    - family: Vaswani
+      given: Ashish
+    - family: Shazeer
+      given: Noam
+    - family: Parmar
+      given: Niki
+  year: 2017
+  venue: Advances in Neural Information Processing Systems
+  identifiers:
+    doi: 10.48550/arXiv.1706.03762
+    arxiv: 1706.03762
+    openreview: null
+    pmid: null
+    url: https://arxiv.org/abs/1706.03762
+  source_ids:
+    - SS-0001
+  source_urls:
+    - https://arxiv.org/abs/1706.03762
+  dedup_key: arxiv:1706.03762
+  verification_status: VERIFIED
+  reading_tier: R2
+  evidence_ids: []
+  conflict_ids: []
+  export_eligible: true
+  captured_at: "2026-08-10T00:00:00Z"
+  verified_at: "2026-08-10T00:00:00Z"
+  notes: Citation metadata only; evidence remains in the evidence ledger.

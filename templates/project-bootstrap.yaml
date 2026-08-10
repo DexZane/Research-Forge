@@ -15,6 +15,7 @@ workspace:
     - state
     - reports
     - papers
+    - exports
     - history
     - snapshots
     - checkpoints
@@ -34,5 +35,6 @@ workspace:
     - state/experiment_registry.yaml
     - state/reasoning_debt.yaml
     - state/search_registry.yaml
+    - exports/references.bib
     - state/resource_profile.yaml
     - state/decision_log.yaml

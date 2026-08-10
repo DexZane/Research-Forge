@@ -1,6 +1,6 @@
 research_state:
   project_id: research-project-0001
-  schema_version: "1.0"
+  schema_version: "1.1"
   state: S00_INTAKE
   state_iteration: 1
   status: ACTIVE
@@ -20,5 +20,15 @@ research_state:
   publication_tier: UNASSESSED
   latest_snapshot_id: null
   last_committed_transaction: null
+  registries:
+    papers: state/paper_registry.yaml
+    evidence: state/evidence_ledger.yaml
+    search_sessions: state/search_registry.yaml
+  bibliography:
+    export_path: exports/references.bib
+    last_export_transaction: null
+    last_export_at: null
+    exported_record_count: 0
+    excluded_paper_ids: []
   version: 1
   updated_at: "2026-08-09T00:00:00Z"
