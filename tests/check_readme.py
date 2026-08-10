@@ -25,6 +25,7 @@ def main() -> int:
         "## What makes it different",
         "## How to use",
         "### Install",
+        "### Agent compatibility and install locations",
         "### Invoke",
         "#### 1. Explore a broad direction",
         "#### 2. Validate an existing idea",
@@ -66,6 +67,17 @@ def main() -> int:
         "python3 tests/check_readme.py",
         "python3 tests/run_acceptance.py --skill-root .",
         "This is a contract comparison, not an empirical benchmark.",
+        "Claude Code",
+        "~/.claude/skills/research-forge/",
+        "Gemini CLI",
+        "~/.gemini/skills/research-forge/",
+        "GitHub Copilot CLI",
+        "~/.copilot/skills/research-forge/",
+        "OpenCode",
+        "~/.config/opencode/skills/research-forge/",
+        "Cursor",
+        ".cursor/rules/research-forge.mdc",
+        "Do not copy only the raw `SKILL.md`",
     )
     for term in required_terms:
         if term not in text:

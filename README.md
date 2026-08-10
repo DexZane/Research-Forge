@@ -168,6 +168,22 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
 The corresponding raw URL is useful for inspecting the entry file:
 [`SKILL.md`](https://raw.githubusercontent.com/DexZane/Research-Forge/skill-only/SKILL.md). A raw URL downloads one file; use the GitHub tree URL or the installer command for the complete Skill.
 
+### Agent compatibility and install locations
+
+Research Forge uses the directory-based Agent Skills layout: keep `SKILL.md` at the root of a `research-forge/` directory, with `protocols/`, `states/`, `domain/`, `templates/`, `schemas/`, and `runtime/` beside it. The research protocol is portable; automatic discovery and invocation are runtime-specific.
+
+| Agent runtime | User-level location | Project-level location | Support |
+|---|---|---|---|
+| [Codex](https://github.com/openai/skills) | `~/.codex/skills/research-forge/` | Host-specific | Native directory Skill; use the installer above |
+| [Claude Code](https://code.claude.com/docs/en/skills) | `~/.claude/skills/research-forge/` | `.claude/skills/research-forge/` | Native `SKILL.md` support |
+| [Gemini CLI](https://geminicli.com/docs/cli/skills/) | `~/.gemini/skills/research-forge/` or `~/.agents/skills/research-forge/` | `.gemini/skills/research-forge/` or `.agents/skills/research-forge/` | Native Agent Skills support |
+| [GitHub Copilot CLI](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference) | `~/.copilot/skills/research-forge/` or `~/.agents/skills/research-forge/` | `.github/skills/research-forge/`, `.agents/skills/research-forge/`, or `.claude/skills/research-forge/` | Native `SKILL.md` support |
+| [OpenCode](https://opencode.ai/docs/skills) | `~/.config/opencode/skills/research-forge/` or `~/.agents/skills/research-forge/` | `.opencode/skills/research-forge/`, `.agents/skills/research-forge/`, or `.claude/skills/research-forge/` | Native Agent Skills support |
+| [Cursor](https://docs.cursor.com/context/rules-for-ai) | No native `SKILL.md` location | `.cursor/rules/research-forge.mdc` or `.cursor/commands/research-forge.md` | Adapter required; preserve or manually attach the referenced folders |
+| Other or API-only agents | No universal location | Runtime-specific | Manually inject `SKILL.md` and give the agent access to its referenced folders and tools |
+
+For runtimes that support the interoperable `.agents/skills/` alias, copy the complete Skill directory there. `agents/openai.yaml` is Codex UI metadata; other runtimes may ignore it. Do not copy only the raw `SKILL.md`, because the state, protocol, schema, template, and runtime references are part of the executable Skill contract. Locations and CLI flags can change, so check the linked vendor documentation for the installed version.
+
 Installing the Skill and creating a research project are different operations. Do not store live research records inside the installed Skill directory.
 
 ### Invoke

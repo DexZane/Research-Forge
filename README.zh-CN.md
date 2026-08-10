@@ -165,6 +165,22 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
 
 对应的 raw 链接适合查看入口文件：[`SKILL.md`](https://raw.githubusercontent.com/DexZane/Research-Forge/skill-only/SKILL.md)。需要注意：raw 链接只下载单个文件；要安装完整 Skill，应使用 GitHub 分支地址或上面的安装命令。
 
+### 各 Agent 的适配与安装位置
+
+Research Forge 使用目录型 Agent Skills 结构：`research-forge/` 目录根部必须有 `SKILL.md`，并在旁边保留 `protocols/`、`states/`、`domain/`、`templates/`、`schemas/` 和 `runtime/`。科研协议本身具有可移植性，但自动发现和调用方式取决于具体 Agent 运行时。
+
+| Agent 运行时 | 用户级位置 | 项目级位置 | 支持情况 |
+|---|---|---|---|
+| [Codex](https://github.com/openai/skills) | `~/.codex/skills/research-forge/` | 取决于主机 | 原生目录型 Skill；使用上面的安装命令 |
+| [Claude Code](https://code.claude.com/docs/en/skills) | `~/.claude/skills/research-forge/` | `.claude/skills/research-forge/` | 原生支持 `SKILL.md` |
+| [Gemini CLI](https://geminicli.com/docs/cli/skills/) | `~/.gemini/skills/research-forge/` 或 `~/.agents/skills/research-forge/` | `.gemini/skills/research-forge/` 或 `.agents/skills/research-forge/` | 原生支持 Agent Skills |
+| [GitHub Copilot CLI](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference) | `~/.copilot/skills/research-forge/` 或 `~/.agents/skills/research-forge/` | `.github/skills/research-forge/`、`.agents/skills/research-forge/` 或 `.claude/skills/research-forge/` | 原生支持 `SKILL.md` |
+| [OpenCode](https://opencode.ai/docs/skills) | `~/.config/opencode/skills/research-forge/` 或 `~/.agents/skills/research-forge/` | `.opencode/skills/research-forge/`、`.agents/skills/research-forge/` 或 `.claude/skills/research-forge/` | 原生支持 Agent Skills |
+| [Cursor](https://docs.cursor.com/context/rules-for-ai) | 没有原生 `SKILL.md` 位置 | `.cursor/rules/research-forge.mdc` 或 `.cursor/commands/research-forge.md` | 需要适配；同时保留或手动附加被引用的目录 |
+| 其他 Agent 或仅 API Agent | 没有统一位置 | 取决于运行时 | 需要手动注入 `SKILL.md`，并提供被引用目录和必要工具 |
+
+对于支持 `.agents/skills/` 互操作别名的运行时，可以直接把完整 Skill 目录复制到该位置。`agents/openai.yaml` 是 Codex 的界面元数据，其他运行时可以忽略。不要只复制 raw 的 `SKILL.md`：状态、协议、schema、模板和 runtime 引用都是可运行 Skill 契约的一部分。目录和命令行参数可能随版本变化，请以所安装版本的官方文档为准。
+
 安装 Skill 和创建研究项目是两件不同的事。不要把实时研究记录放进已安装的 Skill 目录。
 
 ### 调用

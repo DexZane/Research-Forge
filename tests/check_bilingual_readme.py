@@ -29,6 +29,7 @@ CHINESE_HEADINGS = (
     "## 使用方法",
     "### 前置条件",
     "### 安装",
+    "### 各 Agent 的适配与安装位置",
     "### 调用",
     "#### 1. 探索宽泛方向",
     "#### 2. 验证已有想法",
@@ -67,6 +68,17 @@ CHINESE_REQUIREMENTS = (
     "python3 tests/check_readme.py",
     "python3 tests/run_acceptance.py --skill-root .",
     "[Apache License 2.0](LICENSE)",
+    "Claude Code",
+    "~/.claude/skills/research-forge/",
+    "Gemini CLI",
+    "~/.gemini/skills/research-forge/",
+    "GitHub Copilot CLI",
+    "~/.copilot/skills/research-forge/",
+    "OpenCode",
+    "~/.config/opencode/skills/research-forge/",
+    "Cursor",
+    ".cursor/rules/research-forge.mdc",
+    "不要只复制 raw 的 `SKILL.md`",
 )
 
 
