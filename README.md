@@ -156,6 +156,18 @@ For a personal Codex installation:
 
 For another compatible agent host, place the repository in that host’s Skills directory. Keep the internal directory structure intact: `SKILL.md` routes execution, while `protocols/`, `states/`, `schemas/`, `templates/`, `runtime/`, and `domain/` hold separate contracts.
 
+### Minimal install package
+
+If you only want the executable Skill files, install the [`skill-only` branch](https://github.com/DexZane/Research-Forge/tree/skill-only). It excludes README files, examples, tests, design notes, and poster assets:
+
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --url https://github.com/DexZane/Research-Forge/tree/skill-only
+```
+
+The corresponding raw URL is useful for inspecting the entry file:
+[`SKILL.md`](https://raw.githubusercontent.com/DexZane/Research-Forge/skill-only/SKILL.md). A raw URL downloads one file; use the GitHub tree URL or the installer command for the complete Skill.
+
 Installing the Skill and creating a research project are different operations. Do not store live research records inside the installed Skill directory.
 
 ### Invoke

@@ -154,6 +154,17 @@ Research Forge 定义协议，但不会自动获得数据库访问、自动下�
 
 在其他兼容 Agent 主机中，把仓库放入该主机的 Skills 目录。保持内部结构不变：`SKILL.md` 负责路由，`protocols/`、`states/`、`schemas/`、`templates/`、`runtime/` 和 `domain/` 负责不同的契约。
 
+### 最小安装包
+
+如果只想安装可运行的 Skill 文件，可以直接安装 [`skill-only` 分支](https://github.com/DexZane/Research-Forge/tree/skill-only)。该分支不包含 README、示例、测试、设计文档和海报素材：
+
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --url https://github.com/DexZane/Research-Forge/tree/skill-only
+```
+
+对应的 raw 链接适合查看入口文件：[`SKILL.md`](https://raw.githubusercontent.com/DexZane/Research-Forge/skill-only/SKILL.md)。需要注意：raw 链接只下载单个文件；要安装完整 Skill，应使用 GitHub 分支地址或上面的安装命令。
+
 安装 Skill 和创建研究项目是两件不同的事。不要把实时研究记录放进已安装的 Skill 目录。
 
 ### 调用
