@@ -162,7 +162,7 @@ If you only want the executable Skill files, install the [`skill-only` branch](h
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --url https://github.com/DexZane/Research-Forge/tree/skill-only
+  --repo DexZane/Research-Forge --ref skill-only --path . --name research-forge
 ```
 
 The corresponding raw URL is useful for inspecting the entry file:

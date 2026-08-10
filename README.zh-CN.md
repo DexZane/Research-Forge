@@ -160,7 +160,7 @@ Research Forge 定义协议，但不会自动获得数据库访问、自动下�
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --url https://github.com/DexZane/Research-Forge/tree/skill-only
+  --repo DexZane/Research-Forge --ref skill-only --path . --name research-forge
 ```
 
 对应的 raw 链接适合查看入口文件：[`SKILL.md`](https://raw.githubusercontent.com/DexZane/Research-Forge/skill-only/SKILL.md)。需要注意：raw 链接只下载单个文件；要安装完整 Skill，应使用 GitHub 分支地址或上面的安装命令。
