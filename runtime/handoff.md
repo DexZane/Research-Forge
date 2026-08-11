@@ -6,11 +6,11 @@ G4 explicitly approved GO; S18 dossier validates; final freshness/integrity chec
 
 ## Package
 
-Deliver human dossier plus `experiment-handoff.yaml` with project/snapshot/version, candidate, locked hypotheses/predictions/diagnostics, first E0 experiment, controls, fair baselines, datasets, hooks, preregistered decisions, resource assumptions, unknowns, exact next action, and a link to the validated `exports/references.bib` plus its record count and excluded paper IDs.
+Deliver human dossier plus `experiment-handoff.yaml` with project/snapshot/version, candidate, frozen commitment/signature versions, locked hypotheses/predictions/diagnostics, first E0 experiment, controls, fair baselines, datasets, hooks, preregistered decisions, resource assumptions, unknowns, exact next action, and a link to the validated `exports/references.bib` plus its record count and excluded paper IDs.
 
 ## Downstream Contract
 
-The experiment/coding agent may implement and execute the specified experiments, record environment/code/data versions, and return evidence-linked results. It must not silently change novelty boundary, locked hypotheses, primary predictions/metrics, or decision thresholds.
+The experiment/coding agent may implement and execute the specified experiments, record environment/code/data versions, and return evidence-linked results. It must not silently change novelty boundary, frozen candidate commitment/signature, locked hypotheses, primary predictions/metrics, or decision thresholds.
 
 If implementation reveals an invalid assumption, inaccessible hook, new prior art, confounder, or required scientific change, stop and route back to Research Forge recovery/rollback/gate.
 

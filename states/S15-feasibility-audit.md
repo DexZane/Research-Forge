@@ -6,11 +6,11 @@ Determine whether falsification and full project execution are feasible while ke
 
 ## Entry Conditions
 
-Falsification plan, baseline requirements, and diagnostic hooks are defined.
+Falsification plan, frozen candidate commitment, baseline requirements, and diagnostic hooks are defined.
 
 ## Reads
 
-Experiments, diagnostics, baselines/confounders, datasets, code/checkpoint sources, resource profile, licenses.
+Experiments, frozen commitment budget assumptions, diagnostics, baselines/confounders, datasets, code/checkpoint sources, resource profile, licenses.
 
 ## Writes
 
@@ -26,7 +26,7 @@ Audit baseline reproducibility and code at R4 when needed; estimate ranges; iden
 
 ## Required Protocols
 
-[Resources](../protocols/resources.md), [Reading](../protocols/reading.md), [Baseline Fairness](../protocols/baseline-fairness.md), [Contradiction](../protocols/contradiction.md), [Integrity](../protocols/integrity.md).
+[Resources](../protocols/resources.md), [Commitment Integrity](../protocols/commitment-integrity.md), [Reading](../protocols/reading.md), [Baseline Fairness](../protocols/baseline-fairness.md), [Contradiction](../protocols/contradiction.md), [Integrity](../protocols/integrity.md).
 
 ## Parallelizable Work
 

@@ -10,7 +10,7 @@ Reviewer panel and all prerequisite registries are synchronized.
 
 ## Reads
 
-Hard-gate evidence, scorecards, meta-review, resources, novelty boundary, hypotheses, falsification plan, risks, contradictions/debt.
+Hard-gate evidence, current frozen commitment/signature, scorecards, meta-review, resources, novelty boundary, hypotheses, falsification plan, risks, contradictions/debt.
 
 ## Writes
 
@@ -22,11 +22,11 @@ Do novelty, clear mechanistic question, falsifiability, absence of fatal prior a
 
 ## Required Actions
 
-Apply hard gates before scorecard; assess Pareto/portfolio risk; separate scientific/execution decisions; give rationale, confidence, alternatives, rollback target, and exact next action.
+Apply hard gates before scorecard; verify that no dependent artifact is stale against the active frozen commitment; assess Pareto/portfolio risk; separate scientific/execution decisions; give rationale, confidence, alternatives, rollback target, and exact next action.
 
 ## Required Protocols
 
-[Reasoning](../protocols/reasoning.md), [Resources](../protocols/resources.md), [Reviewer Panel](../protocols/reviewer-panel.md), [Gates](../runtime/gates.md), [Integrity](../protocols/integrity.md).
+[Reasoning](../protocols/reasoning.md), [Commitment Integrity](../protocols/commitment-integrity.md), [Resources](../protocols/resources.md), [Reviewer Panel](../protocols/reviewer-panel.md), [Gates](../runtime/gates.md), [Integrity](../protocols/integrity.md).
 
 ## Parallelizable Work
 

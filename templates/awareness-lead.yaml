@@ -1,0 +1,10 @@
+awareness_lead:
+  id: AL-0001
+  hint: Historical term, possible paper, or mechanism to resolve
+  provenance_type: MODEL_MEMORY
+  capture_time: "2026-08-11T00:00:00Z"
+  lineage_role: AWARENESS_ONLY
+  status: OPEN
+  search_session_ids: []
+  resolved_paper_ids: []
+  resolution_notes: null

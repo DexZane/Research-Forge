@@ -13,6 +13,7 @@ ID, source type/ID/version, locator, evidence type, bounded summary, scope, dire
 - T4/T5 evidence must be primary and R3/R4.
 - `CODE` evidence requires repository and commit/release.
 - Search snippets/secondary summaries cannot be marked primary verified.
+- `AL-` awareness-only leads cannot be evidence sources; resolve them to a sourced `P-`/primary artifact before extracting evidence.
 
 ## Independence
 

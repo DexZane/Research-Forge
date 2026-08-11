@@ -6,10 +6,10 @@ Only the orchestrator writes global project state. Use a transaction for every e
 
 ## Transaction Stages
 
-1. `VALIDATE`: parse records; validate IDs/enums/locators/references and worker snapshot.
+1. `VALIDATE`: parse records; validate IDs/enums/locators/references, active signature/commitment versions, and worker snapshot.
 2. `STAGE`: write proposed delta under transaction ID without changing active pointers.
 3. `RECONCILE`: deduplicate paper families/bibliography records/evidence and open/resolve contradictions.
-4. `PROPAGATE`: compute explicit dependency consequences conservatively.
+4. `PROPAGATE`: compute explicit dependency consequences conservatively, including mandatory invalidation for semantic commitment changes.
 5. `INTEGRITY`: run required audits; failures keep transaction staged/aborted.
 6. `SNAPSHOT`: create immutable pre-commit snapshot and manifest/checksum.
 7. `COMMIT`: atomically replace affected registries/state or use journaled ordered writes; commit a validated BibTeX export only with its registry delta.
@@ -22,7 +22,11 @@ Set transaction dirty marker before writes. On interruption, do not resume state
 
 ## Propagation
 
-Invalidate automatically only across `REQUIRES` edges. Other dependency types stage human/orchestrator review. Record every changed status and affected report.
+Invalidate automatically only across `REQUIRES` edges, except for the mandatory commitment-revision dependents defined below. Other dependency types stage human/orchestrator review. Record every changed status and affected report.
+
+## Commitment Revision
+
+Before commit, compare the active and proposed `CM-` records. If bottleneck, operation, changed object, critical condition, core mechanism, differentiating claim, primary predicted contrast, falsifier, or budget assumption changes, require a new commitment version, supersession link, reason, changed-field list, and stale dependent IDs. Invalidate required novelty mappings, hypothesis attacks, diagnostics, falsification plans, feasibility estimates, reviewer reports, and gate packets; route to the earliest affected state. Workers may propose a revision cue but never modify the commitment.
 
 ## Audit Trail
 

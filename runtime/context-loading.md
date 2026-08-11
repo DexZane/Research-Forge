@@ -9,13 +9,13 @@ Load IDs and decision-relevant fields, not entire project history. Always includ
 | States | Add to context |
 |---|---|
 | S00–S01 | intake, project constraints, resource profile |
-| S02–S05 | scope, concept dictionary, research lines, coverage map, anchor papers/bibliography/evidence |
-| S06–S08 | candidate registry/genealogy, red-ocean constraints, preliminary threats, score rationale |
-| S09–S10 | finalist versions, query graph, closest competitors, all T4/T5 evidence, claims, contradictions |
+| S02–S05 | scope, concept dictionary, research lines, awareness-only leads, citable lineage, coverage map, anchor papers/bibliography/evidence, paper signatures |
+| S06–S08 | candidate registry/genealogy, draft signatures/commitments, red-ocean constraints, preliminary threats, score rationale |
+| S09–S10 | version-pinned finalist signature/commitment versions, query graph, closest competitors, all T4/T5 evidence, claims, contradictions |
 | S11–S12 | boundary/residual, mechanism claims, hypotheses, predictions, alternatives, falsifiers |
-| S13–S15 | locked hypothesis version, diagnostics, experiments, baselines/confounders, resources/code evidence |
-| S16–S17 | immutable dossier, independent reviewer reports/meta-review, hard gates, risks |
-| S18 | G4 decision, all active dossier IDs/versions, freshness/integrity results, bibliography export status, handoff template |
+| S13–S15 | locked hypothesis/commitment version, diagnostics, experiments, baselines/confounders, resources/code evidence |
+| S16–S17 | immutable dossier, active commitment/signature, independent reviewer reports/meta-review, hard gates, risks |
+| S18 | G4 decision, all active dossier IDs/versions, frozen commitment, freshness/integrity results, bibliography export status, handoff template |
 
 ## Loading Rules
 

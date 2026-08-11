@@ -14,7 +14,7 @@ Paper registry/families, evidence ledger, landscape taxonomy, R2 notes.
 
 ## Writes
 
-Mechanism matrix, normalized claims, synchronized citation metadata, not-addressed inferences, contradiction records, and preliminary cross-line gaps.
+Mechanism matrix, evidence-linked innovation signatures, normalized claims, synchronized citation metadata, not-addressed inferences, contradiction records, and preliminary cross-line gaps.
 
 ## Required Questions
 
@@ -22,11 +22,11 @@ For each paper: problem, observation, hypothesis, mechanism, changed mathematica
 
 ## Required Actions
 
-Require R2 for formal entries; distinguish author-stated limitations from orchestrator `INFERENCE`; compare columns across lines; identify intersections as `CANDIDATE_GAP`, never novelty.
+Require R2 for formal entries and decision-critical bottlenecks; distinguish author-stated limitations from orchestrator `INFERENCE`; create one bottleneck/operation/changed-object/condition/predicted-contrast signature per critical paper family; compare columns across lines; identify intersections as `CANDIDATE_GAP`, never novelty.
 
 ## Required Protocols
 
-[Reading](../protocols/reading.md), [Bibliography](../protocols/bibliography.md), [Evidence](../protocols/evidence.md), [Reasoning](../protocols/reasoning.md), [Contradiction](../protocols/contradiction.md).
+[Reading](../protocols/reading.md), [Bibliography](../protocols/bibliography.md), [Evidence](../protocols/evidence.md), [Innovation Signature](../protocols/innovation-signature.md), [Reasoning](../protocols/reasoning.md), [Contradiction](../protocols/contradiction.md).
 
 ## Parallelizable Work
 
@@ -38,11 +38,11 @@ Entity normalization and contradiction reconciliation before matrix synthesis.
 
 ## Required Outputs
 
-`reports/paper-matrix.md`, matrix records, normalized claim/evidence links, synchronized bibliography records, candidate-gap list.
+`reports/paper-matrix.md`, matrix records, innovation signatures, normalized claim/evidence links, synchronized bibliography records, candidate-gap list.
 
 ## Exit Conditions
 
-Critical research lines are comparable by mechanism and mathematical object; important matrix claims have evidence/status; route S05.
+Critical research lines are comparable by bottleneck, mechanism, changed object, and critical condition; important matrix claims/signatures have evidence/status; route S05.
 
 ## Rollback Conditions
 

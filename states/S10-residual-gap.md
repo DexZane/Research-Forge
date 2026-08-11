@@ -14,7 +14,7 @@ Candidate, claims, formal threats/evidence, closest competitors, genealogy, cont
 
 ## Writes
 
-Killed claims, peeling operations, updated genealogy, residual-gap class, positive/negative novelty boundary, confidence and debt.
+Killed claims, peeling operations, superseded candidate signature/commitment where needed, updated genealogy, residual-gap class, positive/negative novelty boundary, confidence and debt.
 
 ## Required Questions
 
@@ -22,11 +22,11 @@ Which exact claims died, which source/evidence killed each, why is overlap direc
 
 ## Required Actions
 
-Apply P1–P4 peeling; update dependent claims/candidates; run stitching and residual-quality tests; write “not first” statements and the one precise remaining question.
+Apply P1–P4 peeling; update dependent claims/candidates; supersede rather than overwrite any changed signature/commitment; run signature specificity, stitching, and residual-quality tests; write “not first” statements and the one precise remaining question.
 
 ## Required Protocols
 
-[Novelty](../protocols/novelty.md), [Evidence](../protocols/evidence.md), [Reasoning](../protocols/reasoning.md), [Transaction](../runtime/transaction.md), [Integrity](../protocols/integrity.md).
+[Novelty](../protocols/novelty.md), [Innovation Signature](../protocols/innovation-signature.md), [Commitment Integrity](../protocols/commitment-integrity.md), [Evidence](../protocols/evidence.md), [Reasoning](../protocols/reasoning.md), [Transaction](../runtime/transaction.md), [Integrity](../protocols/integrity.md).
 
 ## Parallelizable Work
 

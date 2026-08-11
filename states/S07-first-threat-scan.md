@@ -22,11 +22,11 @@ Is there a direct same-question paper, a recent close neighbor, the same mechani
 
 ## Required Actions
 
-Run candidate-specific exact/mechanism/recent searches; assign preliminary T1–T5; apply K1 solved-by-multiple-work, K2 component swap, K3 no prediction, K4 no mechanism, K5 no problem–solution dependency.
+Run candidate-specific exact/mechanism/recent searches; compare proposed signatures for obvious bottleneck/operation/object collisions; assign preliminary T1–T5; apply K1 solved-by-multiple-work, K2 component swap, K3 no prediction, K4 no mechanism, K5 no problem–solution dependency, K6 vague or non-discriminating signature.
 
 ## Required Protocols
 
-[Search](../protocols/search.md), [Reading](../protocols/reading.md), [Novelty](../protocols/novelty.md), [Evidence](../protocols/evidence.md).
+[Search](../protocols/search.md), [Reading](../protocols/reading.md), [Innovation Signature](../protocols/innovation-signature.md), [Novelty](../protocols/novelty.md), [Evidence](../protocols/evidence.md).
 
 ## Parallelizable Work
 

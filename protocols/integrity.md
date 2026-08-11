@@ -21,6 +21,7 @@ Run these audits before gates, formal T4/T5 changes, candidate KILL, project dec
 - Authors, title, venue, year/version, DOI/URL/identifier, equations, and code commit are verified where used.
 - Search snippets and secondary summaries are not cited as primary support.
 - Freshness cutoff and source coverage are explicit.
+- `AL-` awareness-only leads are never used as citations, BibTeX exports, evidence, formal paper-matrix entries, or novelty support.
 
 ## State Integrity
 
@@ -28,6 +29,7 @@ Run these audits before gates, formal T4/T5 changes, candidate KILL, project dec
 - Required entry artifacts exist and exit artifacts validate.
 - Only legal transitions or recorded rollback/interrupt occurred.
 - No partial transaction or stale snapshot remains.
+- Active candidates resolve to their active signature and commitment; frozen commitment changes have explicit supersession and dependent-record consequences.
 
 ## Report Synchronization
 
@@ -47,6 +49,8 @@ Run these audits before gates, formal T4/T5 changes, candidate KILL, project dec
 - Innovation peeling, stitching tests, negative boundary, and freshness sweep are complete.
 - “First/never/unexplored” language does not exceed the safety ladder.
 - Search saturation is not treated as proof of global novelty.
+- Candidate/competitor signature comparisons cover bottleneck, operation, changed object, critical condition, and predicted contrast; a vague signature blocks advancement.
+- Outcome-derived pattern frequency, acceptance, or citation statistics were not used as candidate evidence or ranking priors.
 
 ## Experimental Integrity
 
@@ -55,6 +59,7 @@ Run these audits before gates, formal T4/T5 changes, candidate KILL, project dec
 - Falsifiers and decision criteria were preregistered.
 - Baselines, controls, budgets, and confounders are fair/visible.
 - Scientific and execution decisions remain separate.
+- The preregistered falsification plan and resource assumptions reference the active frozen commitment version.
 
 ## Failure Behavior
 

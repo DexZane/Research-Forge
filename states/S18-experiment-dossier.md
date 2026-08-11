@@ -10,7 +10,7 @@ G4 explicitly approved GO; integrity and freshness checks are current.
 
 ## Reads
 
-All active registries/reports, bibliography registry, G4 decision, immutable snapshot, handoff/dossier templates.
+All active registries/reports, frozen candidate commitment/signature, bibliography registry, G4 decision, immutable snapshot, handoff/dossier templates.
 
 ## Writes
 
@@ -22,11 +22,11 @@ Can a downstream agent identify the research problem, boundary, hypothesis, alte
 
 ## Required Actions
 
-Assemble all 30 required elements; run final freshness and integrity sweeps; link IDs/versions; preserve killed claims and uncertainties; state exact E0 action and forbidden scientific changes.
+Assemble all 30 required elements; run final freshness and integrity sweeps; link IDs/versions including the frozen `CM-` commitment and `IS-` signature; preserve killed claims and uncertainties; state exact E0 action and forbidden scientific changes.
 
 ## Required Protocols
 
-[Integrity](../protocols/integrity.md), [Bibliography](../protocols/bibliography.md), [Falsification](../protocols/falsification.md), [Baseline Fairness](../protocols/baseline-fairness.md), [Handoff](../runtime/handoff.md), [Bibliography Runtime](../runtime/bibliography.md).
+[Integrity](../protocols/integrity.md), [Commitment Integrity](../protocols/commitment-integrity.md), [Bibliography](../protocols/bibliography.md), [Falsification](../protocols/falsification.md), [Baseline Fairness](../protocols/baseline-fairness.md), [Handoff](../runtime/handoff.md), [Bibliography Runtime](../runtime/bibliography.md).
 
 ## Parallelizable Work
 
@@ -38,7 +38,7 @@ Freshness sweep → registry sync → bibliography export → dossier assembly �
 
 ## Required Outputs
 
-Experiment dossier with: title, problem, scope, target, tier; backbone, matrix, red-ocean map, competitors, threats; genealogy, killed claims, boundary, residual, unknowns; hypothesis, known mechanisms, missing link, predictions, alternatives; diagnostics, minimal falsification experiments, controls, baselines, datasets, hooks, decision thresholds; resource estimate, reviewer result, exact next action, and the record count/path for `exports/references.bib`. Also `handoff/experiment-handoff.yaml`.
+Experiment dossier with: title, problem, scope, target, tier; frozen candidate commitment/signature; backbone, matrix, red-ocean map, competitors, threats; genealogy, killed claims, boundary, residual, unknowns; hypothesis, known mechanisms, missing link, predictions, alternatives; diagnostics, minimal falsification experiments, controls, baselines, datasets, hooks, decision thresholds; resource estimate, reviewer result, exact next action, and the record count/path for `exports/references.bib`. Also `handoff/experiment-handoff.yaml`.
 
 ## Exit Conditions
 

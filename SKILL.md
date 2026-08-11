@@ -64,7 +64,8 @@ Read [runtime/boot.md](runtime/boot.md). For an existing project, load in this o
 7. blocking/high reasoning debt
 8. search saturation/freshness state
 9. bibliography registry/export status
-10. last major decisions and pending gate
+10. active innovation signatures and candidate commitments
+11. last major decisions and pending gate
 
 Validate before resuming. If state is partial or corrupt, follow [runtime/recovery.md](runtime/recovery.md); do not silently reconstruct uncertain facts.
 
@@ -111,7 +112,9 @@ Load a protocol when the state or decision needs it:
 | Query graph, freshness, saturation | [protocols/search.md](protocols/search.md) |
 | Bibliographic capture, deduplication, and Zotero export | [protocols/bibliography.md](protocols/bibliography.md) and [runtime/bibliography.md](runtime/bibliography.md) |
 | R0–R4 reading depth | [protocols/reading.md](protocols/reading.md) |
+| Mechanism signatures and collision specificity | [protocols/innovation-signature.md](protocols/innovation-signature.md) |
 | T0–T5, peeling, boundaries, collisions | [protocols/novelty.md](protocols/novelty.md) |
+| Candidate commitment versions and dependent-contract invalidation | [protocols/commitment-integrity.md](protocols/commitment-integrity.md) |
 | Mechanism bridge, H0–H3, predictions | [protocols/hypothesis.md](protocols/hypothesis.md) |
 | Cheapest killer, preregistration, decision rules | [protocols/falsification.md](protocols/falsification.md) |
 | Matched baselines and confounders | [protocols/baseline-fairness.md](protocols/baseline-fairness.md) |
@@ -137,10 +140,11 @@ Treat global-state updates as transactions:
 2. Stage proposed evidence and records.
 3. Reconcile duplicates and contradictions.
 4. Propagate claim/threat/candidate consequences conservatively.
-5. Run integrity checks.
-6. Write an immutable pre-commit snapshot.
-7. Commit ledgers, state, and synchronized report references.
-8. Increment versions and append a human-readable decision log.
+5. Validate active signature/commitment versions and invalidate stale dependents.
+6. Run integrity checks.
+7. Write an immutable pre-commit snapshot.
+8. Commit ledgers, state, and synchronized report references.
+9. Increment versions and append a human-readable decision log.
 
 Only the orchestrator commits. Follow [runtime/transaction.md](runtime/transaction.md).
 
@@ -188,7 +192,7 @@ Before every gate, formal threat upgrade, candidate kill, project decision, or h
 - `schemas/`: validity and cross-record constraints.
 - `runtime/`: lifecycle, recovery, commit, gates, handoff.
 - `runtime/bibliography.md`: project-level BibTeX capture/export lifecycle; generated `.bib` files never live in the Skill repository.
-
-This install-only distribution intentionally contains only the runtime Skill files above. Examples, acceptance tests, design notes, and promotional assets remain in the source repository and are not required for execution.
+- `examples/`: correct execution patterns.
+- `tests/`: acceptance contracts and deterministic validation.
 
 Keep generated project data outside this Skill in a dedicated research-project workspace.

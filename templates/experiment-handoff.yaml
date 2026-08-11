@@ -7,6 +7,10 @@ experiment_handoff:
   execution_decision: READY
   publication_tier: T2
   candidate_id: C-0001
+  frozen_commitment_id: CM-0001
+  frozen_commitment_version: 1
+  innovation_signature_id: IS-0001
+  innovation_signature_version: 1
   locked_hypothesis_ids:
     - H-0001
   prediction_ids:
@@ -31,4 +35,5 @@ experiment_handoff:
     - primary_predictions
     - primary_metrics
     - decision_thresholds
+    - core_candidate_commitment
   exact_next_action: Execute EX-0001 as preregistered and return evidence-linked results.

@@ -24,6 +24,10 @@ Read introduction, related work, method, core equations, algorithm, experiments,
 
 R2 is required for the formal paper matrix.
 
+## Bottleneck Grounding Gate
+
+Do not derive a decision-critical bottleneck, operation, changed object, condition, or predicted contrast from a title, abstract, model memory, or search snippet. Complete R2 coverage of the method, evidence, and limitations first. Record an unresolved historical hint as an `AL-` awareness-only lead and create reasoning debt if it matters to the decision.
+
 ## R3 — Threat Deep Read
 
 Use for T4/T5 and novelty-boundary-critical papers. Read the primary paper in full plus supplement/appendix and version history. Verify exact claim language, definitions, equations, pseudocode, training/inference distinction, ablations, controls, limitations, failure cases, and comparisons. Create evidence units with locators and a dimension-by-dimension overlap table.
@@ -49,4 +53,4 @@ Do not silently privilege either source. Create a contradiction record, identify
 
 ## Reading Output
 
-Every read records paper ID/family, tier, scope, sections inspected, extracted evidence IDs, unresolved questions, contradictions, confidence, and recommended next depth. “Read” without a tier and coverage statement is invalid.
+Every read records paper ID/family, tier, scope, sections inspected, extracted evidence IDs, unresolved questions, contradictions, confidence, and recommended next depth. When it grounds a signature, record the signature ID/version. “Read” without a tier and coverage statement is invalid.

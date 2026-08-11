@@ -33,6 +33,14 @@ Poor empirical quality does not erase prior-art existence. Distinguish claim col
 
 Compare problem, observation, hypothesis, task, mathematical formulation, mechanism, data, representation, assignment, objective/loss, training, inference, experiment, and claimed contribution. Identify the strongest competitor set; do not average threats across many weak neighbors.
 
+## Signature Specificity and Collision
+
+Use `protocols/innovation-signature.md` for every finalist. A candidate signature must name a bottleneck, operation, changed object, critical condition, and predicted contrast. Compare each closest competitor signature along all five fields and link exact evidence. A vague “new framework,” a newly named combination, or a task-level difference cannot be a novelty survivor.
+
+An exact or subsuming signature collision does not automatically mean T5: apply the full T5 conditions. Conversely, a different implementation does not prevent T4/T5 when the competitor already establishes the claimed mechanism and contrast under equal or broader conditions.
+
+Do not use historical acceptance/citation outcomes, pattern frequency, or pattern labels as novelty evidence or candidate ranking priors.
+
 ## Innovation Peeling
 
 For each verified overlap, apply one or more:

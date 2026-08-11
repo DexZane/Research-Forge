@@ -14,19 +14,19 @@ All S02–S05 reports/registries, user interests as constraints, killed archive/
 
 ## Writes
 
-Candidate records and genealogy. Exploration mode targets 8–15; validation mode includes original, refined, and alternative-mechanism candidates.
+Candidate records, proposed innovation signatures, draft core commitments, and genealogy. Exploration mode targets 8–15; validation mode includes original, refined, and alternative-mechanism candidates.
 
 ## Required Questions
 
-What precise research question, mechanism, initial gap, observable prediction, closest known work, risks, implementation guess, and falsifier does each candidate have? Does the portfolio span data, representation, assignment, optimization, training, inference, generalization, or efficiency?
+What precise research question, bottleneck, operation, changed object, critical condition, observable contrast, closest known work, risks, planned falsifier, and falsification budget does each candidate have? Does the portfolio span data, representation, assignment, optimization, training, inference, generalization, or efficiency?
 
 ## Required Actions
 
-Express candidates as problems/mechanism questions, not module names; enforce diversity; label novelty `UNVERIFIED`; revive killed ancestors only with new evidence, scope, or mechanism.
+Express candidates as problems/mechanism questions, not module names; create a proposed signature and draft `CM-` commitment; reject vague signatures; enforce diversity; label novelty `UNVERIFIED`; revive killed ancestors only with new evidence, scope, or mechanism.
 
 ## Required Protocols
 
-[Reasoning](../protocols/reasoning.md), [Hypothesis](../protocols/hypothesis.md), [Novelty](../protocols/novelty.md), AI-method domain modules.
+[Reasoning](../protocols/reasoning.md), [Hypothesis](../protocols/hypothesis.md), [Innovation Signature](../protocols/innovation-signature.md), [Commitment Integrity](../protocols/commitment-integrity.md), [Novelty](../protocols/novelty.md), AI-method domain modules.
 
 ## Parallelizable Work
 
@@ -38,11 +38,11 @@ Deduplicate, enforce diversity, build genealogy, and register centrally.
 
 ## Required Outputs
 
-Candidate registry, idea genealogy, `reports/candidate-portfolio.md`.
+Candidate registry, proposed signature/commitment registry, idea genealogy, `reports/candidate-portfolio.md`.
 
 ## Exit Conditions
 
-Required portfolio size/diversity, stable IDs, preliminary predictions/risks, and no module-only candidates; route S07.
+Required portfolio size/diversity, stable IDs, complete proposed signatures, draft commitments with predictions/falsifier/budget assumptions, and no module-only candidates; route S07.
 
 ## Rollback Conditions
 
