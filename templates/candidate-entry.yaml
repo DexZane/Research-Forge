@@ -6,6 +6,8 @@ candidate:
   research_question: null
   mechanism_question: null
   initial_gap: null
+  innovation_signature_id: IS-0001
+  active_commitment_id: CM-0001
   observable_prediction_ids: []
   closest_known_work_ids: []
   threat_ids: []

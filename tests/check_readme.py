@@ -78,6 +78,10 @@ def main() -> int:
         "Cursor",
         ".cursor/rules/research-forge.mdc",
         "Do not copy only the raw `SKILL.md`",
+        "innovation signature",
+        "AWARENESS_ONLY",
+        "candidate commitment",
+        "acceptance/citation outcomes",
     )
     for term in required_terms:
         if term not in text:

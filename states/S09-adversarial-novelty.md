@@ -10,11 +10,11 @@ G2 explicitly selected 1–3 finalists and search scope/cutoff are current.
 
 ## Reads
 
-Finalists, genealogy, claims, all search/paper/bibliography/evidence/threat records, concept dictionary, latest snapshot.
+Version-pinned finalist signatures/commitments, genealogy, claims, all search/paper/bibliography/evidence/threat records, concept dictionary, latest snapshot.
 
 ## Writes
 
-Combination query graph, verified competitor citation metadata, deep evidence, closest-competitor set, formal T0–T5 threats, saturation state, contradictions, emergency packet if triggered.
+Combination query graph, verified competitor citation metadata, deep evidence, signature collision maps, closest-competitor set, formal T0–T5 threats, saturation state, contradictions, emergency packet if triggered.
 
 ## Required Questions
 
@@ -22,11 +22,11 @@ Who already studied each component/combination, same question, hypothesis, formu
 
 ## Required Actions
 
-Decompose A+B+C+D; expand synonyms/history/neighbors; prioritize last 24 months; search proceedings/OpenReview/journals/arXiv/projects/code; R3 all T4/T5 and R4 when critical; steelman competitors; run saturation and freshness checks.
+Pin the candidate signature/commitment version for this audit without changing its lifecycle to `FROZEN`; decompose A+B+C+D; expand synonyms/history/neighbors; prioritize last 24 months; search proceedings/OpenReview/journals/arXiv/projects/code; compare bottleneck, operation, changed object, condition, and predicted contrast against every closest competitor; R3 all T4/T5 and R4 when critical; steelman competitors; run saturation and freshness checks.
 
 ## Required Protocols
 
-[Search](../protocols/search.md), [Bibliography](../protocols/bibliography.md), [Reading](../protocols/reading.md), [Novelty](../protocols/novelty.md), [Evidence](../protocols/evidence.md), [Contradiction](../protocols/contradiction.md), [Integrity](../protocols/integrity.md).
+[Search](../protocols/search.md), [Bibliography](../protocols/bibliography.md), [Reading](../protocols/reading.md), [Innovation Signature](../protocols/innovation-signature.md), [Commitment Integrity](../protocols/commitment-integrity.md), [Novelty](../protocols/novelty.md), [Evidence](../protocols/evidence.md), [Contradiction](../protocols/contradiction.md), [Integrity](../protocols/integrity.md).
 
 ## Parallelizable Work
 
@@ -38,7 +38,7 @@ Verification, contradiction reconciliation, threat assignment, impact propagatio
 
 ## Required Outputs
 
-Threat matrix, closest competitors, adversarial search log/coverage, formal evidence units, `reports/adversarial-novelty.md`.
+Threat matrix with signature collision maps, closest competitors, adversarial search log/coverage, formal evidence units, `reports/adversarial-novelty.md`.
 
 ## Exit Conditions
 

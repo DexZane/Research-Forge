@@ -1,6 +1,6 @@
 research_state:
   project_id: research-project-0001
-  schema_version: "1.1"
+  schema_version: "1.2"
   state: S00_INTAKE
   state_iteration: 1
   status: ACTIVE
@@ -22,6 +22,9 @@ research_state:
   last_committed_transaction: null
   registries:
     papers: state/paper_registry.yaml
+    awareness_leads: state/awareness_leads.yaml
+    innovation_signatures: state/innovation_signature_registry.yaml
+    candidate_commitments: state/candidate_commitment_registry.yaml
     evidence: state/evidence_ledger.yaml
     search_sessions: state/search_registry.yaml
   bibliography:

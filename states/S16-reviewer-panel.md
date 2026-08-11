@@ -6,7 +6,7 @@ Simulate independent top-tier novelty, mechanism, and experiment rejection befor
 
 ## Entry Conditions
 
-Frozen pre-review dossier includes novelty boundary, hypothesis, diagnostics, falsification, fairness, and feasibility.
+Frozen pre-review dossier includes current candidate commitment/signature, novelty boundary, hypothesis, diagnostics, falsification, fairness, and feasibility.
 
 ## Reads
 
@@ -22,11 +22,11 @@ Why is it incremental? Why is the mechanism unsupported? Why would experiments b
 
 ## Required Actions
 
-Run first-pass reviews independently; freeze reports; meta-review without averaging; classify issues; require reject simulation for T1 candidates; link every issue to affected records.
+Run first-pass reviews independently; require the novelty reviewer to test signature specificity and competitor subsumption; freeze reports; meta-review without averaging; classify issues; require reject simulation for T1 candidates; link every issue to affected records.
 
 ## Required Protocols
 
-[Reviewer Panel](../protocols/reviewer-panel.md), [Novelty](../protocols/novelty.md), [Baseline Fairness](../protocols/baseline-fairness.md), [Integrity](../protocols/integrity.md).
+[Reviewer Panel](../protocols/reviewer-panel.md), [Innovation Signature](../protocols/innovation-signature.md), [Commitment Integrity](../protocols/commitment-integrity.md), [Novelty](../protocols/novelty.md), [Baseline Fairness](../protocols/baseline-fairness.md), [Integrity](../protocols/integrity.md).
 
 ## Parallelizable Work
 

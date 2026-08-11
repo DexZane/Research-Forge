@@ -1,0 +1,17 @@
+innovation_signature:
+  id: IS-0001
+  subject_kind: PAPER
+  subject_id: P-0001
+  subject_version: 1
+  bottleneck: null
+  operation: null
+  changed_object: null
+  critical_condition: null
+  predicted_contrast: null
+  scope: null
+  epistemic_status: INFERENCE
+  claim_ids: []
+  evidence_ids: []
+  lifecycle_status: ACTIVE
+  supersedes_signature_id: null
+  version: 1

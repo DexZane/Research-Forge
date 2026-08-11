@@ -54,7 +54,7 @@ Freeze before results:
 - seeds/repeats appropriate to the stage;
 - effect-size or practical-utility threshold with rationale.
 
-Do not quietly move kill thresholds after results. Revise only as a new preregistration version before rerun, with the previous version retained.
+Do not quietly move kill thresholds after results. Revise only as a new preregistration version before rerun, with the previous version retained. Link every plan to the frozen `CM-` candidate commitment and its signature version; if a protected commitment field changes, invalidate this plan and create a new version before rerun.
 
 ## Decision Rules
 

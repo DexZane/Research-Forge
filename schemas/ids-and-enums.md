@@ -12,6 +12,9 @@ This file is the canonical vocabulary. Templates illustrate records; other files
 | `IG-` | evidence-independence group |
 | `CL-` | claim |
 | `C-` | candidate |
+| `CM-` | candidate core commitment |
+| `IS-` | innovation signature |
+| `AL-` | awareness-only literature lead |
 | `TH-` | threat |
 | `CT-` | contradiction |
 | `H-` | hypothesis |
@@ -40,6 +43,8 @@ Use `NONE` only as a field-level sentinel when the schema permits no active valu
 ## Record Lifecycle
 
 `DRAFT`, `PRELIMINARY`, `ACTIVE`, `WEAKENED`, `INVALIDATED`, `SUPERSEDED`, `RESOLVED`, `ARCHIVED`. Hypotheses additionally use `SUPPORTED_NOT_PROVEN`; never `VERIFIED`.
+
+Candidate commitment lifecycle: `DRAFT`, `FROZEN`, `SUPERSEDED`, `INVALIDATED`. Awareness-lead status: `OPEN`, `RESOLVED`, `ARCHIVED`; its lineage role is always `AWARENESS_ONLY` until a resolved `P-` record is independently verified.
 
 ## Confidence
 
@@ -97,6 +102,7 @@ Bibliography records reuse the immutable `P-` paper ID and the existing verifica
 - Hypothesis ladder: `H0_DESCRIPTIVE`, `H1_ASSOCIATIONAL`, `H2_MECHANISTIC`, `H3_INTERVENTIONAL`.
 - Prediction pattern: `DIRECTIONAL`, `ORDERING`, `BOUNDED`, `NULL_EXPECTED`, `INTERACTION`.
 - Diagnostic validity: `UNASSESSED`, `VALID`, `LIMITED`, `INVALID`.
+- Signature subject kind: `PAPER`, `CANDIDATE`.
 
 ## Experiments
 

@@ -2,6 +2,11 @@
 
 ## Locked Hypothesis and Alternatives
 
+## Frozen Candidate Commitment
+
+- Commitment ID/version:
+- Innovation signature ID/version:
+
 ## Primary Predictions
 
 ## Diagnostic Metrics and Alternative Operationalizations

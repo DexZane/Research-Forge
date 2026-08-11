@@ -10,7 +10,7 @@
 
 Research Forge is a stateful, adversarial research-direction Skill for AI and deep-learning method research. It turns a vague topic or a favored idea into an evidence-linked `GO`, `HOLD`, `REFINE`, `HOLD_RESOURCE`, or `KILL` decision—before expensive experiments begin.
 
-**Status:** v1 protocol implementation. The repository contains deterministic contract checks, but it does not claim an empirical performance advantage over other Skills or guarantee research success.
+**Status:** v1.1 protocol implementation. The repository contains deterministic contract checks, but it does not claim an empirical performance advantage over other Skills or guarantee research success.
 
 ## 中文简介
 
@@ -42,7 +42,9 @@ This is a contract comparison, not an empirical benchmark. “Common workflow”
 | Primary objective | Produce plausible, interesting directions | Reach an evidence-linked project decision |
 | Default stance | Expand and improve an idea | Search to reject and expose failure conditions |
 | Literature role | Summarize related work | Build a query graph, steelman prior art, and attack novelty |
+| Literature provenance | A remembered title can drift into a claim | Awareness-only leads stay non-citable until resolved to source-backed records |
 | Novelty | Treat an apparent gap as a candidate contribution | Peel overlapped claims and preserve a qualified residual boundary |
+| Candidate revisions | Rewrite the idea until it sounds better | Version core commitments and invalidate stale downstream tests/reviews |
 | Knowledge control | Blend sources and interpretation into prose | Separate evidence, claims, inferences, hypotheses, contradictions, and unknowns |
 | Hypothesis | Often follows the proposed architecture | Must be method-free, mechanistic, predictive, and falsifiable |
 | Experiments | Demonstrate gains after a method is selected | Start with the cheapest test that can kill or discriminate the hypothesis |
@@ -76,27 +78,35 @@ Research Forge does not flatten everything into confident prose. The [evidence p
 
 An overlap does not trigger rhetorical repositioning. The [novelty protocol](protocols/novelty.md) records which claim was killed, what killed it, what survives, and whether the survivor still has mechanistic depth, scientific generality, impact, and a meaningful optimization space. A newly verified collision can freeze the project even after a prior GO.
 
-### 4. Hypothesis comes before architecture
+### 4. Signatures compare mechanisms; commitments preserve the audit trail
+
+For every comparison-critical paper and every candidate, Research Forge records an [innovation signature](protocols/innovation-signature.md): bottleneck, operation, changed object, critical condition, and predicted contrast. This makes a reviewer-facing question concrete: does the closest work already subsume the same mechanism, even if it uses another title or implementation?
+
+Unresolved historical hints are stored as `AWARENESS_ONLY` `AL-` leads. They can guide search, but they are never citations, evidence, novelty support, or BibTeX entries. A candidate also has a versioned `CM-` candidate commitment. If its mechanism, prediction, falsifier, or budget changes, the [commitment-integrity protocol](protocols/commitment-integrity.md) creates a superseding version and requires the affected novelty maps, tests, feasibility estimates, reviews, and gates to be revalidated.
+
+This is deliberately not a success-pattern scorer: historical acceptance/citation outcomes and pattern frequency are not evidence or ranking priors.
+
+### 5. Hypothesis comes before architecture
 
 The core hypothesis must describe a mechanism without depending on a favorite module name. It must predict observations that distinguish it from steelmanned alternatives. See the [hypothesis protocol](protocols/hypothesis.md).
 
 This prevents familiar combinations—“backbone X plus loss Y for task Z”—from being mistaken for a scientific contribution merely because the components have not been combined under the same name.
 
-### 5. Falsification comes before optimization
+### 6. Falsification comes before optimization
 
 The [falsification protocol](protocols/falsification.md) asks for the cheapest high-information test capable of rejecting the mechanism, exposing a negligible ceiling, or favoring a simpler explanation. Decision thresholds and ambiguity branches are recorded before results are examined.
 
 Negative evidence remains part of project memory. Sunk cost, implementation effort, and author preference do not weaken a valid killer.
 
-### 6. The process has state, gates, and rollback
+### 7. The process has state, gates, and rollback
 
 Research Forge runs an **S00–S18** state machine instead of a one-shot prompt. Four explicit human gates control scope, candidate selection, hypothesis lock, and project launch. Invalidated evidence can trigger local repair, structural rollback, or state re-entry while preserving lineage. See [gates](runtime/gates.md) and [rollback](runtime/rollback.md).
 
-### 7. Scientific value and execution readiness are separate
+### 8. Scientific value and execution readiness are separate
 
 A promising direction is not scientifically false because compute, data, licensing, or implementation access is currently missing. Research Forge separates scientific, execution, and publication decisions; resource limitations can produce `HOLD_RESOURCE` rather than a fabricated scientific rejection.
 
-### 8. GO produces a handoff contract, not a victory message
+### 9. GO produces a handoff contract, not a victory message
 
 After explicit G4 approval, S18 assembles a 30-element experiment-ready dossier with claims, assumptions, controls, metrics, thresholds, failure branches, resource estimates, and exact next actions. The downstream experiment runner may execute the plan but may not silently rewrite its scientific contracts. See the [handoff protocol](runtime/handoff.md).
 
@@ -288,7 +298,7 @@ Before G4, the main outputs are versioned evidence, claim, threat, candidate, hy
 
 Research Forge records citation metadata during the same literature search that builds its evidence and novelty maps. Each paper keeps a stable `P-` ID, identifiers, source URLs, search-session provenance, verification state, reading tier, and conflict links. This is deliberately separate from evidence: a verified citation is not automatically evidence for a claim.
 
-Only deduplicated records with `verification_status: VERIFIED`, required fields, an authoritative source or stable identifier, and no unresolved metadata conflict are exported. Provisional or snippet-only results stay in the project registry and are excluded from the citation file.
+Only deduplicated records with `verification_status: VERIFIED`, required fields, an authoritative source or stable identifier, and no unresolved metadata conflict are exported. Provisional or snippet-only results—and all `AWARENESS_ONLY` leads—stay in the project registry and are excluded from the citation file.
 
 At S18, or when the user explicitly requests an intermediate export, the orchestrator writes one deterministic artifact in the project workspace:
 
@@ -313,7 +323,7 @@ research-forge/
 ├── assets/               # README banners and promotional artwork
 ├── templates/            # Record and report shapes
 ├── schemas/              # IDs, enums, validity, cross-record constraints
-├── runtime/              # Boot, context, gates, transactions, recovery, handoff, BibTeX export
+├── runtime/              # Boot, context, gates, commitment-safe transactions, recovery, handoff, BibTeX export
 ├── examples/             # Correct execution patterns
 └── tests/                # Deterministic and scenario acceptance contracts
 ```

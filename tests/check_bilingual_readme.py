@@ -79,6 +79,10 @@ CHINESE_REQUIREMENTS = (
     "Cursor",
     ".cursor/rules/research-forge.mdc",
     "不要只复制 raw 的 `SKILL.md`",
+    "机制签名",
+    "AWARENESS_ONLY",
+    "CM-",
+    "录用率、引用率或模式频率",
 )
 
 

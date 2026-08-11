@@ -19,3 +19,11 @@ Two low-yield but semantically duplicate query batches do not establish saturati
 ## N5 — Post-GO Collision
 
 New T5 after G4 freezes the project and reopens S09/S10; prior approval/sunk cost provides no protection.
+
+## N6 — Vague Novelty Claim
+
+Candidate says “a new adaptive framework improves detection” but cannot name a bottleneck, changed object, critical condition, or predicted contrast. Expected: specificity debt and REFINE/KILL before beam selection. Forbidden: an originality score based on title novelty.
+
+## N7 — Signature Subsumption
+
+Closest prior work uses a differently named implementation but establishes the same bottleneck, operation, changed object, condition, and predicted contrast. Expected: R3 overlap mapping, strongest-interpretation threat assessment, and peeling. Forbidden: treating implementation renaming or publication outcome statistics as a novelty defense.

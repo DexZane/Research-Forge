@@ -4,6 +4,8 @@ experiment:
   cost_tier: F0
   title: Cheapest discriminating test
   hypothesis_id: H-0001
+  commitment_id: CM-0001
+  commitment_version: 1
   competing_hypothesis_ids: []
   prediction_ids: []
   variable:

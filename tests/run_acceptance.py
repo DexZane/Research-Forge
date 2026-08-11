@@ -45,6 +45,27 @@ REQUIRED_TOP_DIRS = {
     "runtime", "examples", "tests",
 }
 
+UPGRADE_REQUIRED_FILES = (
+    "protocols/innovation-signature.md",
+    "protocols/commitment-integrity.md",
+    "schemas/innovation-signature-schema.md",
+    "schemas/commitment-schema.md",
+    "schemas/literature-lineage-schema.md",
+    "templates/innovation-signature.yaml",
+    "templates/candidate-commitment.yaml",
+    "templates/awareness-lead.yaml",
+)
+
+SIGNATURE_FIELDS = (
+    "bottleneck", "operation", "changed_object", "critical_condition", "predicted_contrast",
+)
+
+COMMITMENT_CORE_FIELDS = (
+    "innovation_signature_id", "innovation_signature_version", "core_mechanism",
+    "differentiating_claim", "prediction_ids", "planned_falsifier",
+    "falsification_budget", "project_resource_assumptions",
+)
+
 
 def legal_transition(current: str, target: str, gate: str = "NONE", decision: str = "NONE", rollback: bool = False) -> bool:
     if rollback:
@@ -84,6 +105,40 @@ def emergency_required(threat_level: str, residual_gap: str, phase_started: bool
     return phase_started and threat_level == "T5" and residual_gap == "NEAR_ZERO"
 
 
+def signature_specific(signature: dict) -> bool:
+    """Reject a novelty claim that is only a title, topic, or generic improvement."""
+    return all(isinstance(signature.get(field), str) and signature[field].strip() for field in SIGNATURE_FIELDS)
+
+
+def exact_signature_collision(candidate: dict, competitor: dict) -> bool:
+    """Identify a candidate for deep novelty verification, not a formal threat verdict."""
+    return signature_specific(candidate) and signature_specific(competitor) and all(
+        candidate[field].strip().casefold() == competitor[field].strip().casefold()
+        for field in SIGNATURE_FIELDS
+    )
+
+
+def awareness_lead_citable(lead: dict) -> bool:
+    """Awareness-only records remain search instructions even after they resolve."""
+    return lead.get("lineage_role") != "AWARENESS_ONLY"
+
+
+def commitment_revision_valid(previous: dict, proposed: dict) -> bool:
+    """Require an explicit superseding transaction for a semantic commitment revision."""
+    changed = {field for field in COMMITMENT_CORE_FIELDS if previous.get(field) != proposed.get(field)}
+    if not changed:
+        return True
+    return (
+        proposed.get("id") != previous.get("id")
+        and proposed.get("candidate_id") == previous.get("candidate_id")
+        and proposed.get("commitment_version") == previous.get("commitment_version", 0) + 1
+        and proposed.get("supersedes_commitment_id") == previous.get("id")
+        and bool(proposed.get("change_reason"))
+        and changed <= set(proposed.get("changed_core_fields", []))
+        and bool(proposed.get("affected_dependent_ids"))
+    )
+
+
 def check_relative_links(root: Path) -> None:
     pattern = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
     for path in root.rglob("*.md"):
@@ -104,9 +159,24 @@ def run(root: Path) -> list[str]:
     assert REQUIRED_TOP_DIRS <= actual_dirs
     passed.append("package directories")
 
+    for relative in UPGRADE_REQUIRED_FILES:
+        assert root.joinpath(relative).is_file(), f"missing ResearchStudio upgrade contract: {relative}"
+    passed.append("innovation-signature, commitment, and lineage contracts")
+
     for path in root.joinpath("templates").glob("*.yaml"):
         assert isinstance(yaml.safe_load(path.read_text(encoding="utf-8")), dict)
     passed.append("YAML templates parse")
+
+    signature = yaml.safe_load(root.joinpath("templates/innovation-signature.yaml").read_text(encoding="utf-8"))["innovation_signature"]
+    commitment = yaml.safe_load(root.joinpath("templates/candidate-commitment.yaml").read_text(encoding="utf-8"))["candidate_commitment"]
+    awareness_lead = yaml.safe_load(root.joinpath("templates/awareness-lead.yaml").read_text(encoding="utf-8"))["awareness_lead"]
+    candidate_template = yaml.safe_load(root.joinpath("templates/candidate-entry.yaml").read_text(encoding="utf-8"))["candidate"]
+    assert signature["id"].startswith("IS-")
+    assert commitment["id"].startswith("CM-")
+    assert awareness_lead["id"].startswith("AL-") and awareness_lead["lineage_role"] == "AWARENESS_ONLY"
+    assert candidate_template["innovation_signature_id"].startswith("IS-")
+    assert candidate_template["active_commitment_id"].startswith("CM-")
+    passed.append("signature, commitment, and awareness-lead template links")
 
     for state_file in STATE_FILES:
         text = root.joinpath("states", state_file).read_text(encoding="utf-8")
@@ -144,6 +214,51 @@ def run(root: Path) -> list[str]:
     assert emergency_required("T5", "NEAR_ZERO", True)
     assert not emergency_required("T4", "NON_TRIVIAL", True)
     passed.append("post-GO novelty collision interrupt")
+
+    vague_signature = {field: "" for field in SIGNATURE_FIELDS}
+    candidate_signature = {
+        "bottleneck": "Token routing hides a useful branch under high ambiguity",
+        "operation": "Intervene on routing confidence before aggregation",
+        "changed_object": "routing distribution",
+        "critical_condition": "ambiguous multi-source tokens",
+        "predicted_contrast": "a branch-use diagnostic rises versus a matched routing baseline",
+    }
+    competitor_signature = dict(candidate_signature)
+    assert not signature_specific(vague_signature)
+    assert signature_specific(candidate_signature)
+    assert exact_signature_collision(candidate_signature, competitor_signature)
+    passed.append("signature specificity and exact-collision trigger")
+
+    assert not awareness_lead_citable(awareness_lead)
+    passed.append("awareness-only lead cannot become citation or evidence")
+
+    previous_commitment = {
+        "id": "CM-0001", "candidate_id": "C-0001", "commitment_version": 1,
+        "innovation_signature_id": "IS-0001", "innovation_signature_version": 1,
+        "core_mechanism": "change routing distribution", "differentiating_claim": "diagnostic difference",
+        "prediction_ids": ["PR-0001"], "planned_falsifier": "no diagnostic change",
+        "falsification_budget": {"maximum_cost_tier": "F1"}, "project_resource_assumptions": ["one GPU"],
+    }
+    silent_change = dict(previous_commitment, core_mechanism="change objective")
+    valid_revision = dict(
+        silent_change,
+        id="CM-0002",
+        commitment_version=2,
+        supersedes_commitment_id="CM-0001",
+        change_reason="Prior art subsumes the previous routing mechanism.",
+        changed_core_fields=["core_mechanism"],
+        affected_dependent_ids=["TH-0001", "H-0001", "EX-0001"],
+    )
+    assert not commitment_revision_valid(previous_commitment, silent_change)
+    assert commitment_revision_valid(previous_commitment, valid_revision)
+    passed.append("semantic commitment revision invalidates dependents")
+
+    innovation_protocol = root.joinpath("protocols/innovation-signature.md").read_text(encoding="utf-8")
+    novelty_protocol = root.joinpath("protocols/novelty.md").read_text(encoding="utf-8")
+    assert "Outcome-Data Boundary" in innovation_protocol
+    assert "acceptance rates, citation rates" in innovation_protocol
+    assert "Do not use historical acceptance/citation outcomes" in novelty_protocol
+    passed.append("outcome-derived prior prohibition")
 
     dossier = root.joinpath("templates/experiment-dossier.md").read_text(encoding="utf-8")
     numbered = {int(n) for n in re.findall(r"^(\d+)\. ", dossier, re.MULTILINE)}

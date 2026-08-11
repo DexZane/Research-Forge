@@ -2,7 +2,7 @@
 
 ## Roles
 
-- `R_N_NOVELTY`: strongest prior art, T5, terminology overlap, latest work, stitching, contribution compression.
+- `R_N_NOVELTY`: strongest prior art, T5, terminology overlap, latest work, signature specificity/subsumption, stitching, contribution compression.
 - `R_M_MECHANISM`: unsupported links, correlation/causation, simpler explanations, metric artifacts, mathematical mechanism, hypothesis-to-intervention coherence.
 - `R_E_EXPERIMENT`: baseline fairness, controls, data, seeds, tuning, compute, negative results, reproducibility, statistical and construct validity.
 - `R_X_META`: reconcile independent reports, classify fatal/resolvable issues, estimate ceiling, and recommend a decision.
@@ -14,6 +14,8 @@ R_N, R_M, and R_E must receive the same frozen dossier and produce first-pass re
 ## Reviewer Output
 
 Each reviewer provides verdict, strongest attack, fatal issues, major/minor issues, required evidence, candidate defense if evidence-backed, confidence, and recommendation. Every issue links affected claim/hypothesis/experiment IDs.
+
+The novelty reviewer must attempt to compress the active innovation signature into the closest competitor's signature. If the signature is vague or the competitor subsumes its bottleneck/operation/object/condition/contrast, return a fatal or blocking issue with evidence rather than a generic “incremental” label.
 
 ## Reject Simulation
 

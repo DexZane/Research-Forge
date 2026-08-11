@@ -1,0 +1,22 @@
+candidate_commitment:
+  id: CM-0001
+  candidate_id: C-0001
+  candidate_version: 1
+  innovation_signature_id: IS-0001
+  innovation_signature_version: 1
+  core_mechanism: null
+  differentiating_claim: null
+  prediction_ids: []
+  planned_falsifier: null
+  falsification_budget:
+    maximum_cost_tier: F1
+    compute: null
+    time: null
+    assumptions: []
+  project_resource_assumptions: []
+  lifecycle_status: DRAFT
+  commitment_version: 1
+  supersedes_commitment_id: null
+  change_reason: null
+  changed_core_fields: []
+  affected_dependent_ids: []
