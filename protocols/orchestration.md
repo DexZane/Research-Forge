@@ -41,7 +41,7 @@ Order work by decision criticality and information gain:
 1. blocking integrity/recovery;
 2. emergency novelty collision;
 3. T4/T5 verification and fatal reviewer issues;
-4. gate-critical unknowns and contradictions;
+4. gate-critical RQ, signal, triage, and contradiction unknowns;
 5. cheapest discriminating evidence;
 6. coverage expansion;
 7. non-blocking enrichment.

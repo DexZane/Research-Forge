@@ -6,9 +6,9 @@ Only the orchestrator writes global project state. Use a transaction for every e
 
 ## Transaction Stages
 
-1. `VALIDATE`: parse records; validate IDs/enums/locators/references, active signature/commitment versions, and worker snapshot.
+1. `VALIDATE`: parse records; validate IDs/enums/locators/references, active research-question/fit pointers, candidate opportunity-signal provenance, gate-critical literature-triage access, active signature/commitment versions, and worker snapshot.
 2. `STAGE`: write proposed delta under transaction ID without changing active pointers.
-3. `RECONCILE`: deduplicate paper families/bibliography records/evidence and open/resolve contradictions.
+3. `RECONCILE`: deduplicate paper families/bibliography records/evidence/opportunity signals and open/resolve contradictions.
 4. `PROPAGATE`: compute explicit dependency consequences conservatively, including mandatory invalidation for semantic commitment changes.
 5. `INTEGRITY`: run required audits; failures keep transaction staged/aborted.
 6. `SNAPSHOT`: create immutable pre-commit snapshot and manifest/checksum.
@@ -27,6 +27,10 @@ Invalidate automatically only across `REQUIRES` edges, except for the mandatory 
 ## Commitment Revision
 
 Before commit, compare the active and proposed `CM-` records. If bottleneck, operation, changed object, critical condition, core mechanism, differentiating claim, primary predicted contrast, falsifier, or budget assumption changes, require a new commitment version, supersession link, reason, changed-field list, and stale dependent IDs. Invalidate required novelty mappings, hypothesis attacks, diagnostics, falsification plans, feasibility estimates, reviewer reports, and gate packets; route to the earliest affected state. Workers may propose a revision cue but never modify the commitment.
+
+## Researchability Revision
+
+Before commit, compare active and proposed `RQ-`, `FIT-`, `OP-`, and `LT-` records. A material research-question change creates a new `RQ-` version, identifies affected candidates, and rechecks the scope ladder; route to S01 when the minimum discriminating path is no longer viable. An invalidated or weakened verified `OP-` reviews dependent candidates and their novelty/gap claims. A gate-critical `LT-` entry that lacks the required reading tier or access creates blocking reasoning debt and caps the affected gate. Preference or mentorship changes may revise the fit card or scope, but cannot promote a scientific claim.
 
 ## Audit Trail
 

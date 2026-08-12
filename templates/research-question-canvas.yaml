@@ -1,0 +1,31 @@
+research_question_canvas:
+  id: RQ-0001
+  phenomenon:
+    statement: null
+    epistemic_status: UNKNOWN
+    evidence_ids: []
+  unit_and_condition: null
+  knowledge_gap: null
+  mechanism_question: null
+  observable_outcome: null
+  minimal_discriminating_path: null
+  scope_ladder:
+    minimum_completable:
+      inputs: []
+      output: null
+      time_compute_assumptions: []
+      stop_condition: null
+    core_project:
+      inputs: []
+      output: null
+      time_compute_assumptions: []
+      stop_condition: null
+    extension:
+      inputs: []
+      output: null
+      time_compute_assumptions: []
+      stop_condition: null
+  stop_or_reframe_condition: null
+  reasoning_debt_ids: []
+  lifecycle_status: DRAFT
+  version: 1

@@ -1,11 +1,13 @@
 research_state:
   project_id: research-project-0001
-  schema_version: "1.2"
+  schema_version: "1.3"
   state: S00_INTAKE
   state_iteration: 1
   status: ACTIVE
   mode: EXPLORATION
   pending_gate: NONE
+  active_research_question_id: null
+  active_fit_card_id: null
   active_candidate_ids: []
   primary_candidate_id: null
   backup_candidate_ids: []
@@ -21,6 +23,10 @@ research_state:
   latest_snapshot_id: null
   last_committed_transaction: null
   registries:
+    research_questions: state/research_question_registry.yaml
+    fit_cards: state/fit_card_registry.yaml
+    opportunity_signals: state/opportunity_signal_ledger.yaml
+    literature_triage: state/literature_triage_queue.yaml
     papers: state/paper_registry.yaml
     awareness_leads: state/awareness_leads.yaml
     innovation_signatures: state/innovation_signature_registry.yaml

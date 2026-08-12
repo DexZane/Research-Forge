@@ -4,6 +4,11 @@
 - Project/state/snapshot version:
 - Decision requested:
 - Options available:
+- Research question canvas and scope ladder:
+- Project fit, capability gaps, and assumed dependencies:
+- Opportunity signals and evidence limits:
+- Gate-critical literature/access debt:
+- Questions requiring human input:
 - Recommended option and rationale:
 - Evidence supporting the recommendation:
 - Strongest counter-evidence:

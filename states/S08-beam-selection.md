@@ -10,7 +10,7 @@ Every candidate has S07 threat/kill status.
 
 ## Reads
 
-Candidate and threat ledgers, evidence, red-ocean map, resource profile, genealogy.
+Candidate/threat/opportunity-signal ledgers, RQ canvas, FIT card, evidence, red-ocean map, resource profile, genealogy.
 
 ## Writes
 
@@ -18,15 +18,15 @@ Hard-gate results, scorecards with rationale/confidence, Pareto analysis, beam, 
 
 ## Required Questions
 
-Does each candidate have basic novelty possibility, non-stitching form, clear question, preliminary falsifiability, potential optimization space, and no confirmed fatal prior art? Which candidates are Pareto dominated?
+Does each candidate have basic novelty possibility, non-stitching form, a clear question tied to a verified signal, a plausible minimum discriminating path, preliminary falsifiability, potential optimization space, and no confirmed fatal prior art? Which candidates are Pareto dominated?
 
 ## Required Actions
 
-Apply hard gates first; score scientific novelty, mechanism depth, impact, reviewer clarity, falsifiability, evidence, competition, time/cost, feasibility, generalization, and ceiling; never average away a hard failure.
+Apply hard gates first; reject candidates with no researchable question, verified/bounded signal, or plausible minimum discriminating path; score scientific novelty, mechanism depth, impact, reviewer clarity, falsifiability, evidence, competition, time/cost, feasibility, generalization, and ceiling; never average away a hard failure. A capability gap or unavailable full project may yield HOLD_RESOURCE, not a scientific KILL.
 
 ## Required Protocols
 
-[Reasoning](../protocols/reasoning.md), [Novelty](../protocols/novelty.md), [Resources](../protocols/resources.md), [Gates](../runtime/gates.md), [Integrity](../protocols/integrity.md).
+[Reasoning](../protocols/reasoning.md), [Researchability](../protocols/researchability.md), [Opportunity Signals](../protocols/opportunity-signals.md), [Novelty](../protocols/novelty.md), [Resources](../protocols/resources.md), [Collaboration](../protocols/collaboration.md), [Gates](../runtime/gates.md), [Integrity](../protocols/integrity.md).
 
 ## Parallelizable Work
 
@@ -38,7 +38,7 @@ Hard gates → score/rationale → Pareto → beam → integrity → G2.
 
 ## Required Outputs
 
-`reports/beam-selection.md` and G2 packet showing survivors, kills, strongest prior art, cost, and uncertainty.
+`reports/beam-selection.md` and G2 packet showing survivors, verified signals, RQ/minimum paths, kills, strongest prior art, cost, uncertainty, and optional human-discussion packet.
 
 ## Exit Conditions
 

@@ -1,0 +1,26 @@
+fit_card:
+  id: FIT-0001
+  hard_constraints:
+    deadline: null
+    compute: null
+    data_access: null
+    licensing_ethics: null
+    required_expertise: []
+    mentor_team_availability: null
+    required_tooling: []
+  preferences:
+    interests: []
+    career_relevance: null
+    target_venues: []
+    preferred_methods: []
+  capability_gaps: []
+  dependency_owners: []
+  availability:
+    verified: []
+    assumed: []
+  feasibility_by_scope:
+    minimum_completable: UNKNOWN
+    core_project: UNKNOWN
+    extension: UNKNOWN
+  lifecycle_status: DRAFT
+  version: 1

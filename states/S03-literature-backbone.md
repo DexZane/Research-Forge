@@ -10,11 +10,11 @@ Landscape research lines and concept dictionary exist.
 
 ## Reads
 
-Scope, landscape, paper/search registries, bibliography registry, evidence ledger, cutoff.
+Scope/RQ canvas, landscape/signals, paper/search registries, bibliography registry, evidence ledger, literature-triage queue, cutoff.
 
 ## Writes
 
-Canonical paper families, verified citation metadata, source-grounded research-line backbone, citable and awareness-only lineage nodes, reading tiers, citation chains, and coverage debt.
+Canonical paper families, verified citation metadata, source-grounded research-line backbone, citable and awareness-only lineage nodes, decision-first literature-triage queue, reading tiers, citation chains, and coverage debt.
 
 ## Required Questions
 
@@ -22,11 +22,11 @@ For each line: who/what founded it, which milestones changed the mechanism, what
 
 ## Required Actions
 
-Search by mechanism and historical terminology; group paper families; record model-memory/user/secondary hints as `AL-` awareness-only leads; resolve leads through sources; perform citation chaining for anchors; upgrade formal backbone papers to at least R2.
+Search by mechanism and historical terminology; group paper families; record model-memory/user/secondary hints as `AL-` awareness-only leads; resolve leads through sources; create `LT-` entries that prioritize gate-critical mechanisms, opportunity signals, threats, and access limitations; perform citation chaining for anchors; upgrade formal backbone papers to at least R2.
 
 ## Required Protocols
 
-[Search](../protocols/search.md), [Bibliography](../protocols/bibliography.md), [Reading](../protocols/reading.md), [Evidence](../protocols/evidence.md), [Literature Lineage](../schemas/literature-lineage-schema.md), [Integrity](../protocols/integrity.md).
+[Search](../protocols/search.md), [Literature Triage](../protocols/literature-triage.md), [Bibliography](../protocols/bibliography.md), [Reading](../protocols/reading.md), [Evidence](../protocols/evidence.md), [Literature Lineage](../schemas/literature-lineage-schema.md), [Integrity](../protocols/integrity.md).
 
 ## Parallelizable Work
 
@@ -38,11 +38,11 @@ Discovery → family normalization → anchor R2 → backbone commit.
 
 ## Required Outputs
 
-`reports/literature-backbone.md`, paper and bibliography registry updates, citable/awareness-only citation lineage, coverage/debt records.
+`reports/literature-backbone.md`, paper and bibliography registry updates, citable/awareness-only citation lineage, literature-triage queue, coverage/debt records.
 
 ## Exit Conditions
 
-Every active line answers foundation/current/recent/debate, critical anchors are R2, and unresolved awareness leads are visible rather than treated as sources; route S04.
+Every active line answers foundation/current/recent/debate, critical anchors are R2, gate-critical reading/access debt is visible in the triage queue, and unresolved awareness leads are visible rather than treated as sources; route S04.
 
 ## Rollback Conditions
 

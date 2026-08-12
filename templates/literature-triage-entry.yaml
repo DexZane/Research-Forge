@@ -1,0 +1,15 @@
+literature_triage_entry:
+  id: LT-0001
+  decision_question: null
+  target_ids: []
+  paper_or_source_ids: []
+  required_reading_tier: R2
+  threat_or_coverage_role: null
+  expected_information_gain: HIGH
+  access_state: FULL_TEXT_READY
+  gate_impact: NONE
+  budget_or_deadline: null
+  status: ACTIVE
+  next_action: null
+  reasoning_debt_ids: []
+  version: 1

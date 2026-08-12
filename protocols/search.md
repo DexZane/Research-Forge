@@ -84,6 +84,10 @@ Use a safety cap to stop unbounded search; if it fires first, use `BUDGET_EXHAUS
 
 Track coverage over task, failure mode, mechanism, mathematical object, historical line, recent frontier, closest competitors, negative/counter evidence, code, and datasets. Record missing cells as reasoning debt.
 
+## Decision-First Triage and Access
+
+Maintain the `LT-` queue defined in [Literature Triage](literature-triage.md). Prioritize sources that can change a gate, boundary, falsifier, opportunity-signal verification, or core mechanism judgment. Record full-text, supplement, and code access; lack of authorized access is debt and a confidence cap, never evidence that the source is irrelevant.
+
 ## Reproducibility
 
 Save exact query, date, source, filters, results reviewed, paper families added, decision impact, and next query. Never report a search as complete from memory or a single search engine.
