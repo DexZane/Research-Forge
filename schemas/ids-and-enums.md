@@ -15,6 +15,10 @@ This file is the canonical vocabulary. Templates illustrate records; other files
 | `CM-` | candidate core commitment |
 | `IS-` | innovation signature |
 | `AL-` | awareness-only literature lead |
+| `RQ-` | research-question canvas |
+| `FIT-` | project fit card |
+| `OP-` | opportunity signal |
+| `LT-` | literature-triage entry |
 | `TH-` | threat |
 | `CT-` | contradiction |
 | `H-` | hypothesis |
@@ -103,6 +107,11 @@ Bibliography records reuse the immutable `P-` paper ID and the existing verifica
 - Prediction pattern: `DIRECTIONAL`, `ORDERING`, `BOUNDED`, `NULL_EXPECTED`, `INTERACTION`.
 - Diagnostic validity: `UNASSESSED`, `VALID`, `LIMITED`, `INVALID`.
 - Signature subject kind: `PAPER`, `CANDIDATE`.
+- Opportunity signal: `BENCHMARK_SLICE_FAILURE`, `REPLICATION_ANOMALY`, `PAPER_LIMITATION`, `NEGATIVE_RESULT`, `DATASET_OR_EVALUATION_ARTIFACT`, `DEPLOYMENT_CONSTRAINT`, `OPEN_TECHNICAL_QUESTION`.
+- Opportunity signal lifecycle: `DISCOVERY`, `VERIFICATION_PENDING`, `VERIFIED`, `WEAKENED`, `INVALIDATED`, `ARCHIVED`.
+- Fit classification: `HARD_CONSTRAINT`, `PREFERENCE`, `ASSUMPTION`.
+- Fit scope feasibility: `READY`, `HOLD_RESOURCE`, `UNKNOWN`, `NOT_APPLICABLE`.
+- Literature access: `FULL_TEXT_READY`, `ABSTRACT_ONLY`, `SUPPLEMENT_MISSING`, `CODE_MISSING`, `ACCESS_REQUESTED`, `UNAVAILABLE`, `NOT_APPLICABLE`.
 
 ## Experiments
 
@@ -116,9 +125,14 @@ Bibliography records reuse the immutable `P-` paper ID and the existing verifica
 - Reviewer role: `R_N_NOVELTY`, `R_M_MECHANISM`, `R_E_EXPERIMENT`, `R_X_META`.
 - Reviewer verdict: `ACCEPTABLE`, `MINOR_CONCERNS`, `MAJOR_CONCERNS`, `FATAL_CONCERN`.
 - Reasoning debt severity: `BLOCKING`, `HIGH`, `MEDIUM`, `LOW`.
-- Common debt type: `MISSING_PRIMARY_SOURCE`, `UNCLEAR_SCOPE`, `UNRESOLVED_CONTRADICTION`, `MISSING_CONTROL`, `FRESHNESS_GAP`, `BROKEN_PROVENANCE`, `RESOURCE_UNKNOWN`.
+- Common debt type: `MISSING_PRIMARY_SOURCE`, `MISSING_FULL_TEXT`, `UNCLEAR_RESEARCH_QUESTION`, `UNCLEAR_SCOPE`, `UNRESOLVED_CONTRADICTION`, `MISSING_CONTROL`, `FRESHNESS_GAP`, `BROKEN_PROVENANCE`, `RESOURCE_UNKNOWN`, `CAPABILITY_GAP`.
 - Search decision impact: `NONE`, `LOW`, `MEDIUM`, `HIGH`, `FATAL`.
 - Gate outcome: `APPROVED`, `REVISE`, `HOLD`, `KILL`, `GO`.
+
+## Human Input
+
+- Human input class: `CONSTRAINT_DECISION`, `DOMAIN_JUDGMENT`, `MENTORSHIP_ADVICE`, `ARTIFACT_POINTER`.
+- Human input is neither evidence nor a claim until a linked primary artifact is independently verified under the evidence protocol.
 
 ## Forbidden Synonym Drift
 

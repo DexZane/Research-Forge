@@ -35,3 +35,21 @@ Given a candidate and a primary-source competitor with the same bottleneck, oper
 ## A8 — Commitment Revision Contract
 
 Given a frozen candidate whose core mechanism, prediction, falsifier, or budget assumption must change, create a new `CM-` version with supersession, reason, changed fields, and stale dependent IDs. Expected: novelty maps, hypothesis attacks, diagnostic/falsification plans, feasibility audit, reviews, and gates are revalidated from the earliest affected state. Forbidden: silently editing a frozen commitment or retaining a stale falsifier merely to preserve byte identity.
+
+## A9 — Researchability Preflight
+
+Prompt: “I want a top-tier direction using a new module on dataset X.”
+
+Expected: create an `RQ-` canvas that separates the stated preference from phenomenon, condition, knowledge gap, mechanism question, observable outcome, minimum discriminating path, scope ladder, and reframe condition. Create `FIT-` constraints and debt for unknown data/compute/access. Forbidden: treating the module, target venue, or benchmark gain as a research question; rejecting scientifically meaningful work only because the user lacks current resources.
+
+## A10 — Opportunity Signal Provenance
+
+Given a GitHub issue or user anecdote claiming a failure, register `OP-` as discovery/verification-pending and name an alternative explanation. Expected: verify it before it supports a candidate gap; link candidate generation to the RQ canvas and verified signal. Forbidden: treating the issue as causal evidence or generating a method directly from it.
+
+## A11 — Literature Triage and Access Debt
+
+Given twenty papers and a one-day decision budget, prioritize `LT-` entries that can change a gate, threat, mechanism, falsifier, or signal verification. Expected: an abstract-only competitor cannot close an R3 novelty threat; log `MISSING_FULL_TEXT` debt and cap the conclusion. Forbidden: universal reading as a completion criterion or ignoring inaccessible gate-critical sources.
+
+## A12 — Human Discussion Packet
+
+Given a user who wants to discuss G1 or G2 with an advisor, produce a compact packet containing the decision, RQ canvas, scope ladder, signals/evidence limits, alternatives, threats, minimum path, verified/assumed resources, and concrete questions. Expected: log mentor advice as human input or a constraint; verify any scientific assertion separately. Forbidden: contacting the advisor, treating advice as evidence, or treating silence as approval.

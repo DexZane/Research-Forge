@@ -35,3 +35,7 @@ User ambition does not raise publication tier. Resources do not turn weak novelt
 ## Risk Treatment
 
 For each risk record likelihood qualitatively, impact, evidence, mitigation, trigger, owner, and decision consequence. If mitigation changes the scientific question, rollback and reopen novelty search.
+
+## Early Fit Boundary
+
+At S01, make a preliminary FIT card and scope ladder. Identify skills, mentor/team availability, access, and dependencies as verified, assumed, or unknown. This early view selects a valid minimum discriminating path; S15 remains the authoritative full feasibility audit. Do not turn a capability gap into a scientific KILL or turn a preferred venue into evidence of value.

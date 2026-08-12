@@ -1,0 +1,15 @@
+opportunity_signal:
+  id: OP-0001
+  signal_type: PAPER_LIMITATION
+  source_provenance: null
+  bounded_observation: null
+  epistemic_status: UNKNOWN
+  scope: null
+  alternative_explanations: []
+  minimum_verification_action: null
+  linked_research_question_ids: []
+  linked_candidate_ids: []
+  evidence_ids: []
+  reasoning_debt_ids: []
+  lifecycle_status: DISCOVERY
+  version: 1

@@ -31,6 +31,8 @@ Decompose into seven slots:
 
 Mark missing links. A module name, benchmark gap, or performance target is not a scientific question.
 
+Before deep search or candidate ranking, express the question through the RQ canvas in [Researchability](researchability.md): phenomenon, unit/condition, knowledge gap, mechanism question, observable outcome, minimum path, scope ladder, and stop/reframe condition. A hard constraint, preference, or mentor opinion is not a scientific premise.
+
 ## R2 — Evidence-to-Claim
 
 For every claim, assess:
@@ -137,3 +139,4 @@ Search at least one counter-claim, strongest-competitor, and simpler-explanation
 - Conflating failure to find evidence with evidence of absence.
 - Protecting a candidate because of sunk cost.
 - Using a score to hide a failed hard gate.
+- Treating a user anecdote, issue report, or paper limitation as a verified causal mechanism.

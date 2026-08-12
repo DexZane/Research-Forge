@@ -2,15 +2,15 @@
 
 ## Minimal Context Rule
 
-Load IDs and decision-relevant fields, not entire project history. Always include current state/iteration/version, pending gate, active candidates/hypotheses, T4/T5 threats, open blocking contradictions/debt, bibliography export status, latest snapshot, and last major decisions.
+Load IDs and decision-relevant fields, not entire project history. Always include current state/iteration/version, pending gate, active research-question canvas and fit card, verified/decision-critical opportunity signals, gate-critical literature-triage entries and access debt, active candidates/hypotheses, T4/T5 threats, open blocking contradictions/debt, bibliography export status, latest snapshot, and last major decisions.
 
 ## State Groups
 
 | States | Add to context |
 |---|---|
-| S00–S01 | intake, project constraints, resource profile |
-| S02–S05 | scope, concept dictionary, research lines, awareness-only leads, citable lineage, coverage map, anchor papers/bibliography/evidence, paper signatures |
-| S06–S08 | candidate registry/genealogy, draft signatures/commitments, red-ocean constraints, preliminary threats, score rationale |
+| S00–S01 | intake, research-question canvas, fit card, scope ladder, project constraints, resource profile |
+| S02–S05 | research-question canvas, fit card, opportunity-signal ledger, literature-triage queue/access debt, scope, concept dictionary, research lines, awareness-only leads, citable lineage, coverage map, anchor papers/bibliography/evidence, paper signatures |
+| S06–S08 | candidate registry/genealogy, candidate-to-question/signal provenance, draft signatures/commitments, red-ocean constraints, preliminary threats, score rationale, minimum discriminating paths |
 | S09–S10 | version-pinned finalist signature/commitment versions, query graph, closest competitors, all T4/T5 evidence, claims, contradictions |
 | S11–S12 | boundary/residual, mechanism claims, hypotheses, predictions, alternatives, falsifiers |
 | S13–S15 | locked hypothesis/commitment version, diagnostics, experiments, baselines/confounders, resources/code evidence |

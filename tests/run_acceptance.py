@@ -56,6 +56,27 @@ UPGRADE_REQUIRED_FILES = (
     "templates/awareness-lead.yaml",
 )
 
+V12_REQUIRED_FILES = (
+    "protocols/researchability.md",
+    "protocols/opportunity-signals.md",
+    "protocols/literature-triage.md",
+    "protocols/collaboration.md",
+    "schemas/researchability-schema.md",
+    "schemas/literature-triage-schema.md",
+    "templates/research-question-canvas.yaml",
+    "templates/fit-card.yaml",
+    "templates/opportunity-signal.yaml",
+    "templates/literature-triage-entry.yaml",
+    "templates/human-discussion-packet.md",
+)
+
+V12_RUNTIME_CONTRACTS = {
+    "runtime/boot.md": ("research-question", "opportunity signals", "literature-triage"),
+    "runtime/context-loading.md": ("research-question canvas", "literature-triage", "minimum discriminating paths"),
+    "runtime/transaction.md": ("candidate opportunity-signal provenance", "Researchability Revision", "gate-critical `LT-`"),
+    "protocols/integrity.md": ("Active `RQ-` and `FIT-` pointers", "abstract-only reading cannot close", "minimum discriminating path"),
+}
+
 SIGNATURE_FIELDS = (
     "bottleneck", "operation", "changed_object", "critical_condition", "predicted_contrast",
 )
@@ -139,6 +160,44 @@ def commitment_revision_valid(previous: dict, proposed: dict) -> bool:
     )
 
 
+def research_question_valid(canvas: dict) -> bool:
+    """Require an answerable question and a small discriminating path before deep exploration."""
+    required = (
+        "unit_and_condition", "knowledge_gap", "mechanism_question", "observable_outcome",
+        "minimal_discriminating_path", "stop_or_reframe_condition",
+    )
+    minimum = canvas.get("scope_ladder", {}).get("minimum_completable", {})
+    return (
+        all(isinstance(canvas.get(field), str) and canvas[field].strip() for field in required)
+        and isinstance(canvas.get("phenomenon"), dict)
+        and isinstance(canvas["phenomenon"].get("statement"), str)
+        and bool(canvas["phenomenon"]["statement"].strip())
+        and canvas["phenomenon"].get("epistemic_status") in {"FACT", "INFERENCE", "HYPOTHESIS", "UNKNOWN"}
+        and isinstance(minimum.get("output"), str) and minimum["output"].strip()
+        and isinstance(minimum.get("stop_condition"), str) and minimum["stop_condition"].strip()
+    )
+
+
+def opportunity_signal_valid(signal: dict) -> bool:
+    """Prevent an anecdote, limitation, or issue from silently becoming a candidate gap."""
+    return (
+        signal.get("lifecycle_status") == "VERIFIED"
+        and bool(signal.get("source_provenance"))
+        and bool(signal.get("bounded_observation"))
+        and bool(signal.get("alternative_explanations"))
+        and bool(signal.get("evidence_ids"))
+        and bool(signal.get("minimum_verification_action"))
+    )
+
+
+def triage_closes_required_tier(entry: dict) -> bool:
+    """Abstract access is discovery-only and cannot close a deep-reading requirement."""
+    return not (
+        entry.get("access_state") == "ABSTRACT_ONLY"
+        and entry.get("required_reading_tier") in {"R2", "R3", "R4"}
+    )
+
+
 def check_relative_links(root: Path) -> None:
     pattern = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
     for path in root.rglob("*.md"):
@@ -163,6 +222,16 @@ def run(root: Path) -> list[str]:
         assert root.joinpath(relative).is_file(), f"missing ResearchStudio upgrade contract: {relative}"
     passed.append("innovation-signature, commitment, and lineage contracts")
 
+    for relative in V12_REQUIRED_FILES:
+        assert root.joinpath(relative).is_file(), f"missing researchability upgrade contract: {relative}"
+    passed.append("researchability, opportunity, triage, and collaboration contracts")
+
+    for relative, required_fragments in V12_RUNTIME_CONTRACTS.items():
+        text = root.joinpath(relative).read_text(encoding="utf-8")
+        for fragment in required_fragments:
+            assert fragment in text, f"missing v1.2 runtime integration in {relative}: {fragment}"
+    passed.append("researchability runtime integration")
+
     for path in root.joinpath("templates").glob("*.yaml"):
         assert isinstance(yaml.safe_load(path.read_text(encoding="utf-8")), dict)
     passed.append("YAML templates parse")
@@ -171,12 +240,22 @@ def run(root: Path) -> list[str]:
     commitment = yaml.safe_load(root.joinpath("templates/candidate-commitment.yaml").read_text(encoding="utf-8"))["candidate_commitment"]
     awareness_lead = yaml.safe_load(root.joinpath("templates/awareness-lead.yaml").read_text(encoding="utf-8"))["awareness_lead"]
     candidate_template = yaml.safe_load(root.joinpath("templates/candidate-entry.yaml").read_text(encoding="utf-8"))["candidate"]
+    rq_canvas = yaml.safe_load(root.joinpath("templates/research-question-canvas.yaml").read_text(encoding="utf-8"))["research_question_canvas"]
+    fit_card = yaml.safe_load(root.joinpath("templates/fit-card.yaml").read_text(encoding="utf-8"))["fit_card"]
+    opportunity_signal = yaml.safe_load(root.joinpath("templates/opportunity-signal.yaml").read_text(encoding="utf-8"))["opportunity_signal"]
+    triage_entry = yaml.safe_load(root.joinpath("templates/literature-triage-entry.yaml").read_text(encoding="utf-8"))["literature_triage_entry"]
     assert signature["id"].startswith("IS-")
     assert commitment["id"].startswith("CM-")
     assert awareness_lead["id"].startswith("AL-") and awareness_lead["lineage_role"] == "AWARENESS_ONLY"
     assert candidate_template["innovation_signature_id"].startswith("IS-")
     assert candidate_template["active_commitment_id"].startswith("CM-")
+    assert rq_canvas["id"].startswith("RQ-")
+    assert fit_card["id"].startswith("FIT-")
+    assert opportunity_signal["id"].startswith("OP-")
+    assert triage_entry["id"].startswith("LT-")
+    assert candidate_template["research_question_canvas_id"].startswith("RQ-")
     passed.append("signature, commitment, and awareness-lead template links")
+    passed.append("researchability, opportunity, and triage template links")
 
     for state_file in STATE_FILES:
         text = root.joinpath("states", state_file).read_text(encoding="utf-8")
@@ -259,6 +338,49 @@ def run(root: Path) -> list[str]:
     assert "acceptance rates, citation rates" in innovation_protocol
     assert "Do not use historical acceptance/citation outcomes" in novelty_protocol
     passed.append("outcome-derived prior prohibition")
+
+    invalid_canvas = dict(rq_canvas)
+    valid_canvas = {
+        "phenomenon": {"statement": "Tiny objects are missed after downsampling.", "epistemic_status": "INFERENCE"},
+        "unit_and_condition": "one-stage detection under aggressive feature downsampling",
+        "knowledge_gap": "whether assignment failure rather than representation loss explains the slice failure",
+        "mechanism_question": "does assignment instability mediate missed tiny objects?",
+        "observable_outcome": "assignment consistency and slice recall under matched settings",
+        "minimal_discriminating_path": "instrument a trained baseline and perturb assignment only",
+        "scope_ladder": {"minimum_completable": {"output": "a valid discriminating diagnostic", "stop_condition": "no measurable assignment difference"}},
+        "stop_or_reframe_condition": "diagnostic cannot distinguish assignment from representation explanations",
+    }
+    assert not research_question_valid(invalid_canvas)
+    assert research_question_valid(valid_canvas)
+    passed.append("research-question canvas requires an observable minimum path")
+
+    unverified_signal = {
+        "lifecycle_status": "DISCOVERY", "source_provenance": "user report", "bounded_observation": "latency is high",
+        "alternative_explanations": ["measurement artifact"], "evidence_ids": [], "minimum_verification_action": "profile deployment",
+    }
+    verified_signal = dict(
+        unverified_signal,
+        lifecycle_status="VERIFIED",
+        source_provenance="P-0001 Figure 4",
+        evidence_ids=["EU-0001"],
+    )
+    assert not opportunity_signal_valid(unverified_signal)
+    assert opportunity_signal_valid(verified_signal)
+    passed.append("opportunity signal requires verification and alternatives")
+
+    abstract_t4 = {"access_state": "ABSTRACT_ONLY", "required_reading_tier": "R3"}
+    full_text_t4 = {"access_state": "FULL_TEXT_READY", "required_reading_tier": "R3"}
+    assert not triage_closes_required_tier(abstract_t4)
+    assert triage_closes_required_tier(full_text_t4)
+    passed.append("literature triage prevents abstract-only deep-read closure")
+
+    state_template = yaml.safe_load(root.joinpath("templates/research-state.yaml").read_text(encoding="utf-8"))["research_state"]
+    registries = state_template["registries"]
+    assert state_template["active_research_question_id"] is None
+    assert state_template["active_fit_card_id"] is None
+    for key in ("research_questions", "fit_cards", "opportunity_signals", "literature_triage"):
+        assert key in registries
+    passed.append("researchability registry pointers")
 
     dossier = root.joinpath("templates/experiment-dossier.md").read_text(encoding="utf-8")
     numbered = {int(n) for n in re.findall(r"^(\d+)\. ", dossier, re.MULTILINE)}

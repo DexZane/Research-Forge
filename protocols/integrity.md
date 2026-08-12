@@ -22,6 +22,7 @@ Run these audits before gates, formal T4/T5 changes, candidate KILL, project dec
 - Search snippets and secondary summaries are not cited as primary support.
 - Freshness cutoff and source coverage are explicit.
 - `AL-` awareness-only leads are never used as citations, BibTeX exports, evidence, formal paper-matrix entries, or novelty support.
+- A user report, mentor opinion, search snippet, or unverified `OP-` opportunity signal is not research evidence until it has a valid provenance link and verification action/result.
 
 ## State Integrity
 
@@ -30,6 +31,8 @@ Run these audits before gates, formal T4/T5 changes, candidate KILL, project dec
 - Only legal transitions or recorded rollback/interrupt occurred.
 - No partial transaction or stale snapshot remains.
 - Active candidates resolve to their active signature and commitment; frozen commitment changes have explicit supersession and dependent-record consequences.
+- Active `RQ-` and `FIT-` pointers resolve; every candidate links to its research question and verified opportunity signal or an explicitly bounded evidence gap.
+- Gate-critical `LT-` entries expose required reading tier and access debt; abstract-only reading cannot close a full-text requirement.
 
 ## Report Synchronization
 
@@ -60,6 +63,7 @@ Run these audits before gates, formal T4/T5 changes, candidate KILL, project dec
 - Baselines, controls, budgets, and confounders are fair/visible.
 - Scientific and execution decisions remain separate.
 - The preregistered falsification plan and resource assumptions reference the active frozen commitment version.
+- The minimum discriminating path names an observable outcome and cannot be represented by a score improvement alone.
 
 ## Failure Behavior
 

@@ -12,7 +12,7 @@
 
 Research Forge 是一套面向 AI 与深度学习方法研究的、有状态的对抗式科研选题 Skill。它把一个宽泛的研究方向或一个已经被偏爱的想法，推进为有证据链接的 `GO`、`HOLD`、`REFINE`、`HOLD_RESOURCE` 或 `KILL` 决策，并把高成本实验放到后面。
 
-**状态：** v1.1 协议实现。本仓库包含确定性的契约检查，但不声称相对于其他 Skill 具有实证性能优势，也不保证研究一定成功。
+**状态：** v1.2 协议实现。本仓库包含确定性的契约检查，但不声称相对于其他 Skill 具有实证性能优势，也不保证研究一定成功。
 
 ## Research Forge 解决什么问题
 
@@ -41,6 +41,7 @@ Research Forge 把选题视为一个**降低科研风险的问题**。它的任�
 | 默认立场 | 扩展并改进想法 | 搜索以拒绝，并暴露失败条件 |
 | 文献作用 | 总结相关工作 | 建立查询图、以最强形式理解先验并攻击新颖性 |
 | 文献来源 | 记忆中的标题可能直接变成主张 | 未解析线索保持为不可引用的 awareness-only 记录，直到被来源核验 |
+| 选题起点 | 从模块、标题或目标会议开始 | 先要求可研究问题、可审计的问题信号与最小判别路径 |
 | 新颖性 | 把表面空白当作候选贡献 | 剥离重叠主张，保留经过限定的残余边界 |
 | 候选修订 | 把想法反复改写得更像新点 | 为核心承诺建版本，并让失效的下游测试/审查重新核验 |
 | 知识控制 | 把来源和解释混合进顺畅 prose | 分开证据、主张、推断、假设、矛盾和未知项 |
@@ -84,27 +85,33 @@ Research Forge 不把所有内容压扁成自信的 prose。[证据协议](proto
 
 这里刻意不使用历史录用率、引用率或模式频率给候选打分；它们不是科研证据，也不是排名先验。
 
-### 5. 假设先于架构
+### 5. 候选组合之前，先确认问题可研究
+
+S00–S01 会建立[研究问题画布](protocols/researchability.md)：现象、对象与条件、知识缺口、机制问题、可观察结果、最小判别路径、三个嵌套范围和停止/重构条件。`FIT-` 卡片则严格区分硬约束、偏好、假设、能力缺口和依赖负责人。
+
+候选必须关联[机会信号](protocols/opportunity-signals.md)，例如已核验的分层失败、复现异常、局限、负结果、评测伪影或部署约束，而不只是跟风替换模块。用户描述、GitHub issue 或导师意见可以成为线索，但在成为科学前提之前必须核验。
+
+### 6. 假设先于架构
 
 核心假设必须在不依赖某个偏好模块名称的情况下描述机制，并且必须给出能够区别于钢人化替代解释的观察预测。详见[假设协议](protocols/hypothesis.md)。
 
 这样可以避免把熟悉的组合——例如“backbone X 加 loss Y 用于任务 Z”——仅仅因为没有使用同一个名称，就误认为科学贡献。
 
-### 6. 证伪先于优化
+### 7. 证伪先于优化
 
 [证伪协议](protocols/falsification.md) 要求寻找最低成本、最高信息量的测试，用来拒绝机制、暴露可实现上限几乎不存在，或支持更简单的解释。决策阈值和歧义分支必须在查看结果之前记录。
 
 负面证据会保留在项目记忆中。沉没成本、已经投入的实现工作和作者偏好，都不会削弱一个有效的 killer。
 
-### 7. 流程具有状态、Gate 和回滚
+### 8. 流程具有状态、Gate 和回滚
 
-Research Forge 运行 **S00–S18** 状态机，而不是一次性 prompt。四个人工 Gate 控制范围、候选选择、假设锁定和项目启动。被证伪的证据可以触发局部修复、结构回滚或状态重入，同时保留谱系。详见 [Gate](runtime/gates.md) 和[回滚](runtime/rollback.md)。
+Research Forge 运行 **S00–S18** 状态机，而不是一次性 prompt。四个人工 Gate 控制范围、候选选择、假设锁定和项目启动。在深读前，[文献分诊协议](protocols/literature-triage.md) 会优先安排能够改变决策的来源，并显式记录全文/访问缺口。被证伪的证据可以触发局部修复、结构回滚或状态重入，同时保留谱系。详见 [Gate](runtime/gates.md) 和[回滚](runtime/rollback.md)。
 
-### 8. 科学价值和执行就绪度分开
+### 9. 科学价值和执行就绪度分开
 
 一个有潜力的方向不能因为暂时缺少算力、数据、许可证或实现条件，就被错误判定为科学上无效。Research Forge 分开处理科学、执行和发表决策；资源限制可以产生 `HOLD_RESOURCE`，而不是伪造科学否定。
 
-### 9. GO 产生交接契约，而不是胜利宣言
+### 10. GO 产生交接契约，而不是胜利宣言
 
 显式 G4 批准后，S18 会组装一个 30 项的 experiment-ready dossier，包含主张、假设、控制、指标、阈值、失败分支、资源估计和明确的下一步动作。下游实验执行者可以执行计划，但不能悄悄重写其中的科学契约。详见[交接协议](runtime/handoff.md)。
 
@@ -270,8 +277,8 @@ Research Forge 必须在每个 Gate 停下来，等待明确决定：
 
 | Gate | 人类决定 |
 |---|---|
-| `G1_SCOPE_LOCK` | 批准或修改任务、方法、时间、场所、资源和兴趣边界 |
-| `G2_PORTFOLIO_REVIEW` | 审查 survivors、kills、威胁、成本和不确定性，最多选择 1–3 个 finalists |
+| `G1_SCOPE_LOCK` | 批准或修改研究问题画布、最小/核心/扩展范围、匹配约束和研究边界 |
+| `G2_PORTFOLIO_REVIEW` | 审查 survivors 的问题信号/最小路径、kills、威胁、成本和不确定性，最多选择 1–3 个 finalists |
 | `G3_HYPOTHESIS_LOCK` | 锁定存活的无方法假设、替代解释、预测和证伪条件 |
 | `G4_PROJECT_LAUNCH` | 根据 project-decision packet 选择 GO、HOLD、KILL 或 REVISE |
 
@@ -327,7 +334,7 @@ research-forge/
 
 [`SKILL.md`](SKILL.md) 负责运行时路由。详细规则留在各自目录，使编排、科研政策、状态转移、记录有效性和项目数据不会坍缩成一个 prompt。
 
-生成的研究数据属于仓库之外。典型的项目 workspace 包含实时状态、不可变快照、registries、reports、Gate packet 和最终 handoff；可以参考 [`templates/project-bootstrap.yaml`](templates/project-bootstrap.yaml) 的 bootstrap 形状。
+生成的研究数据属于仓库之外。典型的项目 workspace 包含实时状态、不可变快照、RQ/FIT/信号/分诊 registries、reports、Gate packet 和最终 handoff；可以参考 [`templates/project-bootstrap.yaml`](templates/project-bootstrap.yaml) 的 bootstrap 形状。
 
 ## 验收
 

@@ -19,3 +19,11 @@ If stronger augmentation explains the gain under matched tests, weaken the metho
 ## R5 — Confidence
 
 High novelty confidence cannot compensate for low evidence/coverage; each confidence dimension remains separate with rationale.
+
+## R6 — Researchability Before Novelty
+
+User proposes “a top-tier efficient model” with no phenomenon, unit/condition, observable outcome, or minimum path. Expected: initialize RQ canvas with `UNKNOWN` fields, create scope debt, and hold/reframe at G1. Forbidden: generating a novelty claim from a venue ambition or module name.
+
+## R7 — Signal Is Not a Cause
+
+One paper reports a weak benchmark slice and another lists a limitation. Expected: create opportunity signals with scope and alternative explanations; use them to prioritize verification, not as proof of a mechanism or a recommendation for a method.

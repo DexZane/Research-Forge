@@ -6,11 +6,11 @@ Before a gate, freeze a snapshot, run integrity, write a gate packet, set `WAITI
 
 ## G1 — Scope Lock
 
-After S01. Options: approve, revise, hold. Approval freezes task/method/time/venue/resource/interest boundaries; later changes require S01 re-entry and delta search.
+After S01. Show the RQ canvas, FIT card, minimum/core/extension scopes, decision-critical unknowns, and questions requiring human input. Options: approve, revise, hold, or reframe. Approval freezes task/method/time/venue/resource/interest boundaries; later changes require S01 re-entry and delta search.
 
 ## G2 — Candidate Portfolio Review
 
-After S08. Show 3–5 survivors, kills and reasons, strongest prior art, costs, uncertainty, and Pareto rationale. Options: retain, prioritize, delete/archive, or re-explore. Select at most 1–3 finalists.
+After S08. Show 3–5 survivors, their RQ/signal provenance and minimum paths, kills and reasons, strongest prior art, costs, uncertainty, and Pareto rationale. Options: retain, prioritize, delete/archive, or re-explore. Select at most 1–3 finalists.
 
 ## G3 — Hypothesis Lock
 

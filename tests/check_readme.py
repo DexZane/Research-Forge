@@ -82,6 +82,10 @@ def main() -> int:
         "AWARENESS_ONLY",
         "candidate commitment",
         "acceptance/citation outcomes",
+        "research-question canvas",
+        "opportunity signals",
+        "literature-triage protocol",
+        "minimum discriminating path",
     )
     for term in required_terms:
         if term not in text:

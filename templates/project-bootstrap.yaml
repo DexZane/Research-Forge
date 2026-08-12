@@ -4,7 +4,7 @@ project:
   title: Example research project
   mode: EXPLORATION
   created_at: "2026-08-09T00:00:00Z"
-  research_forge_version: "1.1.0"
+  research_forge_version: "1.2.0"
   root: ./example-project
   scope_status: DRAFT
   user_constraints: []
@@ -23,6 +23,10 @@ workspace:
     - results
   state_files:
     - state/research_state.yaml
+    - state/research_question_registry.yaml
+    - state/fit_card_registry.yaml
+    - state/opportunity_signal_ledger.yaml
+    - state/literature_triage_queue.yaml
     - state/paper_registry.yaml
     - state/awareness_leads.yaml
     - state/innovation_signature_registry.yaml

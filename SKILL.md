@@ -65,7 +65,8 @@ Read [runtime/boot.md](runtime/boot.md). For an existing project, load in this o
 8. search saturation/freshness state
 9. bibliography registry/export status
 10. active innovation signatures and candidate commitments
-11. last major decisions and pending gate
+11. active RQ canvas, FIT card, opportunity signals, and literature triage queue
+12. last major decisions and pending gate
 
 Validate before resuming. If state is partial or corrupt, follow [runtime/recovery.md](runtime/recovery.md); do not silently reconstruct uncertain facts.
 
@@ -112,6 +113,9 @@ Load a protocol when the state or decision needs it:
 | Query graph, freshness, saturation | [protocols/search.md](protocols/search.md) |
 | Bibliographic capture, deduplication, and Zotero export | [protocols/bibliography.md](protocols/bibliography.md) and [runtime/bibliography.md](runtime/bibliography.md) |
 | R0–R4 reading depth | [protocols/reading.md](protocols/reading.md) |
+| Research-question scope, project fit, and minimum path | [protocols/researchability.md](protocols/researchability.md) |
+| Source-grounded problem signals | [protocols/opportunity-signals.md](protocols/opportunity-signals.md) |
+| Decision-first reading order and access debt | [protocols/literature-triage.md](protocols/literature-triage.md) |
 | Mechanism signatures and collision specificity | [protocols/innovation-signature.md](protocols/innovation-signature.md) |
 | T0–T5, peeling, boundaries, collisions | [protocols/novelty.md](protocols/novelty.md) |
 | Candidate commitment versions and dependent-contract invalidation | [protocols/commitment-integrity.md](protocols/commitment-integrity.md) |
@@ -122,6 +126,7 @@ Load a protocol when the state or decision needs it:
 | Independent reviewers and meta-review | [protocols/reviewer-panel.md](protocols/reviewer-panel.md) |
 | Compute, data, licensing, execution holds | [protocols/resources.md](protocols/resources.md) |
 | Worker packets and central integration | [protocols/orchestration.md](protocols/orchestration.md) |
+| Supervisor/mentor/collaborator discussion without authority leakage | [protocols/collaboration.md](protocols/collaboration.md) |
 | Pre-gate and pre-commit audits | [protocols/integrity.md](protocols/integrity.md) |
 
 Templates show record shape; schemas define validity. Read [schemas/ids-and-enums.md](schemas/ids-and-enums.md) before creating records.

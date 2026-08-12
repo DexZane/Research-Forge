@@ -10,7 +10,7 @@
 
 Research Forge is a stateful, adversarial research-direction Skill for AI and deep-learning method research. It turns a vague topic or a favored idea into an evidence-linked `GO`, `HOLD`, `REFINE`, `HOLD_RESOURCE`, or `KILL` decision—before expensive experiments begin.
 
-**Status:** v1.1 protocol implementation. The repository contains deterministic contract checks, but it does not claim an empirical performance advantage over other Skills or guarantee research success.
+**Status:** v1.2 protocol implementation. The repository contains deterministic contract checks, but it does not claim an empirical performance advantage over other Skills or guarantee research success.
 
 ## 中文简介
 
@@ -43,6 +43,7 @@ This is a contract comparison, not an empirical benchmark. “Common workflow”
 | Default stance | Expand and improve an idea | Search to reject and expose failure conditions |
 | Literature role | Summarize related work | Build a query graph, steelman prior art, and attack novelty |
 | Literature provenance | A remembered title can drift into a claim | Awareness-only leads stay non-citable until resolved to source-backed records |
+| Starting point | Start from a module, title, or target venue | Require a researchable question, an auditable problem signal, and a minimum discriminating path |
 | Novelty | Treat an apparent gap as a candidate contribution | Peel overlapped claims and preserve a qualified residual boundary |
 | Candidate revisions | Rewrite the idea until it sounds better | Version core commitments and invalidate stale downstream tests/reviews |
 | Knowledge control | Blend sources and interpretation into prose | Separate evidence, claims, inferences, hypotheses, contradictions, and unknowns |
@@ -86,27 +87,33 @@ Unresolved historical hints are stored as `AWARENESS_ONLY` `AL-` leads. They can
 
 This is deliberately not a success-pattern scorer: historical acceptance/citation outcomes and pattern frequency are not evidence or ranking priors.
 
-### 5. Hypothesis comes before architecture
+### 5. Researchability comes before a portfolio
+
+S00–S01 now create a [research-question canvas](protocols/researchability.md): the phenomenon, unit and condition, knowledge gap, mechanism question, observable outcome, minimum discriminating path, three nested scopes, and a stop-or-reframe condition. A `FIT-` card separates hard constraints, preferences, assumptions, capability gaps, and dependency owners.
+
+Candidates are linked to [opportunity signals](protocols/opportunity-signals.md)—such as verified slice failures, replications, limitations, negative results, evaluation artifacts, or deployment constraints—not merely a fashionable module swap. A user report, GitHub issue, or mentor comment can start a lead, but it must be verified before becoming a scientific premise.
+
+### 6. Hypothesis comes before architecture
 
 The core hypothesis must describe a mechanism without depending on a favorite module name. It must predict observations that distinguish it from steelmanned alternatives. See the [hypothesis protocol](protocols/hypothesis.md).
 
 This prevents familiar combinations—“backbone X plus loss Y for task Z”—from being mistaken for a scientific contribution merely because the components have not been combined under the same name.
 
-### 6. Falsification comes before optimization
+### 7. Falsification comes before optimization
 
 The [falsification protocol](protocols/falsification.md) asks for the cheapest high-information test capable of rejecting the mechanism, exposing a negligible ceiling, or favoring a simpler explanation. Decision thresholds and ambiguity branches are recorded before results are examined.
 
 Negative evidence remains part of project memory. Sunk cost, implementation effort, and author preference do not weaken a valid killer.
 
-### 7. The process has state, gates, and rollback
+### 8. The process has state, gates, and rollback
 
-Research Forge runs an **S00–S18** state machine instead of a one-shot prompt. Four explicit human gates control scope, candidate selection, hypothesis lock, and project launch. Invalidated evidence can trigger local repair, structural rollback, or state re-entry while preserving lineage. See [gates](runtime/gates.md) and [rollback](runtime/rollback.md).
+Research Forge runs an **S00–S18** state machine instead of a one-shot prompt. Four explicit human gates control scope, candidate selection, hypothesis lock, and project launch. Before deep reading, the [literature-triage protocol](protocols/literature-triage.md) prioritizes sources that can change a decision and makes full-text/access gaps visible. Invalidated evidence can trigger local repair, structural rollback, or state re-entry while preserving lineage. See [gates](runtime/gates.md) and [rollback](runtime/rollback.md).
 
-### 8. Scientific value and execution readiness are separate
+### 9. Scientific value and execution readiness are separate
 
 A promising direction is not scientifically false because compute, data, licensing, or implementation access is currently missing. Research Forge separates scientific, execution, and publication decisions; resource limitations can produce `HOLD_RESOURCE` rather than a fabricated scientific rejection.
 
-### 9. GO produces a handoff contract, not a victory message
+### 10. GO produces a handoff contract, not a victory message
 
 After explicit G4 approval, S18 assembles a 30-element experiment-ready dossier with claims, assumptions, controls, metrics, thresholds, failure branches, resource estimates, and exact next actions. The downstream experiment runner may execute the plan but may not silently rewrite its scientific contracts. See the [handoff protocol](runtime/handoff.md).
 
@@ -273,8 +280,8 @@ Research Forge must stop and ask for an explicit decision at each gate:
 
 | Gate | Human decision |
 |---|---|
-| `G1_SCOPE_LOCK` | Approve or revise task, method, time, venue, resource, and interest boundaries |
-| `G2_PORTFOLIO_REVIEW` | Review survivors, kills, threats, cost, and uncertainty; select at most 1–3 finalists |
+| `G1_SCOPE_LOCK` | Approve or revise the RQ canvas, minimum/core/extension scope, fit constraints, and research boundaries |
+| `G2_PORTFOLIO_REVIEW` | Review survivors, their problem signals/minimum paths, kills, threats, cost, and uncertainty; select at most 1–3 finalists |
 | `G3_HYPOTHESIS_LOCK` | Lock a surviving method-free hypothesis, alternatives, predictions, and falsifiers |
 | `G4_PROJECT_LAUNCH` | Choose GO, HOLD, KILL, or REVISE from the project-decision packet |
 
@@ -330,7 +337,7 @@ research-forge/
 
 [`SKILL.md`](SKILL.md) routes the runtime. Detailed rules remain in their named directories so that orchestration, scientific policy, state transitions, record validity, and project data do not collapse into one prompt.
 
-Generated research data belongs outside this repository. A typical project workspace contains live state, immutable snapshots, registries, reports, gate packets, and the final handoff; see the bootstrap shape in [`templates/project-bootstrap.yaml`](templates/project-bootstrap.yaml).
+Generated research data belongs outside this repository. A typical project workspace contains live state, immutable snapshots, RQ/FIT/signal/triage registries, reports, gate packets, and the final handoff; see the bootstrap shape in [`templates/project-bootstrap.yaml`](templates/project-bootstrap.yaml).
 
 ## Validation
 
