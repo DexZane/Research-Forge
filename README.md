@@ -185,6 +185,23 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
 The corresponding raw URL is useful for inspecting the entry file:
 [`SKILL.md`](https://raw.githubusercontent.com/DexZane/Research-Forge/skill-only/SKILL.md). A raw URL downloads one file; use the GitHub tree URL or the installer command for the complete Skill.
 
+### Install through an Agent
+
+If your coding agent has network and filesystem access, paste the following request into it:
+
+```text
+Install and verify Research Forge by following this guide exactly:
+https://raw.githubusercontent.com/DexZane/Research-Forge/main/docs/guide/installation.md
+
+Install the complete skill-only package, not only SKILL.md. Do not overwrite an existing installation. Report the target path, checked-out commit, and verification result.
+```
+
+You can also read the [installation guide](docs/guide/installation.md) yourself. An Agent can fetch the same guide with:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/DexZane/Research-Forge/main/docs/guide/installation.md
+```
+
 ### Agent compatibility and install locations
 
 Research Forge uses the directory-based Agent Skills layout: keep `SKILL.md` at the root of a `research-forge/` directory, with `protocols/`, `states/`, `domain/`, `templates/`, `schemas/`, and `runtime/` beside it. The research protocol is portable; automatic discovery and invocation are runtime-specific.

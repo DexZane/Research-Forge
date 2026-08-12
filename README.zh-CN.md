@@ -182,6 +182,23 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
 
 对应的 raw 链接适合查看入口文件：[`SKILL.md`](https://raw.githubusercontent.com/DexZane/Research-Forge/skill-only/SKILL.md)。需要注意：raw 链接只下载单个文件；要安装完整 Skill，应使用 GitHub 分支地址或上面的安装命令。
 
+### 交给 Agent 安装
+
+如果你的编程 Agent 具备网络与文件系统权限，可以直接复制以下提示给它：
+
+```text
+请读取并严格按照这份指南安装和验证 Research Forge：
+https://raw.githubusercontent.com/DexZane/Research-Forge/main/docs/guide/installation.md
+
+请安装完整的 skill-only 包，而不是只下载 SKILL.md。不要覆盖已有安装；最后报告目标路径、检出的 commit 和验证结果。
+```
+
+你也可以直接阅读[安装指南](docs/guide/installation.md)。Agent 可以用下面的命令读取同一份指南：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/DexZane/Research-Forge/main/docs/guide/installation.md
+```
+
 ### 各 Agent 的适配与安装位置
 
 Research Forge 使用目录型 Agent Skills 结构：`research-forge/` 目录根部必须有 `SKILL.md`，并在旁边保留 `protocols/`、`states/`、`domain/`、`templates/`、`schemas/` 和 `runtime/`。科研协议本身具有可移植性，但自动发现和调用方式取决于具体 Agent 运行时。

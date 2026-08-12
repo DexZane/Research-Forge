@@ -11,6 +11,7 @@ from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
+INSTALLATION_GUIDE = ROOT / "docs" / "guide" / "installation.md"
 
 
 def main() -> int:
@@ -25,6 +26,7 @@ def main() -> int:
         "## What makes it different",
         "## How to use",
         "### Install",
+        "### Install through an Agent",
         "### Agent compatibility and install locations",
         "### Invoke",
         "#### 1. Explore a broad direction",
@@ -86,10 +88,26 @@ def main() -> int:
         "opportunity signals",
         "literature-triage protocol",
         "minimum discriminating path",
+        "https://raw.githubusercontent.com/DexZane/Research-Forge/main/docs/guide/installation.md",
     )
     for term in required_terms:
         if term not in text:
             failures.append(f"missing required term: {term}")
+
+    if not INSTALLATION_GUIDE.is_file():
+        failures.append("missing Agent installation guide")
+    else:
+        guide = INSTALLATION_GUIDE.read_text(encoding="utf-8")
+        for term in (
+            "# Research Forge installation guide",
+            "`skill-only`",
+            "overwrite, delete, or merge an existing",
+            "test -f \"$target/SKILL.md\"",
+            "# Research Forge 安装指南（中文）",
+            "只安装 raw `SKILL.md`",
+        ):
+            if term not in guide:
+                failures.append(f"installation guide missing contract: {term}")
 
     chinese_chars = re.findall(r"[\u3400-\u9fff]", text)
     if len(chinese_chars) < 80:
@@ -130,6 +148,7 @@ def main() -> int:
     print(f"- required headings: {len(required_headings)}")
     print(f"- required contract terms: {len(required_terms)}")
     print(f"- Chinese overview characters: {len(chinese_chars)}")
+    print("- Agent installation guide: present with safety and verification contracts")
     print("- prohibited claims: 0")
     print("- unresolved local links: 0")
     return 0

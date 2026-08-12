@@ -29,6 +29,7 @@ CHINESE_HEADINGS = (
     "## 使用方法",
     "### 前置条件",
     "### 安装",
+    "### 交给 Agent 安装",
     "### 各 Agent 的适配与安装位置",
     "### 调用",
     "#### 1. 探索宽泛方向",
@@ -87,6 +88,7 @@ CHINESE_REQUIREMENTS = (
     "机会信号",
     "文献分诊协议",
     "最小判别路径",
+    "https://raw.githubusercontent.com/DexZane/Research-Forge/main/docs/guide/installation.md",
 )
 
 
