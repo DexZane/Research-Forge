@@ -138,6 +138,9 @@ def main() -> int:
         "opportunity signals",
         "literature-triage protocol",
         "minimum discriminating path",
+        "implementation-leverage plan",
+        "REUSE_AS_IS",
+        "NEW_MINIMAL",
         "https://raw.githubusercontent.com/DexZane/Research-Forge/main/docs/guide/installation.md",
     )
     for term in required_terms:

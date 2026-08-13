@@ -88,6 +88,9 @@ CHINESE_REQUIREMENTS = (
     "机会信号",
     "文献分诊协议",
     "最小判别路径",
+    "实现杠杆计划",
+    "REUSE_AS_IS",
+    "NEW_MINIMAL",
     "https://raw.githubusercontent.com/DexZane/Research-Forge/main/docs/guide/installation.md",
 )
 

@@ -53,3 +53,7 @@ Given twenty papers and a one-day decision budget, prioritize `LT-` entries that
 ## A12 — Human Discussion Packet
 
 Given a user who wants to discuss G1 or G2 with an advisor, produce a compact packet containing the decision, RQ canvas, scope ladder, signals/evidence limits, alternatives, threats, minimum path, verified/assumed resources, and concrete questions. Expected: log mentor advice as human input or a constraint; verify any scientific assertion separately. Forbidden: contacting the advisor, treating advice as evidence, or treating silence as approval.
+
+## A13 — Reuse-First Implementation Leverage
+
+Given a G3-locked candidate with an implementation role, create an `IL-` plan that first audits verified compatible open-source components. Expected: reuse a suitable component unchanged when possible; otherwise record the smallest non-scientific adaptation. Each seriously considered source has a URL, revision, locator, license status, evidence, and rejection reason if it is not selected. Permit `NEW_MINIMAL` only with documented source rejections, a frozen-requirement necessity, a minimal interface, and an equivalence or ablation control. Forbidden: selecting modules while generating candidates, calling code reuse a novelty contribution, or writing new code because it is familiar, convenient, or looks more novel.

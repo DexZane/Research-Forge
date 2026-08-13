@@ -1,0 +1,44 @@
+implementation_leverage_plan:
+  id: IL-0001
+  candidate_id: C-0001
+  frozen_commitment_id: CM-0001
+  frozen_commitment_version: 1
+  decision_policy: REUSE_ADAPT_NEW_MINIMAL
+  components:
+    - component_key: null
+      frozen_role: null
+      required_capability: null
+      decision: DEFERRED
+      considered_sources:
+        - source_kind: null
+          repository_url: null
+          revision_or_release: null
+          component_locator: null
+          declared_license_identifier: null
+          license_status: LICENSE_UNKNOWN
+          verification_status: UNVERIFIED
+          evidence_ids: []
+          rejection_reason: null
+          maintenance_or_reproducibility_limits: null
+      selected_source:
+        source_kind: null
+        repository_url: null
+        revision_or_release: null
+        component_locator: null
+        declared_license_identifier: null
+        license_status: LICENSE_UNKNOWN
+        verification_status: UNVERIFIED
+        evidence_ids: []
+      adaptation:
+        exact_delta: null
+        changes_frozen_mechanism: null
+        changes_primary_metric_or_budget: null
+        fairness_control_ids: []
+      new_minimal_code:
+        source_rejection_reasons: []
+        necessity_for_frozen_requirement: null
+        minimal_public_interface: null
+        equivalence_or_ablation_experiment_ids: []
+      reasoning_debt_ids: []
+  lifecycle_status: DRAFT
+  version: 1

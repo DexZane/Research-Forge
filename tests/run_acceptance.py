@@ -70,12 +70,25 @@ V12_REQUIRED_FILES = (
     "templates/human-discussion-packet.md",
 )
 
+V13_REQUIRED_FILES = (
+    "protocols/implementation-leverage.md",
+    "schemas/implementation-leverage-schema.md",
+    "templates/implementation-leverage-plan.yaml",
+)
+
 V12_RUNTIME_CONTRACTS = {
     "runtime/boot.md": ("research-question", "opportunity signals", "literature-triage"),
     "runtime/context-loading.md": ("research-question canvas", "literature-triage", "minimum discriminating paths"),
     "runtime/gates.md": ("FIT card/preflight outcome", "`PROCEED` may be approved", "`REFRAME` maps to `REVISE`"),
     "runtime/transaction.md": ("candidate opportunity-signal provenance", "Researchability Revision", "gate-critical `LT-`"),
     "protocols/integrity.md": ("Active `RQ-` and `FIT-` pointers", "non-full-text access cannot close", "minimum discriminating path"),
+}
+
+V13_RUNTIME_CONTRACTS = {
+    "runtime/boot.md": ("implementation-leverage", "active implementation-leverage plan/source revisions"),
+    "runtime/context-loading.md": ("implementation-leverage source scan", "finalized implementation-leverage plan/pinned source revisions"),
+    "runtime/transaction.md": ("implementation-leverage source/revision/license fields", "Implementation-Leverage Revision"),
+    "runtime/handoff.md": ("finalized implementation-leverage plan ID", "must follow each pinned `REUSE_AS_IS`"),
 }
 
 SIGNATURE_FIELDS = (
@@ -218,6 +231,105 @@ def triage_closes_required_tier(entry: dict) -> bool:
     return access_state in {"FULL_TEXT_READY", "ABSTRACT_ONLY", "NOT_APPLICABLE"}
 
 
+def considered_source_valid(source: dict) -> bool:
+    """Require enough provenance to reproduce a source-scan decision."""
+    return (
+        source.get("source_kind") in {
+            "OFFICIAL_CODE", "MAINTAINED_LIBRARY", "REPRODUCTION", "OTHER_OPEN_SOURCE",
+        }
+        and isinstance(source.get("repository_url"), str)
+        and bool(source["repository_url"].strip())
+        and isinstance(source.get("revision_or_release"), str)
+        and bool(source["revision_or_release"].strip())
+        and isinstance(source.get("component_locator"), str)
+        and bool(source["component_locator"].strip())
+        and isinstance(source.get("declared_license_identifier"), str)
+        and bool(source["declared_license_identifier"].strip())
+        and source.get("license_status") in {
+            "LICENSE_COMPATIBLE", "LICENSE_REVIEW_REQUIRED", "LICENSE_INCOMPATIBLE", "LICENSE_UNKNOWN",
+        }
+        and source.get("verification_status") == "VERIFIED"
+        and bool(source.get("evidence_ids"))
+        and isinstance(source.get("maintenance_or_reproducibility_limits"), str)
+        and bool(source["maintenance_or_reproducibility_limits"].strip())
+    )
+
+
+def implementation_component_valid(component: dict, final: bool = False) -> bool:
+    """Enforce reuse-first provenance and a narrow, auditable new-code fallback."""
+    decision = component.get("decision")
+    considered_sources = component.get("considered_sources", [])
+    common_valid = (
+        isinstance(component.get("component_key"), str)
+        and bool(component["component_key"].strip())
+        and isinstance(component.get("frozen_role"), str)
+        and bool(component["frozen_role"].strip())
+        and isinstance(component.get("required_capability"), str)
+        and bool(component["required_capability"].strip())
+        and isinstance(considered_sources, list)
+    )
+    if not common_valid or decision not in {"REUSE_AS_IS", "ADAPT_EXISTING", "NEW_MINIMAL", "DEFERRED"}:
+        return False
+    if decision == "DEFERRED":
+        return not final
+    if not considered_sources or not all(considered_source_valid(source) for source in considered_sources):
+        return False
+
+    selected = component.get("selected_source", {})
+    selected_valid = (
+        selected.get("source_kind") in {
+            "OFFICIAL_CODE", "MAINTAINED_LIBRARY", "REPRODUCTION", "OTHER_OPEN_SOURCE",
+        }
+        and isinstance(selected.get("repository_url"), str)
+        and bool(selected["repository_url"].strip())
+        and isinstance(selected.get("revision_or_release"), str)
+        and bool(selected["revision_or_release"].strip())
+        and isinstance(selected.get("component_locator"), str)
+        and bool(selected["component_locator"].strip())
+        and isinstance(selected.get("declared_license_identifier"), str)
+        and bool(selected["declared_license_identifier"].strip())
+        and selected.get("license_status") == "LICENSE_COMPATIBLE"
+        and selected.get("verification_status") == "VERIFIED"
+        and bool(selected.get("evidence_ids"))
+    )
+    selected_is_considered = any(
+        source.get("repository_url") == selected.get("repository_url")
+        and source.get("revision_or_release") == selected.get("revision_or_release")
+        and source.get("component_locator") == selected.get("component_locator")
+        for source in considered_sources
+    )
+    adaptation = component.get("adaptation", {})
+    no_scientific_delta = (
+        adaptation.get("changes_frozen_mechanism") is False
+        and adaptation.get("changes_primary_metric_or_budget") is False
+    )
+    if decision == "REUSE_AS_IS":
+        return selected_valid and selected_is_considered and no_scientific_delta
+    if decision == "ADAPT_EXISTING":
+        return (
+            selected_valid
+            and selected_is_considered
+            and no_scientific_delta
+            and isinstance(adaptation.get("exact_delta"), str)
+            and bool(adaptation["exact_delta"].strip())
+            and bool(adaptation.get("fairness_control_ids"))
+        )
+
+    new_code = component.get("new_minimal_code", {})
+    return (
+        bool(new_code.get("source_rejection_reasons"))
+        and all(
+            isinstance(source.get("rejection_reason"), str) and bool(source["rejection_reason"].strip())
+            for source in considered_sources
+        )
+        and isinstance(new_code.get("necessity_for_frozen_requirement"), str)
+        and bool(new_code["necessity_for_frozen_requirement"].strip())
+        and isinstance(new_code.get("minimal_public_interface"), str)
+        and bool(new_code["minimal_public_interface"].strip())
+        and bool(new_code.get("equivalence_or_ablation_experiment_ids"))
+    )
+
+
 def check_relative_links(root: Path) -> None:
     pattern = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
     for path in root.rglob("*.md"):
@@ -246,11 +358,21 @@ def run(root: Path) -> list[str]:
         assert root.joinpath(relative).is_file(), f"missing researchability upgrade contract: {relative}"
     passed.append("researchability, opportunity, triage, and collaboration contracts")
 
+    for relative in V13_REQUIRED_FILES:
+        assert root.joinpath(relative).is_file(), f"missing implementation-leverage contract: {relative}"
+    passed.append("implementation-leverage contracts")
+
     for relative, required_fragments in V12_RUNTIME_CONTRACTS.items():
         text = root.joinpath(relative).read_text(encoding="utf-8")
         for fragment in required_fragments:
             assert fragment in text, f"missing v1.2 runtime integration in {relative}: {fragment}"
     passed.append("researchability runtime integration")
+
+    for relative, required_fragments in V13_RUNTIME_CONTRACTS.items():
+        text = root.joinpath(relative).read_text(encoding="utf-8")
+        for fragment in required_fragments:
+            assert fragment in text, f"missing v1.3 runtime integration in {relative}: {fragment}"
+    passed.append("implementation-leverage runtime integration")
 
     for path in root.joinpath("templates").glob("*.yaml"):
         assert isinstance(yaml.safe_load(path.read_text(encoding="utf-8")), dict)
@@ -264,6 +386,7 @@ def run(root: Path) -> list[str]:
     fit_card = yaml.safe_load(root.joinpath("templates/fit-card.yaml").read_text(encoding="utf-8"))["fit_card"]
     opportunity_signal = yaml.safe_load(root.joinpath("templates/opportunity-signal.yaml").read_text(encoding="utf-8"))["opportunity_signal"]
     triage_entry = yaml.safe_load(root.joinpath("templates/literature-triage-entry.yaml").read_text(encoding="utf-8"))["literature_triage_entry"]
+    leverage_plan = yaml.safe_load(root.joinpath("templates/implementation-leverage-plan.yaml").read_text(encoding="utf-8"))["implementation_leverage_plan"]
     assert signature["id"].startswith("IS-")
     assert commitment["id"].startswith("CM-")
     assert awareness_lead["id"].startswith("AL-") and awareness_lead["lineage_role"] == "AWARENESS_ONLY"
@@ -274,9 +397,12 @@ def run(root: Path) -> list[str]:
     assert fit_card["preflight_outcome"] is None
     assert opportunity_signal["id"].startswith("OP-")
     assert triage_entry["id"].startswith("LT-")
+    assert leverage_plan["id"].startswith("IL-")
+    assert leverage_plan["decision_policy"] == "REUSE_ADAPT_NEW_MINIMAL"
     assert candidate_template["research_question_canvas_id"].startswith("RQ-")
     passed.append("signature, commitment, and awareness-lead template links")
     passed.append("researchability, opportunity, and triage template links")
+    passed.append("implementation-leverage template links")
 
     for state_file in STATE_FILES:
         text = root.joinpath("states", state_file).read_text(encoding="utf-8")
@@ -424,11 +550,120 @@ def run(root: Path) -> list[str]:
     assert triage_closes_required_tier(full_text_t4)
     passed.append("literature triage fails closed without full-text access")
 
+    reused_component = {
+        "component_key": "baseline_encoder",
+        "frozen_role": "shared baseline infrastructure",
+        "required_capability": "extract frozen encoder features",
+        "decision": "REUSE_AS_IS",
+        "considered_sources": [{
+            "source_kind": "OFFICIAL_CODE",
+            "repository_url": "https://github.com/example/official-code",
+            "revision_or_release": "abc123",
+            "component_locator": "models/encoder.py:Encoder",
+            "declared_license_identifier": "Apache-2.0",
+            "license_status": "LICENSE_COMPATIBLE",
+            "verification_status": "VERIFIED",
+            "evidence_ids": ["EU-0001"],
+            "rejection_reason": None,
+            "maintenance_or_reproducibility_limits": "Pin the revision because main may change.",
+        }],
+        "selected_source": {
+            "source_kind": "OFFICIAL_CODE",
+            "repository_url": "https://github.com/example/official-code",
+            "revision_or_release": "abc123",
+            "component_locator": "models/encoder.py:Encoder",
+            "declared_license_identifier": "Apache-2.0",
+            "license_status": "LICENSE_COMPATIBLE",
+            "verification_status": "VERIFIED",
+            "evidence_ids": ["EU-0001"],
+        },
+        "adaptation": {
+            "exact_delta": None,
+            "changes_frozen_mechanism": False,
+            "changes_primary_metric_or_budget": False,
+            "fairness_control_ids": [],
+        },
+        "new_minimal_code": {},
+    }
+    adapted_component = dict(
+        reused_component,
+        decision="ADAPT_EXISTING",
+        adaptation={
+            "exact_delta": "Expose an existing intermediate activation through the documented hook.",
+            "changes_frozen_mechanism": False,
+            "changes_primary_metric_or_budget": False,
+            "fairness_control_ids": ["EX-0002"],
+        },
+    )
+    new_minimal_component = dict(
+        reused_component,
+        decision="NEW_MINIMAL",
+        considered_sources=[{
+            "source_kind": "OFFICIAL_CODE",
+            "repository_url": "https://github.com/example/official-code",
+            "revision_or_release": "abc123",
+            "component_locator": "models/encoder.py:Encoder",
+            "declared_license_identifier": "Apache-2.0",
+            "license_status": "LICENSE_COMPATIBLE",
+            "verification_status": "VERIFIED",
+            "evidence_ids": ["EU-0001"],
+            "rejection_reason": "The component cannot expose the frozen intervention boundary.",
+            "maintenance_or_reproducibility_limits": "Pin the revision because main may change.",
+        }],
+        selected_source={},
+        new_minimal_code={
+            "source_rejection_reasons": ["Official and library components cannot expose the required intervention boundary."],
+            "necessity_for_frozen_requirement": "The locked mechanism requires a local intervention at the assignment boundary.",
+            "minimal_public_interface": "forward(assignments, intervention_mask) -> assignments",
+            "equivalence_or_ablation_experiment_ids": ["EX-0003"],
+        },
+    )
+    convenience_new_code = dict(
+        new_minimal_component,
+        new_minimal_code={
+            "source_rejection_reasons": [],
+            "necessity_for_frozen_requirement": "A custom module looks more novel.",
+            "minimal_public_interface": "forward(x) -> y",
+            "equivalence_or_ablation_experiment_ids": [],
+        },
+    )
+    unknown_license_source = dict(
+        reused_component["considered_sources"][0],
+        license_status="LICENSE_UNKNOWN",
+        rejection_reason="License status is unresolved and blocks reuse.",
+    )
+    unknown_license_component = dict(
+        reused_component,
+        considered_sources=[unknown_license_source],
+        selected_source=dict(reused_component["selected_source"], license_status="LICENSE_UNKNOWN"),
+    )
+    unscanned_selection_component = dict(
+        reused_component,
+        selected_source=dict(
+            reused_component["selected_source"],
+            repository_url="https://github.com/example/different-code",
+        ),
+    )
+    deferred_component = dict(reused_component, decision="DEFERRED")
+    assert implementation_component_valid(reused_component, final=True)
+    assert implementation_component_valid(adapted_component, final=True)
+    assert implementation_component_valid(new_minimal_component, final=True)
+    assert not implementation_component_valid(convenience_new_code, final=True)
+    assert not implementation_component_valid(unknown_license_component, final=True)
+    assert not implementation_component_valid(unscanned_selection_component, final=True)
+    assert implementation_component_valid(deferred_component)
+    assert not implementation_component_valid(deferred_component, final=True)
+    implementation_protocol = root.joinpath("protocols/implementation-leverage.md").read_text(encoding="utf-8")
+    assert "Do not search for components while generating candidates" in implementation_protocol
+    assert "It is easier" in implementation_protocol
+    passed.append("implementation leverage reuses first and constrains new code")
+
     state_template = yaml.safe_load(root.joinpath("templates/research-state.yaml").read_text(encoding="utf-8"))["research_state"]
     registries = state_template["registries"]
     assert state_template["active_research_question_id"] is None
     assert state_template["active_fit_card_id"] is None
-    for key in ("research_questions", "fit_cards", "opportunity_signals", "literature_triage"):
+    assert state_template["active_implementation_leverage_plan_id"] is None
+    for key in ("research_questions", "fit_cards", "opportunity_signals", "literature_triage", "implementation_leverage"):
         assert key in registries
     passed.append("researchability registry pointers")
 

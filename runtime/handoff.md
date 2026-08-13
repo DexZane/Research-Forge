@@ -6,17 +6,17 @@ G4 explicitly approved GO; S18 dossier validates; final freshness/integrity chec
 
 ## Package
 
-Deliver human dossier plus `experiment-handoff.yaml` with project/snapshot/version, candidate, frozen commitment/signature versions, locked hypotheses/predictions/diagnostics, first E0 experiment, controls, fair baselines, datasets, hooks, preregistered decisions, resource assumptions, unknowns, exact next action, and a link to the validated `exports/references.bib` plus its record count and excluded paper IDs.
+Deliver human dossier plus `experiment-handoff.yaml` with project/snapshot/version, candidate, frozen commitment/signature versions, finalized implementation-leverage plan ID, pinned source revisions, locked hypotheses/predictions/diagnostics, first E0 experiment, controls, fair baselines, datasets, hooks, preregistered decisions, resource assumptions, unknowns, exact next action, and a link to the validated `exports/references.bib` plus its record count and excluded paper IDs.
 
 ## Downstream Contract
 
-The experiment/coding agent may implement and execute the specified experiments, record environment/code/data versions, and return evidence-linked results. It must not silently change novelty boundary, frozen candidate commitment/signature, locked hypotheses, primary predictions/metrics, or decision thresholds.
+The experiment/coding agent may implement and execute the specified experiments, record environment/code/data versions, and return evidence-linked results. It must follow each pinned `REUSE_AS_IS`, `ADAPT_EXISTING`, or `NEW_MINIMAL` component decision; it must not silently change novelty boundary, frozen candidate commitment/signature, locked hypotheses, primary predictions/metrics, decision thresholds, or the implementation-leverage plan.
 
-If implementation reveals an invalid assumption, inaccessible hook, new prior art, confounder, or required scientific change, stop and route back to Research Forge recovery/rollback/gate.
+If implementation reveals an invalid assumption, inaccessible hook, unsuitable source revision/license, adaptation that changes a fair comparison, new prior art, confounder, or required scientific change, stop and route back to Research Forge recovery/rollback/gate.
 
 ## Result Return
 
-Return experiment ID/version, preregistration version, code/data/environment identifiers, raw artifact paths, validity outcome, metric results with uncertainty, deviations, negative evidence, and proposed claim/hypothesis updates. Research Forge remains the authority for scientific state changes.
+Return experiment ID/version, preregistration version, code/data/environment identifiers, reused/adapted/new component identifiers and revisions, raw artifact paths, validity outcome, metric results with uncertainty, deviations, negative evidence, and proposed claim/hypothesis updates. Research Forge remains the authority for scientific state changes.
 
 ## Completion
 

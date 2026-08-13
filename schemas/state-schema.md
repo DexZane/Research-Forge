@@ -2,7 +2,7 @@
 
 ## Required Fields
 
-`project_id`, `schema_version`, `state`, `state_iteration`, `status`, `mode`, `pending_gate`, active/critical ID lists, active RQ/FIT pointers, search status/cutoff, scientific/execution decisions, publication tier, snapshot/transaction pointers, version, and timestamp.
+`project_id`, `schema_version`, `state`, `state_iteration`, `status`, `mode`, `pending_gate`, active/critical ID lists, active RQ/FIT/implementation-leverage pointers, search status/cutoff, scientific/execution decisions, publication tier, snapshot/transaction pointers, version, and timestamp.
 
 ## Legal Forward Transitions
 
@@ -22,6 +22,7 @@ Any state may return to the earliest invalid dependency when a decision record c
 - Active candidate IDs resolve to current `IS-` signature and `CM-` commitment records; frozen commitments resolve from S14 onward.
 - G1 approval requires an active `RQ-` canvas, a `FIT-` card with preflight outcome `PROCEED`, and a minimum-completable scope with all decision-critical unknowns either bounded or recorded as debt.
 - S06 candidates resolve to an RQ canvas and at least one verified `OP-` signal.
+- From S15 onward, an active `IL-` plan resolves to the active frozen candidate commitment; S18 has no `DEFERRED` component decision and pins all reused/adapted source revisions.
 - Gate-critical unresolved `LT-` entries and access debt cap the associated claim/threat judgment; they cannot be silently ignored.
 - A semantic commitment revision invalidates dependent novelty mappings, hypothesis/diagnostic/falsification/feasibility records, reviewer reports, and gate packets until they are revalidated.
 - `COMPLETE` requires S18 validation and immutable snapshot.

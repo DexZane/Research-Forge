@@ -10,7 +10,7 @@
 
 Research Forge is a stateful, adversarial research-direction Skill for AI and deep-learning method research. It turns a vague topic or a favored idea into an evidence-linked `GO`, `HOLD`, `REFINE`, `HOLD_RESOURCE`, or `KILL` decision—before expensive experiments begin.
 
-**Status:** v1.2 protocol implementation. The repository contains deterministic contract checks, but it does not claim an empirical performance advantage over other Skills or guarantee research success.
+**Status:** v1.3 protocol implementation. The repository contains deterministic contract checks, but it does not claim an empirical performance advantage over other Skills or guarantee research success.
 
 ## 中文简介
 
@@ -113,7 +113,13 @@ Research Forge runs an **S00–S18** state machine instead of a one-shot prompt.
 
 A promising direction is not scientifically false because compute, data, licensing, or implementation access is currently missing. Research Forge separates scientific, execution, and publication decisions; resource limitations can produce `HOLD_RESOURCE` rather than a fabricated scientific rejection.
 
-### 10. GO produces a handoff contract, not a victory message
+### 10. Reuse proven building blocks before writing a new module
+
+After G3 locks the scientific commitment, S15 creates an [implementation-leverage plan](protocols/implementation-leverage.md). For every implementation role, it must choose `REUSE_AS_IS`, `ADAPT_EXISTING`, `NEW_MINIMAL`, or `DEFERRED`. The decision order is strict: reuse a verified compatible open-source component first; adapt it only when the change preserves the frozen mechanism and fair comparison; write a minimal new component only after a recorded source scan shows why reuse and adaptation cannot meet the frozen requirement.
+
+The plan pins repository URL, component locator, revision, license status, evidence, adaptation delta, and fairness control. It prevents a useful engineering shortcut from being relabeled as a scientific contribution, and it prevents “more novel-looking code” from replacing a valid building block.
+
+### 11. GO produces a handoff contract, not a victory message
 
 After explicit G4 approval, S18 assembles a 30-element experiment-ready dossier with claims, assumptions, controls, metrics, thresholds, failure branches, resource estimates, and exact next actions. The downstream experiment runner may execute the plan but may not silently rewrite its scientific contracts. See the [handoff protocol](runtime/handoff.md).
 
@@ -127,7 +133,7 @@ flowchart LR
     C --> G2{"G2: Portfolio review"}
     G2 --> D["S09–S12: Novelty and hypothesis attack"]
     D --> G3{"G3: Hypothesis lock"}
-    G3 --> E["S13–S17: Diagnostics, falsification, review"]
+    G3 --> E["S13–S17: Diagnostics, leverage, falsification, review"]
     E --> G4{"G4: Project launch"}
     G4 -->|GO| F["S18: Experiment-ready dossier"]
     G4 -->|HOLD / REFINE / KILL| R["Stop, repair, or roll back"]
