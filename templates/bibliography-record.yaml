@@ -29,6 +29,13 @@ bibliography_record:
   evidence_ids: []
   conflict_ids: []
   export_eligible: true
+  reading_plan:
+    priority: IMMEDIATE
+    decision_roles:
+      - CLOSEST_NOVELTY_THREAT
+    required_verification_locators: []
+    suggested_zotero_tags:
+      - rf:read-next
   captured_at: "2026-08-10T00:00:00Z"
   verified_at: "2026-08-10T00:00:00Z"
   notes: Citation metadata only; evidence remains in the evidence ledger.

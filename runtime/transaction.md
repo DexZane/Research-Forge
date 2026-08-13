@@ -6,7 +6,7 @@ Only the orchestrator writes global project state. Use a transaction for every e
 
 ## Transaction Stages
 
-1. `VALIDATE`: parse records; validate IDs/enums/locators/references, active research-question/fit pointers, candidate opportunity-signal provenance, gate-critical literature-triage access, implementation-leverage source/revision/license fields, active signature/commitment versions, and worker snapshot.
+1. `VALIDATE`: parse records; validate IDs/enums/locators/references, active research-question/fit/capability pointers, candidate opportunity-signal provenance, gate-critical literature-triage access, implementation-leverage source/revision/license/trust/dependency fields, active signature/commitment versions, and worker snapshot.
 2. `STAGE`: write proposed delta under transaction ID without changing active pointers.
 3. `RECONCILE`: deduplicate paper families/bibliography records/evidence/opportunity signals/component sources and open/resolve contradictions.
 4. `PROPAGATE`: compute explicit dependency consequences conservatively, including mandatory invalidation for semantic commitment changes.
@@ -34,7 +34,11 @@ Before commit, compare active and proposed `RQ-`, `FIT-`, `OP-`, and `LT-` recor
 
 ## Implementation-Leverage Revision
 
-Before commit, compare active and proposed `IL-` plans against the frozen `CM-` commitment. A selected-source revision, license-status change, adaptation delta, or `NEW_MINIMAL` necessity change invalidates affected feasibility estimates, fairness controls, reviewer reports, dossiers, and handoffs. If the change touches the frozen mechanism, diagnostic, primary prediction/metric, or comparison budget, route to the earliest scientific dependency rather than treating it as an implementation-only edit. A worker may propose component evidence but only the orchestrator commits an `IL-` plan.
+Before commit, compare active and proposed `IL-` plans against the frozen `CM-` commitment. A selected-source revision, license/trust/dependency-status change, adaptation delta, or `NEW_MINIMAL` necessity change invalidates affected feasibility estimates, fairness controls, reviewer reports, dossiers, and handoffs. If the change touches the frozen mechanism, diagnostic, primary prediction/metric, or comparison budget, route to the earliest scientific dependency rather than treating it as an implementation-only edit. A worker may propose component evidence but only the orchestrator commits an `IL-` plan.
+
+## Capability Revision
+
+Before commit, compare the active and proposed `CAP-` profiles. A host, tool, network, credential, permission, or sandbox change rechecks dependent access debt, feasibility estimates, source inspection, bibliography export, and handoff execution assumptions. Capability evidence cannot upgrade a scientific claim. A worker may report a limitation but cannot assume another host's access.
 
 ## Audit Trail
 

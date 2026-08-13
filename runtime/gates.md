@@ -6,7 +6,7 @@ Before a gate, freeze a snapshot, run integrity, write a gate packet, set `WAITI
 
 ## G1 — Scope Lock
 
-After S01. Show the RQ canvas, FIT card/preflight outcome, minimum/core/extension scopes, decision-critical unknowns, and questions requiring human input. Gate options are canonical `APPROVED`, `REVISE`, or `HOLD`: `PROCEED` may be approved into S02; `HOLD_SCOPE` and `HOLD_RESOURCE` map to `HOLD`; `REFRAME` maps to `REVISE` and S00/S01 re-entry. Approval freezes task/method/time/venue/resource/interest boundaries; later changes require S01 re-entry and delta search.
+After S01. Show the RQ canvas, FIT card/preflight outcome, active `CAP-` capability profile, minimum/core/extension scopes, decision-critical unknowns, and questions requiring human input. Gate options are canonical `APPROVED`, `REVISE`, or `HOLD`: `PROCEED` may be approved into S02; `HOLD_SCOPE` and `HOLD_RESOURCE` map to `HOLD`; `REFRAME` maps to `REVISE` and S00/S01 re-entry. Approval freezes task/method/time/venue/resource/interest boundaries; later changes require S01 re-entry and delta search.
 
 ## G2 — Candidate Portfolio Review
 
@@ -18,7 +18,7 @@ After S12. Show original idea, killed claims/sources, residual gap/boundary, met
 
 ## G4 — Project Launch
 
-After S17. Show hard-gate result, scientific/execution/publication decisions, reviewer issues, resources, falsification plan, unknowns, and primary/backup candidate. Options: GO, HOLD, KILL, REVISE. Only GO permits S18.
+After S17. Show hard-gate result, scientific/execution/publication decisions, reviewer issues, resources, capability limits, source trust/dependency findings, falsification plan, unknowns, and primary/backup candidate. Options: GO, HOLD, KILL, REVISE. Only GO permits S18.
 
 ## Emergency Novelty Collision
 

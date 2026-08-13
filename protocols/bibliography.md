@@ -14,6 +14,7 @@ Every discovered paper is represented by one `P-` paper record in the project pa
 - `verification_status` (`UNVERIFIED`, `PARTIALLY_VERIFIED`, or `VERIFIED`);
 - `reading_tier`, `evidence_ids`, `conflict_ids`, and `dedup_key`;
 - a stable `bib_key` and an `export_eligible` flag;
+- a reading priority, decision role, required verification locators, and optional suggested Zotero tags; and
 - optional raw/canonical BibTeX only after metadata normalization.
 
 BibTeX fields are a projection of the paper record. They are never the source of truth for claims, threats, hypotheses, or evidence.
@@ -71,7 +72,7 @@ Add `doi`, `url`, `eprint`, `archivePrefix`, `pmid`, `publisher`, `volume`, `num
 
 ## Export contract
 
-The default user-facing artifact is exactly:
+The default citation artifact is exactly:
 
 ```text
 <research-project>/exports/references.bib
@@ -81,6 +82,12 @@ At S03/S04, export may be refreshed for inspection. At S18, after freshness and 
 
 The `.bib` file contains citation metadata only. Research Forge keeps provenance, evidence IDs, conflicts, reading tiers, and reading priorities in the project registry/dossier so Zotero import cannot flatten scientific uncertainty.
 
+## Reading Queue
+
+Generate `exports/reading-queue.md` beside `exports/references.bib` whenever an export is refreshed for decision-critical reading and during S18. The queue projects verified or explicitly provisional paper records into `IMMEDIATE`, `NEXT`, `BACKGROUND`, or `DEFERRED` reading priority, required tier, decision role, and exact locators to verify. It may suggest portable workflow tags such as `rf:read-next`, but it must not claim that BibTeX created Zotero collections, downloaded PDFs, or verified evidence.
+
+The user remains in control of Zotero import, collections, tags, annotations, and any API authorization. Do not write to a Zotero library unless the user explicitly authorizes a host with that capability; a file-based `.bib` handoff remains the portable default.
+
 ## Failure and recovery
 
-If a record lacks a required field, has an unresolved conflict, or cannot be serialized safely, leave it out of `references.bib`, record the blocking debt, and report the excluded `P-` IDs. Never write a partial file over a known-good export: write a temporary candidate, validate it, then commit it as a transaction. A failed export sets the project to recovery handling without changing scientific decisions.
+If a record lacks a required field, has an unresolved conflict, or cannot be serialized safely, leave it out of `references.bib`, record the blocking debt, and report the excluded `P-` IDs. Keep such a paper visible in the reading queue only when the queue labels its metadata and evidence limitations. Never write a partial file over a known-good export: write a temporary candidate, validate it, then commit it as a transaction. A failed export sets the project to recovery handling without changing scientific decisions.

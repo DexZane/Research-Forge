@@ -14,7 +14,7 @@ Estimate compute, accelerator type/count, time, storage, data access, licensing,
 ## Feasibility Checks
 
 - Official baseline/checkpoint/config exists or reproduction risk is explicit.
-- Required implementation roles have a reuse-first source audit; selected sources have pinned revisions and visible license status.
+- Required implementation roles have a reuse-first source audit; selected sources have pinned revisions, visible license/trust/execution status, and dependency-assessment limits.
 - Required datasets and licenses are accessible.
 - Internal variables can be instrumented without changing the tested mechanism.
 - F0/F1 alternatives have been considered before training.
@@ -43,4 +43,4 @@ At S01, make a preliminary FIT card and scope ladder. Identify skills, mentor/te
 
 ## Implementation Leverage Boundary
 
-At S15, evaluate implementation only after the scientific commitment is frozen. Reuse compatible components before adapting them; consider minimal new code only with the source scan and fairness controls in [Implementation Leverage](implementation-leverage.md). An unavailable or unsuitable component is an execution risk, not novelty evidence.
+At S15, evaluate implementation only after the scientific commitment is frozen. Reuse compatible, trust-reviewed components before adapting them; consider minimal new code only with the source scan and fairness controls in [Implementation Leverage](implementation-leverage.md). Research Forge does not install or execute third-party repositories. An unavailable or unsuitable component is an execution risk, not novelty evidence.
