@@ -20,8 +20,8 @@ Any state may return to the earliest invalid dependency when a decision record c
 - T4/T5 critical IDs require threat records meeting threat schema.
 - Active hypothesis IDs require G3 at or after S13.
 - Active candidate IDs resolve to current `IS-` signature and `CM-` commitment records; frozen commitments resolve from S14 onward.
-- G1 approval requires an active `RQ-` canvas, `FIT-` card, and minimum-completable scope with all decision-critical unknowns either bounded or recorded as debt.
-- S06 candidates resolve to an RQ canvas and at least one verified `OP-` signal or an explicitly bounded evidence-backed gap.
+- G1 approval requires an active `RQ-` canvas, a `FIT-` card with preflight outcome `PROCEED`, and a minimum-completable scope with all decision-critical unknowns either bounded or recorded as debt.
+- S06 candidates resolve to an RQ canvas and at least one verified `OP-` signal.
 - Gate-critical unresolved `LT-` entries and access debt cap the associated claim/threat judgment; they cannot be silently ignored.
 - A semantic commitment revision invalidates dependent novelty mappings, hypothesis/diagnostic/falsification/feasibility records, reviewer reports, and gate packets until they are revalidated.
 - `COMPLETE` requires S18 validation and immutable snapshot.

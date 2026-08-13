@@ -9,7 +9,7 @@
 - Candidate is a scientific question plus mechanism, not a module combination.
 - Active candidate has at least one observable preliminary prediction and risk.
 - Active candidate has one proposed `IS-` signature and one active `CM-` commitment; the signature must pass the specificity gate.
-- Active candidate links an `RQ-` canvas and at least one verified `OP-` signal, unless an explicitly bounded evidence-backed gap explains why a signal is not applicable.
+- Active candidate links an `RQ-` canvas and at least one verified `OP-` signal.
 - Candidate core mechanisms, predictions, falsifiers, and budget assumptions change only through the commitment-integrity protocol.
 - Novelty begins `UNVERIFIED`; only S10 can assign a bounded survivor status.
 - Candidate lineage uses `ORIGIN`, `REFINES`, `NARROWS`, `PIVOTS`, `MERGES`, `SPLITS`, or `REVIVES`.

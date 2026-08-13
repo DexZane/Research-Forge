@@ -39,12 +39,15 @@ Write three nested scopes rather than one oversized project:
 
 Every scope lists inputs, output, time/compute assumptions, and its stop condition. Do not call an extension a minimum requirement or quietly use an unavailable core dependency in the minimum scope.
 
-## Preflight Outcomes
+## Preflight Assessment
 
-- `PROCEED`: canvas is answerable and the minimum path is plausible; carry unknowns into S02.
-- `HOLD_SCOPE`: a user or mentor decision changes scope materially; remain at G1.
+- Record exactly one canonical preflight outcome in the FIT card.
+- `PROCEED`: the canvas is answerable and the minimum path is plausible.
+- `HOLD_SCOPE`: a user or mentor decision changes scope materially.
 - `HOLD_RESOURCE`: the question remains meaningful, but no minimum path is currently possible; preserve it without forcing a weaker question.
-- `REFRAME`: narrow the unit, condition, mechanism, or observation and return to S00/S01.
+- `REFRAME`: the unit, condition, mechanism, or observation is not yet answerable as written.
+
+The outcome is an assessment, not a gate decision or transition. S01 and the gate runtime own routing.
 
 Do not issue scientific `KILL` merely because a novice lacks a skill or resource; record the gap and distinguish a capability plan from scientific validity.
 

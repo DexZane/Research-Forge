@@ -31,8 +31,8 @@ Run these audits before gates, formal T4/T5 changes, candidate KILL, project dec
 - Only legal transitions or recorded rollback/interrupt occurred.
 - No partial transaction or stale snapshot remains.
 - Active candidates resolve to their active signature and commitment; frozen commitment changes have explicit supersession and dependent-record consequences.
-- Active `RQ-` and `FIT-` pointers resolve; every candidate links to its research question and verified opportunity signal or an explicitly bounded evidence gap.
-- Gate-critical `LT-` entries expose required reading tier and access debt; abstract-only reading cannot close a full-text requirement.
+- Active `RQ-` and `FIT-` pointers resolve; every active candidate links to its research question and at least one verified opportunity signal.
+- Gate-critical `LT-` entries expose required reading tier and access debt; non-full-text access cannot close an R2/R3/R4 requirement.
 
 ## Report Synchronization
 

@@ -13,11 +13,12 @@ Validity:
 
 ## Fit Card
 
-Required: `FIT-` ID, hard constraints, preferences, capability gaps, dependency owners, verified/assumed availability, minimum/core/extension feasibility, lifecycle, and version.
+Required: `FIT-` ID, hard constraints, preferences, capability gaps, dependency owners, verified/assumed availability, minimum/core/extension feasibility, canonical preflight outcome, lifecycle, and version.
 
 Validity:
 
 - Separate `HARD_CONSTRAINT`, `PREFERENCE`, and `ASSUMPTION`.
+- Use only the researchability preflight outcomes defined in `schemas/ids-and-enums.md`.
 - A missing skill/resource creates a gap or `HOLD_RESOURCE`; it does not invalidate a question scientifically.
 - Human preference/mentor advice is recorded as input, never as evidence.
 

@@ -22,7 +22,7 @@ Use qualitative `HIGH`/`MEDIUM`/`LOW` expected information gain. Never fabricate
 
 Use `FULL_TEXT_READY`, `ABSTRACT_ONLY`, `SUPPLEMENT_MISSING`, `CODE_MISSING`, `ACCESS_REQUESTED`, `UNAVAILABLE`, or `NOT_APPLICABLE`.
 
-- `ABSTRACT_ONLY` may guide discovery but cannot close an R2/R3/R4 requirement.
+- Only `FULL_TEXT_READY` closes an R2/R3/R4 reading requirement. `ABSTRACT_ONLY`, `ACCESS_REQUESTED`, `UNAVAILABLE`, `SUPPLEMENT_MISSING`, and `CODE_MISSING` remain open for deep-reading closure.
 - An unavailable decision-critical source creates `MISSING_FULL_TEXT` debt and caps the associated judgment.
 - Record legal/authorized access routes only. Do not bypass paywalls or infer unobserved methods from citations.
 

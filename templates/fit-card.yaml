@@ -22,5 +22,6 @@ fit_card:
     minimum_completable: UNKNOWN
     core_project: UNKNOWN
     extension: UNKNOWN
+  preflight_outcome: null
   lifecycle_status: DRAFT
   version: 1
