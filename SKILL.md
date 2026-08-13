@@ -39,6 +39,7 @@ Do not train models, make broad codebase changes, run long experiments, write a 
 13. Let workers propose; let only the orchestrator write global state.
 14. Treat rollback as normal research behavior.
 15. Separate scientific, execution, and publication decisions.
+16. After a scientific commitment is locked, reuse verified compatible components before adapting or writing minimal new code.
 
 ## Research Standards
 
@@ -66,7 +67,8 @@ Read [runtime/boot.md](runtime/boot.md). For an existing project, load in this o
 9. bibliography registry/export status
 10. active innovation signatures and candidate commitments
 11. active RQ canvas, FIT card, opportunity signals, and literature triage queue
-12. last major decisions and pending gate
+12. active implementation-leverage plan and selected source revisions, when present
+13. last major decisions and pending gate
 
 Validate before resuming. If state is partial or corrupt, follow [runtime/recovery.md](runtime/recovery.md); do not silently reconstruct uncertain facts.
 
@@ -125,6 +127,7 @@ Load a protocol when the state or decision needs it:
 | Evidence/code/benchmark conflicts | [protocols/contradiction.md](protocols/contradiction.md) |
 | Independent reviewers and meta-review | [protocols/reviewer-panel.md](protocols/reviewer-panel.md) |
 | Compute, data, licensing, execution holds | [protocols/resources.md](protocols/resources.md) |
+| Reuse-first component composition and minimal new-code necessity | [protocols/implementation-leverage.md](protocols/implementation-leverage.md) |
 | Worker packets and central integration | [protocols/orchestration.md](protocols/orchestration.md) |
 | Supervisor/mentor/collaborator discussion without authority leakage | [protocols/collaboration.md](protocols/collaboration.md) |
 | Pre-gate and pre-commit audits | [protocols/integrity.md](protocols/integrity.md) |
@@ -177,7 +180,7 @@ Complete only when:
 - the novelty boundary is stable and qualified;
 - no unresolved fatal threat or reviewer issue remains;
 - the core hypothesis is method-free, falsifiable, and distinguished from alternatives;
-- diagnostics, controls, fair baselines, resource estimates, and pre-registered decision rules exist;
+- diagnostics, controls, fair baselines, resource estimates, pre-registered decision rules, and a pinned implementation-leverage plan exist;
 - evidence, claims, threats, contradictions, state, reports, and snapshots are synchronized;
 - the S18 dossier contains all 30 required elements and an exact next action.
 

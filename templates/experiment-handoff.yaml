@@ -9,6 +9,7 @@ experiment_handoff:
   candidate_id: C-0001
   frozen_commitment_id: CM-0001
   frozen_commitment_version: 1
+  implementation_leverage_plan_id: IL-0001
   innovation_signature_id: IS-0001
   innovation_signature_version: 1
   locked_hypothesis_ids:
@@ -28,6 +29,11 @@ experiment_handoff:
     kill_if: []
     refine_if: []
   resource_assumptions: []
+  implementation_contract:
+    decision_policy: REUSE_ADAPT_NEW_MINIMAL
+    pinned_component_keys: []
+    source_revision_ids_or_urls: []
+    new_minimal_component_keys: []
   open_nonfatal_unknowns: []
   forbidden_silent_changes:
     - novelty_boundary
@@ -36,4 +42,5 @@ experiment_handoff:
     - primary_metrics
     - decision_thresholds
     - core_candidate_commitment
+    - implementation_leverage_plan
   exact_next_action: Execute EX-0001 as preregistered and return evidence-linked results.

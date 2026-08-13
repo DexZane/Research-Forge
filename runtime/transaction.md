@@ -6,9 +6,9 @@ Only the orchestrator writes global project state. Use a transaction for every e
 
 ## Transaction Stages
 
-1. `VALIDATE`: parse records; validate IDs/enums/locators/references, active research-question/fit pointers, candidate opportunity-signal provenance, gate-critical literature-triage access, active signature/commitment versions, and worker snapshot.
+1. `VALIDATE`: parse records; validate IDs/enums/locators/references, active research-question/fit pointers, candidate opportunity-signal provenance, gate-critical literature-triage access, implementation-leverage source/revision/license fields, active signature/commitment versions, and worker snapshot.
 2. `STAGE`: write proposed delta under transaction ID without changing active pointers.
-3. `RECONCILE`: deduplicate paper families/bibliography records/evidence/opportunity signals and open/resolve contradictions.
+3. `RECONCILE`: deduplicate paper families/bibliography records/evidence/opportunity signals/component sources and open/resolve contradictions.
 4. `PROPAGATE`: compute explicit dependency consequences conservatively, including mandatory invalidation for semantic commitment changes.
 5. `INTEGRITY`: run required audits; failures keep transaction staged/aborted.
 6. `SNAPSHOT`: create immutable pre-commit snapshot and manifest/checksum.
@@ -31,6 +31,10 @@ Before commit, compare the active and proposed `CM-` records. If bottleneck, ope
 ## Researchability Revision
 
 Before commit, compare active and proposed `RQ-`, `FIT-`, `OP-`, and `LT-` records. A material research-question change creates a new `RQ-` version, identifies affected candidates, and rechecks the scope ladder; route to S01 when the minimum discriminating path is no longer viable. An invalidated or weakened verified `OP-` reviews dependent candidates and their novelty/gap claims. A gate-critical `LT-` entry that lacks the required reading tier or access creates blocking reasoning debt and caps the affected gate. Preference or mentorship changes may revise the fit card or scope, but cannot promote a scientific claim.
+
+## Implementation-Leverage Revision
+
+Before commit, compare active and proposed `IL-` plans against the frozen `CM-` commitment. A selected-source revision, license-status change, adaptation delta, or `NEW_MINIMAL` necessity change invalidates affected feasibility estimates, fairness controls, reviewer reports, dossiers, and handoffs. If the change touches the frozen mechanism, diagnostic, primary prediction/metric, or comparison budget, route to the earliest scientific dependency rather than treating it as an implementation-only edit. A worker may propose component evidence but only the orchestrator commits an `IL-` plan.
 
 ## Audit Trail
 

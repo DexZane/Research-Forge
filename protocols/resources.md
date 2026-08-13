@@ -14,6 +14,7 @@ Estimate compute, accelerator type/count, time, storage, data access, licensing,
 ## Feasibility Checks
 
 - Official baseline/checkpoint/config exists or reproduction risk is explicit.
+- Required implementation roles have a reuse-first source audit; selected sources have pinned revisions and visible license status.
 - Required datasets and licenses are accessible.
 - Internal variables can be instrumented without changing the tested mechanism.
 - F0/F1 alternatives have been considered before training.
@@ -39,3 +40,7 @@ For each risk record likelihood qualitatively, impact, evidence, mitigation, tri
 ## Early Fit Boundary
 
 At S01, make a preliminary FIT card and scope ladder. Identify skills, mentor/team availability, access, and dependencies as verified, assumed, or unknown. This early view selects a valid minimum discriminating path; S15 remains the authoritative full feasibility audit. Do not turn a capability gap into a scientific KILL or turn a preferred venue into evidence of value.
+
+## Implementation Leverage Boundary
+
+At S15, evaluate implementation only after the scientific commitment is frozen. Reuse compatible components before adapting them; consider minimal new code only with the source scan and fairness controls in [Implementation Leverage](implementation-leverage.md). An unavailable or unsuitable component is an execution risk, not novelty evidence.

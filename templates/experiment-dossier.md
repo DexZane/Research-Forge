@@ -46,7 +46,7 @@
 
 ## Execution
 
-28. Resource estimate
+28. Resource estimate and implementation-leverage plan
 29. Reviewer panel result
 30. Exact next action
 

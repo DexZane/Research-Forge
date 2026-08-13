@@ -33,6 +33,7 @@ Run these audits before gates, formal T4/T5 changes, candidate KILL, project dec
 - Active candidates resolve to their active signature and commitment; frozen commitment changes have explicit supersession and dependent-record consequences.
 - Active `RQ-` and `FIT-` pointers resolve; every active candidate links to its research question and at least one verified opportunity signal.
 - Gate-critical `LT-` entries expose required reading tier and access debt; non-full-text access cannot close an R2/R3/R4 requirement.
+- From S15 onward, the active `IL-` plan resolves to the frozen commitment. Each selected component has source provenance, immutable revision/release, license status, and verification evidence.
 
 ## Report Synchronization
 
@@ -64,6 +65,7 @@ Run these audits before gates, formal T4/T5 changes, candidate KILL, project dec
 - Scientific and execution decisions remain separate.
 - The preregistered falsification plan and resource assumptions reference the active frozen commitment version.
 - The minimum discriminating path names an observable outcome and cannot be represented by a score improvement alone.
+- Implementation leverage is reuse-first: `NEW_MINIMAL` entries document rejected reusable sources, frozen-requirement necessity, a minimal interface, and an equivalence/ablation control. Reuse or new code is never claimed as scientific novelty by itself.
 
 ## Failure Behavior
 
