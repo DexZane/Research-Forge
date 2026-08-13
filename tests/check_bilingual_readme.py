@@ -91,6 +91,10 @@ CHINESE_REQUIREMENTS = (
     "实现杠杆计划",
     "REUSE_AS_IS",
     "NEW_MINIMAL",
+    "CAP-",
+    "TRUST_REVIEWED",
+    "exports/reading-queue.md",
+    "scripts/validate_project.py",
     "https://raw.githubusercontent.com/DexZane/Research-Forge/main/docs/guide/installation.md",
 )
 

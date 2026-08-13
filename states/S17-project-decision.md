@@ -10,7 +10,7 @@ Reviewer panel and all prerequisite registries are synchronized.
 
 ## Reads
 
-Hard-gate evidence, current frozen commitment/signature, scorecards, meta-review, resources, novelty boundary, hypotheses, falsification plan, risks, contradictions/debt.
+Hard-gate evidence, current frozen commitment/signature, scorecards, meta-review, resources, active capability profile, source trust/dependency limits, novelty boundary, hypotheses, falsification plan, risks, contradictions/debt.
 
 ## Writes
 
@@ -18,15 +18,15 @@ Hard-gate evidence, current frozen commitment/signature, scorecards, meta-review
 
 ## Required Questions
 
-Do novelty, clear mechanistic question, falsifiability, absence of fatal prior art, optimization space, diagnostic access, integrity, and reviewer-fatal gates pass? What uncertainty remains?
+Do novelty, clear mechanistic question, falsifiability, absence of fatal prior art, optimization space, diagnostic access, integrity, reviewer-fatal gates, and execution capability/source-trust requirements pass? What uncertainty remains?
 
 ## Required Actions
 
-Apply hard gates before scorecard; verify that no dependent artifact is stale against the active frozen commitment; assess Pareto/portfolio risk; separate scientific/execution decisions; give rationale, confidence, alternatives, rollback target, and exact next action.
+Apply hard gates before scorecard; verify that no dependent artifact is stale against the active frozen commitment or capability profile; assess Pareto/portfolio risk; separate scientific/execution decisions; give rationale, confidence, alternatives, rollback target, and exact next action.
 
 ## Required Protocols
 
-[Reasoning](../protocols/reasoning.md), [Commitment Integrity](../protocols/commitment-integrity.md), [Resources](../protocols/resources.md), [Reviewer Panel](../protocols/reviewer-panel.md), [Gates](../runtime/gates.md), [Integrity](../protocols/integrity.md).
+[Reasoning](../protocols/reasoning.md), [Commitment Integrity](../protocols/commitment-integrity.md), [Resources](../protocols/resources.md), [Capability Preflight](../runtime/capability-preflight.md), [Implementation Leverage](../protocols/implementation-leverage.md), [Reviewer Panel](../protocols/reviewer-panel.md), [Gates](../runtime/gates.md), [Integrity](../protocols/integrity.md).
 
 ## Parallelizable Work
 

@@ -30,6 +30,11 @@ bibliography_record:
   evidence_ids: []
   conflict_ids: []
   export_eligible: true
+  reading_plan:
+    priority: IMMEDIATE
+    decision_roles: [CLOSEST_NOVELTY_THREAT]
+    required_verification_locators: []
+    suggested_zotero_tags: [rf:read-next]
   captured_at: "2026-08-10T00:00:00Z"
   verified_at: "2026-08-10T00:00:00Z"
   notes: null
@@ -52,6 +57,7 @@ bibliography_record:
 | `reading_tier`, `evidence_ids` | Preserve scientific reading/evidence links; they do not imply citation export eligibility. |
 | `conflict_ids` | Empty for export; unresolved conflicts create reasoning debt. |
 | `export_eligible` | Must equal `true` only after all export preconditions pass. |
+| `reading_plan` | Required project-reading projection: priority, decision roles, verification locators, and optional user-controlled Zotero tag suggestions. |
 | `captured_at`, `verified_at` | Required timestamps for auditability; `verified_at` is null until verified. |
 
 ## Invariants
@@ -62,3 +68,5 @@ bibliography_record:
 4. Missing optional fields are omitted from BibTeX; nulls are not serialized as literal strings.
 5. A duplicate merge unions provenance and evidence links and preserves a paper-family/version relation.
 6. An export does not upgrade reading tier, evidence verification, claim status, threat level, or project decision.
+7. Reading priority is one of `IMMEDIATE`, `NEXT`, `BACKGROUND`, or `DEFERRED`; it cannot promote metadata or evidence.
+8. Suggested Zotero tags are workflow hints. They do not assert that tags/collections were created or transferred.

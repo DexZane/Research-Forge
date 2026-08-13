@@ -64,7 +64,7 @@ Run the following after cloning:
       verification_failed=1
     fi
   done
-  for directory in agents domain protocols runtime schemas states templates; do
+  for directory in agents domain protocols runtime schemas states templates scripts; do
     if [ ! -d "$target/$directory" ]; then
       printf 'Missing required directory: %s\n' "$target/$directory" >&2
       verification_failed=1

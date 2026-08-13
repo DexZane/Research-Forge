@@ -1,6 +1,6 @@
 ---
 name: research-forge
-description: Use when evaluating, challenging, or maturing an AI or deep-learning method research direction, vague topic, or existing idea before costly experiments, especially for literature mapping, novelty risk, mechanistic hypotheses, falsification design, reviewer attack, project triage, or an experiment-ready handoff.
+description: Use when evaluating, challenging, or maturing an AI or deep-learning method research direction, vague topic, or existing idea before costly experiments, especially for literature mapping, novelty risk, mechanistic hypotheses, falsification design, reviewer attack, project triage, reuse-first open-source component planning, or an experiment-ready handoff.
 ---
 
 # Research Forge
@@ -39,7 +39,7 @@ Do not train models, make broad codebase changes, run long experiments, write a 
 13. Let workers propose; let only the orchestrator write global state.
 14. Treat rollback as normal research behavior.
 15. Separate scientific, execution, and publication decisions.
-16. After a scientific commitment is locked, reuse verified compatible components before adapting or writing minimal new code.
+16. After a scientific commitment is locked, reuse verified, license-compatible, trust-reviewed components before adapting or writing minimal new code; never execute third-party code during research planning.
 
 ## Research Standards
 
@@ -66,9 +66,10 @@ Read [runtime/boot.md](runtime/boot.md). For an existing project, load in this o
 8. search saturation/freshness state
 9. bibliography registry/export status
 10. active innovation signatures and candidate commitments
-11. active RQ canvas, FIT card, opportunity signals, and literature triage queue
-12. active implementation-leverage plan and selected source revisions, when present
-13. last major decisions and pending gate
+11. active RQ canvas, FIT card, opportunity signals, literature triage queue, and capability profile
+12. active implementation-leverage plan, selected source revisions, trust/dependency assessments, when present
+13. bibliography export and reading-queue status
+14. last major decisions and pending gate
 
 Validate before resuming. If state is partial or corrupt, follow [runtime/recovery.md](runtime/recovery.md); do not silently reconstruct uncertain facts.
 
@@ -128,6 +129,7 @@ Load a protocol when the state or decision needs it:
 | Independent reviewers and meta-review | [protocols/reviewer-panel.md](protocols/reviewer-panel.md) |
 | Compute, data, licensing, execution holds | [protocols/resources.md](protocols/resources.md) |
 | Reuse-first component composition and minimal new-code necessity | [protocols/implementation-leverage.md](protocols/implementation-leverage.md) |
+| Host/tool capability discovery and constrained fallback | [runtime/capability-preflight.md](runtime/capability-preflight.md) |
 | Worker packets and central integration | [protocols/orchestration.md](protocols/orchestration.md) |
 | Supervisor/mentor/collaborator discussion without authority leakage | [protocols/collaboration.md](protocols/collaboration.md) |
 | Pre-gate and pre-commit audits | [protocols/integrity.md](protocols/integrity.md) |
@@ -144,7 +146,7 @@ For the reviewer panel, novelty, mechanism, and experiment reviewers must produc
 
 Treat global-state updates as transactions:
 
-1. Validate shape, IDs, provenance, and epistemic status.
+1. Validate shape, IDs, provenance, epistemic status, capability profile, and implementation source trust.
 2. Stage proposed evidence and records.
 3. Reconcile duplicates and contradictions.
 4. Propagate claim/threat/candidate consequences conservatively.
@@ -181,6 +183,7 @@ Complete only when:
 - no unresolved fatal threat or reviewer issue remains;
 - the core hypothesis is method-free, falsifiable, and distinguished from alternatives;
 - diagnostics, controls, fair baselines, resource estimates, pre-registered decision rules, and a pinned implementation-leverage plan exist;
+- current-host capabilities and unresolved execution limitations are explicit;
 - evidence, claims, threats, contradictions, state, reports, and snapshots are synchronized;
 - the S18 dossier contains all 30 required elements and an exact next action.
 
@@ -199,6 +202,7 @@ Before every gate, formal threat upgrade, candidate kill, project decision, or h
 - `templates/`: blank/example record shapes.
 - `schemas/`: validity and cross-record constraints.
 - `runtime/`: lifecycle, recovery, commit, gates, handoff.
+- `scripts/`: deterministic workspace validation only; never external-code execution.
 - `runtime/bibliography.md`: project-level BibTeX capture/export lifecycle; generated `.bib` files never live in the Skill repository.
 - `examples/`: correct execution patterns.
 - `tests/`: acceptance contracts and deterministic validation.

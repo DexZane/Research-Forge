@@ -20,6 +20,15 @@ implementation_leverage_plan:
           evidence_ids: []
           rejection_reason: null
           maintenance_or_reproducibility_limits: null
+          trust_status: TRUST_UNVERIFIED
+          trust_evidence_ids: []
+          execution_status: NOT_EXECUTED
+          dependency_assessment:
+            manifest_or_lockfile: null
+            transitive_dependency_visibility: UNKNOWN
+            vulnerability_check_status: NOT_RUN
+            known_finding_ids: []
+            assessment_scope: METADATA_ONLY
       selected_source:
         source_kind: null
         repository_url: null
@@ -29,6 +38,15 @@ implementation_leverage_plan:
         license_status: LICENSE_UNKNOWN
         verification_status: UNVERIFIED
         evidence_ids: []
+        trust_status: TRUST_UNVERIFIED
+        trust_evidence_ids: []
+        execution_status: NOT_EXECUTED
+        dependency_assessment:
+          manifest_or_lockfile: null
+          transitive_dependency_visibility: UNKNOWN
+          vulnerability_check_status: NOT_RUN
+          known_finding_ids: []
+          assessment_scope: METADATA_ONLY
       adaptation:
         exact_delta: null
         changes_frozen_mechanism: null

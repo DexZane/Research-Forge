@@ -12,7 +12,7 @@
 
 Research Forge 是一套面向 AI 与深度学习方法研究的、有状态的对抗式科研选题 Skill。它把一个宽泛的研究方向或一个已经被偏爱的想法，推进为有证据链接的 `GO`、`HOLD`、`REFINE`、`HOLD_RESOURCE` 或 `KILL` 决策，并把高成本实验放到后面。
 
-**状态：** v1.3 协议实现。本仓库包含确定性的契约检查，但不声称相对于其他 Skill 具有实证性能优势，也不保证研究一定成功。
+**状态：** v1.4 协议实现。本仓库包含确定性的契约检查，但不声称相对于其他 Skill 具有实证性能优势，也不保证研究一定成功。
 
 ## Research Forge 解决什么问题
 
@@ -115,9 +115,13 @@ Research Forge 运行 **S00–S18** 状态机，而不是一次性 prompt。四�
 
 G3 锁定科学承诺后，S15 会建立[实现杠杆计划](protocols/implementation-leverage.md)。每个实现角色必须在 `REUSE_AS_IS`、`ADAPT_EXISTING`、`NEW_MINIMAL` 与 `DEFERRED` 中明确选择。顺序是硬约束：先复用已核验且许可证状态可用的开源组件；只有适配不改变冻结机制与公平比较时才适配；只有来源扫描已经说明现有组件无法复用或安全适配时，才编写最小必要的新模块。
 
-计划会固定仓库 URL、组件位置、版本、许可证状态、证据、适配差异与公平性控制。它既不允许把工程复用包装成科学贡献，也不允许为了“代码看起来更创新”而放弃可用的积木。
+计划会固定仓库 URL、组件位置、版本、许可证/信任状态、依赖审计覆盖范围、证据、适配差异与公平性控制。Research Forge 在规划阶段不会 clone、安装、执行第三方代码，也不会下载外部 checkpoint。最终复用组件必须为 `TRUST_REVIEWED` 且保持 `NOT_EXECUTED`；下游实验主机必须自行完成沙箱与能力预检。
 
-### 11. GO 产生交接契约，而不是胜利宣言
+### 11. 不假设 Agent 能力，先进行预检
+
+S00 会建立 `CAP-` 能力档案，记录网页检索、学术元数据、授权全文、PDF 阅读、项目写入、Python/YAML 校验、Git 版本核验、BibTeX 校验、隔离执行和可选 Zotero 写入能力。能力缺失会变成访问或执行债务，并可能产生 `HOLD_RESOURCE`；它绝不代表先前工作不存在，也不代表科学问题无效。
+
+### 12. GO 产生交接契约，而不是胜利宣言
 
 显式 G4 批准后，S18 会组装一个 30 项的 experiment-ready dossier，包含主张、假设、控制、指标、阈值、失败分支、资源估计和明确的下一步动作。下游实验执行者可以执行计划，但不能悄悄重写其中的科学契约。详见[交接协议](runtime/handoff.md)。
 
@@ -175,7 +179,7 @@ Research Forge 定义协议，但不会自动获得数据库访问、自动下�
 3. 确认 `~/.codex/skills/research-forge/SKILL.md` 直接位于该目录下；
 4. 重新加载主机，使其发现 Skill。
 
-在其他兼容 Agent 主机中，把仓库放入该主机的 Skills 目录。保持内部结构不变：`SKILL.md` 负责路由，`protocols/`、`states/`、`schemas/`、`templates/`、`runtime/` 和 `domain/` 负责不同的契约。
+在其他兼容 Agent 主机中，把仓库放入该主机的 Skills 目录。保持内部结构不变：`SKILL.md` 负责路由，`protocols/`、`states/`、`schemas/`、`templates/`、`runtime/`、`scripts/` 和 `domain/` 负责不同的契约。
 
 ### 最小安装包
 
@@ -207,7 +211,7 @@ curl -fsSL https://raw.githubusercontent.com/DexZane/Research-Forge/main/docs/gu
 
 ### 各 Agent 的适配与安装位置
 
-Research Forge 使用目录型 Agent Skills 结构：`research-forge/` 目录根部必须有 `SKILL.md`，并在旁边保留 `protocols/`、`states/`、`domain/`、`templates/`、`schemas/` 和 `runtime/`。科研协议本身具有可移植性，但自动发现和调用方式取决于具体 Agent 运行时。
+Research Forge 使用目录型 Agent Skills 结构：`research-forge/` 目录根部必须有 `SKILL.md`，并在旁边保留 `protocols/`、`states/`、`domain/`、`templates/`、`schemas/`、`runtime/` 和 `scripts/`。科研协议本身具有可移植性，但自动发现和调用方式取决于具体 Agent 运行时。
 
 | Agent 运行时 | 用户级位置 | 项目级位置 | 支持情况 |
 |---|---|---|---|
@@ -331,9 +335,10 @@ Research Forge 会在建立证据图和新颖性地图的同一轮文献检索�
 
 ```text
 <research-project>/exports/references.bib
+<research-project>/exports/reading-queue.md
 ```
 
-在 Zotero 中选择 `File → Import → A file`，选中该 BibTeX 文件并指定 collection 即可导入。之后由用户使用 Zotero 和全文阅读工作流获取 PDF、做批注和精读。Research Forge 不会自动获取付费论文，不会补写猜测的引用字段，也不会把 BibTeX 当作科研证据。
+在 Zotero 中选择 `File → Import → A file` 导入 BibTeX 文件，再用精读队列安排全文获取、批注和精读。队列可以建议 `rf:read-next` 等工作流标签，但不会声称导入已创建 Zotero collection、下载 PDF 或核验科学内容。Research Forge 不会自动获取付费论文，不会补写猜测的引用字段，也不会把 BibTeX 当作科研证据。
 
 项目 registry 仍然是 provenance、evidence ID、阅读优先级、被排除的 `P-` 记录和冲突的审计来源。单一 `.bib` 文件保持轻量，便于导入，同时不扁平化 Research Forge 的不确定性模型。
 
@@ -351,6 +356,7 @@ research-forge/
 ├── templates/            # 记录与报告形状
 ├── schemas/              # ID、枚举、有效性和跨记录约束
 ├── runtime/              # 启动、上下文、Gate、承诺安全事务、恢复、交接、BibTeX 导出
+├── scripts/              # 确定性的只读项目 workspace 校验
 ├── examples/             # 正确执行模式
 └── tests/                # 确定性与场景验收契约
 ```
@@ -383,6 +389,12 @@ python3 tests/check_bibliography.py
 
 ```bash
 python3 tests/run_acceptance.py --skill-root .
+```
+
+在 Gate、handoff 或恢复项目之前校验真实项目 workspace：
+
+```bash
+python3 scripts/validate_project.py /absolute/path/to/research-project
 ```
 
 运行双语 README 检查：

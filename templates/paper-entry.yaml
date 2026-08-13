@@ -24,6 +24,11 @@ paper:
     dedup_key: null
     conflict_ids: []
     export_eligible: false
+    reading_plan:
+      priority: DEFERRED
+      decision_roles: []
+      required_verification_locators: []
+      suggested_zotero_tags: []
     captured_at: "2026-08-10T00:00:00Z"
     verified_at: null
   reading_tier: R0

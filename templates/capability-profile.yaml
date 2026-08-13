@@ -1,0 +1,85 @@
+capability_profile:
+  id: CAP-0001
+  host_label: null
+  checked_at: "2026-08-13T00:00:00Z"
+  capabilities:
+    - name: WEB_SEARCH
+      status: UNKNOWN
+      check_basis: null
+      checked_at: "2026-08-13T00:00:00Z"
+      limitation: null
+      fallback: null
+      required_by_states: []
+    - name: SCHOLARLY_METADATA
+      status: UNKNOWN
+      check_basis: null
+      checked_at: "2026-08-13T00:00:00Z"
+      limitation: null
+      fallback: null
+      required_by_states: []
+    - name: AUTHORIZED_FULL_TEXT
+      status: UNKNOWN
+      check_basis: null
+      checked_at: "2026-08-13T00:00:00Z"
+      limitation: null
+      fallback: Record access debt and request an authorized source.
+      required_by_states:
+        - S03_LITERATURE_BACKBONE
+        - S09_ADVERSARIAL_NOVELTY
+    - name: PDF_TEXT_EXTRACTION
+      status: UNKNOWN
+      check_basis: null
+      checked_at: "2026-08-13T00:00:00Z"
+      limitation: null
+      fallback: Record reading-access debt.
+      required_by_states: []
+    - name: PROJECT_WORKSPACE_WRITE
+      status: UNKNOWN
+      check_basis: null
+      checked_at: "2026-08-13T00:00:00Z"
+      limitation: null
+      fallback: Use a user-provided writable project root.
+      required_by_states:
+        - S00_INTAKE
+    - name: PYTHON_YAML_VALIDATION
+      status: UNKNOWN
+      check_basis: null
+      checked_at: "2026-08-13T00:00:00Z"
+      limitation: null
+      fallback: Perform documented manual validation and create debt.
+      required_by_states:
+        - S18_EXPERIMENT_DOSSIER
+    - name: GIT_REVISION_INSPECTION
+      status: UNKNOWN
+      check_basis: null
+      checked_at: "2026-08-13T00:00:00Z"
+      limitation: null
+      fallback: Do not finalize a reused or adapted component.
+      required_by_states:
+        - S15_FEASIBILITY_AUDIT
+    - name: BIBTEX_VALIDATION
+      status: UNKNOWN
+      check_basis: null
+      checked_at: "2026-08-13T00:00:00Z"
+      limitation: null
+      fallback: Keep export provisional and record debt.
+      required_by_states:
+        - S18_EXPERIMENT_DOSSIER
+    - name: ISOLATED_CODE_EXECUTION
+      status: NOT_REQUIRED
+      check_basis: Research Forge does not execute third-party code.
+      checked_at: "2026-08-13T00:00:00Z"
+      limitation: null
+      fallback: Downstream experiment agent must preflight its own sandbox.
+      required_by_states: []
+    - name: ZOTERO_WRITE_API
+      status: NOT_REQUIRED
+      check_basis: BibTeX handoff is file-based and user controlled.
+      checked_at: "2026-08-13T00:00:00Z"
+      limitation: null
+      fallback: Import references.bib manually into Zotero.
+      required_by_states: []
+  execution_consequences: []
+  reasoning_debt_ids: []
+  lifecycle_status: DRAFT
+  version: 1

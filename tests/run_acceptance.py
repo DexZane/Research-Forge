@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import argparse
 import re
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 import yaml
@@ -42,7 +44,7 @@ GATED_EDGES = {
 
 REQUIRED_TOP_DIRS = {
     "agents", "protocols", "states", "domain", "templates", "schemas",
-    "runtime", "examples", "tests",
+    "runtime", "scripts", "examples", "tests",
 }
 
 UPGRADE_REQUIRED_FILES = (
@@ -76,6 +78,15 @@ V13_REQUIRED_FILES = (
     "templates/implementation-leverage-plan.yaml",
 )
 
+V14_REQUIRED_FILES = (
+    "runtime/capability-preflight.md",
+    "schemas/capability-profile-schema.md",
+    "templates/capability-profile.yaml",
+    "templates/reading-queue.md",
+    "scripts/validate_project.py",
+    "tests/behavioral-evals.md",
+)
+
 V12_RUNTIME_CONTRACTS = {
     "runtime/boot.md": ("research-question", "opportunity signals", "literature-triage"),
     "runtime/context-loading.md": ("research-question canvas", "literature-triage", "minimum discriminating paths"),
@@ -87,8 +98,16 @@ V12_RUNTIME_CONTRACTS = {
 V13_RUNTIME_CONTRACTS = {
     "runtime/boot.md": ("implementation-leverage", "active implementation-leverage plan/source revisions"),
     "runtime/context-loading.md": ("implementation-leverage source scan", "finalized implementation-leverage plan/pinned source revisions"),
-    "runtime/transaction.md": ("implementation-leverage source/revision/license fields", "Implementation-Leverage Revision"),
+    "runtime/transaction.md": ("implementation-leverage source/revision/license/trust/dependency fields", "Implementation-Leverage Revision"),
     "runtime/handoff.md": ("finalized implementation-leverage plan ID", "must follow each pinned `REUSE_AS_IS`"),
+}
+
+V14_RUNTIME_CONTRACTS = {
+    "runtime/boot.md": ("capability profile", "reading-queue"),
+    "runtime/gates.md": ("active `CAP-` capability profile", "source trust/dependency findings"),
+    "runtime/transaction.md": ("active research-question/fit/capability pointers", "Capability Revision"),
+    "runtime/handoff.md": ("active capability profile", "own capability preflight"),
+    "protocols/implementation-leverage.md": ("`TRUST_REVIEWED`", "never clone, install, execute"),
 }
 
 SIGNATURE_FIELDS = (
@@ -231,6 +250,50 @@ def triage_closes_required_tier(entry: dict) -> bool:
     return access_state in {"FULL_TEXT_READY", "ABSTRACT_ONLY", "NOT_APPLICABLE"}
 
 
+def dependency_assessment_valid(assessment: dict) -> bool:
+    """Keep source-audit coverage explicit without claiming code safety."""
+    return (
+        assessment.get("assessment_scope") == "METADATA_ONLY"
+        and assessment.get("transitive_dependency_visibility") in {
+            "KNOWN_DIRECT_ONLY", "KNOWN_TRANSITIVE", "UNKNOWN", "NOT_APPLICABLE",
+        }
+        and assessment.get("vulnerability_check_status") in {
+            "NOT_RUN", "NO_FINDINGS_RECORDED", "FINDINGS_RECORDED", "UNAVAILABLE", "NOT_APPLICABLE",
+        }
+        and isinstance(assessment.get("known_finding_ids"), list)
+    )
+
+
+def capability_profile_valid(profile: dict) -> bool:
+    """Require checked, secret-free host capability records."""
+    entries = profile.get("capabilities", [])
+    allowed_statuses = {"AVAILABLE", "LIMITED", "UNAVAILABLE", "UNKNOWN", "NOT_REQUIRED"}
+    required_names = {
+        "WEB_SEARCH", "SCHOLARLY_METADATA", "AUTHORIZED_FULL_TEXT", "PDF_TEXT_EXTRACTION",
+        "PROJECT_WORKSPACE_WRITE", "PYTHON_YAML_VALIDATION", "GIT_REVISION_INSPECTION",
+        "BIBTEX_VALIDATION", "ISOLATED_CODE_EXECUTION", "ZOTERO_WRITE_API",
+    }
+    names = {entry.get("name") for entry in entries if isinstance(entry, dict)}
+    return (
+        isinstance(profile.get("id"), str)
+        and profile["id"].startswith("CAP-")
+        and required_names <= names
+        and all(
+            entry.get("status") in allowed_statuses
+            and (
+                entry.get("status") not in {"AVAILABLE", "LIMITED"}
+                or bool(entry.get("check_basis"))
+            )
+            and (
+                entry.get("status") != "LIMITED"
+                or bool(entry.get("limitation"))
+            )
+            for entry in entries
+            if isinstance(entry, dict)
+        )
+    )
+
+
 def considered_source_valid(source: dict) -> bool:
     """Require enough provenance to reproduce a source-scan decision."""
     return (
@@ -252,6 +315,15 @@ def considered_source_valid(source: dict) -> bool:
         and bool(source.get("evidence_ids"))
         and isinstance(source.get("maintenance_or_reproducibility_limits"), str)
         and bool(source["maintenance_or_reproducibility_limits"].strip())
+        and source.get("trust_status") in {
+            "TRUST_UNVERIFIED", "TRUST_REVIEWED", "TRUST_BLOCKED",
+        }
+        and source.get("execution_status") == "NOT_EXECUTED"
+        and dependency_assessment_valid(source.get("dependency_assessment", {}))
+        and (
+            source.get("trust_status") != "TRUST_REVIEWED"
+            or bool(source.get("trust_evidence_ids"))
+        )
     )
 
 
@@ -291,6 +363,10 @@ def implementation_component_valid(component: dict, final: bool = False) -> bool
         and selected.get("license_status") == "LICENSE_COMPATIBLE"
         and selected.get("verification_status") == "VERIFIED"
         and bool(selected.get("evidence_ids"))
+        and selected.get("trust_status") == "TRUST_REVIEWED"
+        and bool(selected.get("trust_evidence_ids"))
+        and selected.get("execution_status") == "NOT_EXECUTED"
+        and dependency_assessment_valid(selected.get("dependency_assessment", {}))
     )
     selected_is_considered = any(
         source.get("repository_url") == selected.get("repository_url")
@@ -362,6 +438,10 @@ def run(root: Path) -> list[str]:
         assert root.joinpath(relative).is_file(), f"missing implementation-leverage contract: {relative}"
     passed.append("implementation-leverage contracts")
 
+    for relative in V14_REQUIRED_FILES:
+        assert root.joinpath(relative).is_file(), f"missing v1.4 execution contract: {relative}"
+    passed.append("capability, trust, reading-queue, validator, and behavioral-eval contracts")
+
     for relative, required_fragments in V12_RUNTIME_CONTRACTS.items():
         text = root.joinpath(relative).read_text(encoding="utf-8")
         for fragment in required_fragments:
@@ -373,6 +453,12 @@ def run(root: Path) -> list[str]:
         for fragment in required_fragments:
             assert fragment in text, f"missing v1.3 runtime integration in {relative}: {fragment}"
     passed.append("implementation-leverage runtime integration")
+
+    for relative, required_fragments in V14_RUNTIME_CONTRACTS.items():
+        text = root.joinpath(relative).read_text(encoding="utf-8")
+        for fragment in required_fragments:
+            assert fragment in text, f"missing v1.4 runtime integration in {relative}: {fragment}"
+    passed.append("capability and source-trust runtime integration")
 
     for path in root.joinpath("templates").glob("*.yaml"):
         assert isinstance(yaml.safe_load(path.read_text(encoding="utf-8")), dict)
@@ -386,6 +472,7 @@ def run(root: Path) -> list[str]:
     fit_card = yaml.safe_load(root.joinpath("templates/fit-card.yaml").read_text(encoding="utf-8"))["fit_card"]
     opportunity_signal = yaml.safe_load(root.joinpath("templates/opportunity-signal.yaml").read_text(encoding="utf-8"))["opportunity_signal"]
     triage_entry = yaml.safe_load(root.joinpath("templates/literature-triage-entry.yaml").read_text(encoding="utf-8"))["literature_triage_entry"]
+    capability_profile = yaml.safe_load(root.joinpath("templates/capability-profile.yaml").read_text(encoding="utf-8"))["capability_profile"]
     leverage_plan = yaml.safe_load(root.joinpath("templates/implementation-leverage-plan.yaml").read_text(encoding="utf-8"))["implementation_leverage_plan"]
     assert signature["id"].startswith("IS-")
     assert commitment["id"].startswith("CM-")
@@ -397,12 +484,25 @@ def run(root: Path) -> list[str]:
     assert fit_card["preflight_outcome"] is None
     assert opportunity_signal["id"].startswith("OP-")
     assert triage_entry["id"].startswith("LT-")
+    assert capability_profile_valid(capability_profile)
+    unavailable_capability = yaml.safe_load(
+        yaml.safe_dump(capability_profile, sort_keys=False),
+    )
+    unavailable_capability["capabilities"][0]["status"] = "AVAILABLE"
+    unavailable_capability["capabilities"][0]["check_basis"] = None
+    assert not capability_profile_valid(unavailable_capability)
     assert leverage_plan["id"].startswith("IL-")
     assert leverage_plan["decision_policy"] == "REUSE_ADAPT_NEW_MINIMAL"
     assert candidate_template["research_question_canvas_id"].startswith("RQ-")
     passed.append("signature, commitment, and awareness-lead template links")
     passed.append("researchability, opportunity, and triage template links")
+    passed.append("capability profile template links")
     passed.append("implementation-leverage template links")
+
+    behavioral_evals = root.joinpath("tests/behavioral-evals.md").read_text(encoding="utf-8")
+    for case in ("B1", "B2", "B3", "B4", "B5", "B6", "TRUST_UNVERIFIED", "HOLD_RESOURCE"):
+        assert case in behavioral_evals
+    passed.append("behavioral eval contract covers capability, source trust, novelty, Zotero, and handoff")
 
     for state_file in STATE_FILES:
         text = root.joinpath("states", state_file).read_text(encoding="utf-8")
@@ -566,6 +666,16 @@ def run(root: Path) -> list[str]:
             "evidence_ids": ["EU-0001"],
             "rejection_reason": None,
             "maintenance_or_reproducibility_limits": "Pin the revision because main may change.",
+            "trust_status": "TRUST_REVIEWED",
+            "trust_evidence_ids": ["EU-0002"],
+            "execution_status": "NOT_EXECUTED",
+            "dependency_assessment": {
+                "manifest_or_lockfile": "requirements.txt",
+                "transitive_dependency_visibility": "KNOWN_DIRECT_ONLY",
+                "vulnerability_check_status": "UNAVAILABLE",
+                "known_finding_ids": [],
+                "assessment_scope": "METADATA_ONLY",
+            },
         }],
         "selected_source": {
             "source_kind": "OFFICIAL_CODE",
@@ -576,6 +686,16 @@ def run(root: Path) -> list[str]:
             "license_status": "LICENSE_COMPATIBLE",
             "verification_status": "VERIFIED",
             "evidence_ids": ["EU-0001"],
+            "trust_status": "TRUST_REVIEWED",
+            "trust_evidence_ids": ["EU-0002"],
+            "execution_status": "NOT_EXECUTED",
+            "dependency_assessment": {
+                "manifest_or_lockfile": "requirements.txt",
+                "transitive_dependency_visibility": "KNOWN_DIRECT_ONLY",
+                "vulnerability_check_status": "UNAVAILABLE",
+                "known_finding_ids": [],
+                "assessment_scope": "METADATA_ONLY",
+            },
         },
         "adaptation": {
             "exact_delta": None,
@@ -609,6 +729,16 @@ def run(root: Path) -> list[str]:
             "evidence_ids": ["EU-0001"],
             "rejection_reason": "The component cannot expose the frozen intervention boundary.",
             "maintenance_or_reproducibility_limits": "Pin the revision because main may change.",
+            "trust_status": "TRUST_REVIEWED",
+            "trust_evidence_ids": ["EU-0002"],
+            "execution_status": "NOT_EXECUTED",
+            "dependency_assessment": {
+                "manifest_or_lockfile": "requirements.txt",
+                "transitive_dependency_visibility": "KNOWN_DIRECT_ONLY",
+                "vulnerability_check_status": "UNAVAILABLE",
+                "known_finding_ids": [],
+                "assessment_scope": "METADATA_ONLY",
+            },
         }],
         selected_source={},
         new_minimal_code={
@@ -644,6 +774,14 @@ def run(root: Path) -> list[str]:
             repository_url="https://github.com/example/different-code",
         ),
     )
+    untrusted_selection_component = dict(
+        reused_component,
+        selected_source=dict(reused_component["selected_source"], trust_status="TRUST_UNVERIFIED"),
+    )
+    executed_selection_component = dict(
+        reused_component,
+        selected_source=dict(reused_component["selected_source"], execution_status="SANDBOX_AUTHORIZED"),
+    )
     deferred_component = dict(reused_component, decision="DEFERRED")
     assert implementation_component_valid(reused_component, final=True)
     assert implementation_component_valid(adapted_component, final=True)
@@ -651,6 +789,8 @@ def run(root: Path) -> list[str]:
     assert not implementation_component_valid(convenience_new_code, final=True)
     assert not implementation_component_valid(unknown_license_component, final=True)
     assert not implementation_component_valid(unscanned_selection_component, final=True)
+    assert not implementation_component_valid(untrusted_selection_component, final=True)
+    assert not implementation_component_valid(executed_selection_component, final=True)
     assert implementation_component_valid(deferred_component)
     assert not implementation_component_valid(deferred_component, final=True)
     implementation_protocol = root.joinpath("protocols/implementation-leverage.md").read_text(encoding="utf-8")
@@ -662,10 +802,101 @@ def run(root: Path) -> list[str]:
     registries = state_template["registries"]
     assert state_template["active_research_question_id"] is None
     assert state_template["active_fit_card_id"] is None
+    assert state_template["active_capability_profile_id"] is None
     assert state_template["active_implementation_leverage_plan_id"] is None
-    for key in ("research_questions", "fit_cards", "opportunity_signals", "literature_triage", "implementation_leverage"):
+    assert state_template["bibliography"]["reading_queue_path"] == "exports/reading-queue.md"
+    for key in (
+        "research_questions", "fit_cards", "opportunity_signals", "literature_triage",
+        "capability_profiles", "implementation_leverage",
+    ):
         assert key in registries
     passed.append("researchability registry pointers")
+
+    with tempfile.TemporaryDirectory(prefix="research-forge-project-validator-") as temporary:
+        project_root = Path(temporary)
+        state_directory = project_root / "state"
+        exports_directory = project_root / "exports"
+        state_directory.mkdir()
+        exports_directory.mkdir()
+        final_state = {
+            "project_id": "research-project-0001",
+            "schema_version": "1.5",
+            "state": "S18_EXPERIMENT_DOSSIER",
+            "state_iteration": 1,
+            "status": "ACTIVE",
+            "mode": "EXPLORATION",
+            "pending_gate": "NONE",
+            "active_capability_profile_id": "CAP-0001",
+            "active_implementation_leverage_plan_id": "IL-0001",
+            "registries": {
+                "capability_profiles": "state/capability_profile_registry.yaml",
+                "implementation_leverage": "state/implementation_leverage_registry.yaml",
+            },
+            "bibliography": {
+                "export_path": "exports/references.bib",
+                "reading_queue_path": "exports/reading-queue.md",
+            },
+            "version": 1,
+            "updated_at": "2026-08-13T00:00:00Z",
+        }
+        state_directory.joinpath("research_state.yaml").write_text(
+            yaml.safe_dump({"research_state": final_state}, sort_keys=False), encoding="utf-8",
+        )
+        state_directory.joinpath("capability_profile_registry.yaml").write_text(
+            yaml.safe_dump({"records": [capability_profile]}, sort_keys=False), encoding="utf-8",
+        )
+        final_plan = {
+            "id": "IL-0001",
+            "components": [reused_component],
+        }
+        state_directory.joinpath("implementation_leverage_registry.yaml").write_text(
+            yaml.safe_dump({"records": [final_plan]}, sort_keys=False), encoding="utf-8",
+        )
+        exports_directory.joinpath("references.bib").write_text(
+            "@article{rf_p0001,\n  author = {Example, Agent},\n  title = {Example},\n  year = {2026}\n}\n",
+            encoding="utf-8",
+        )
+        exports_directory.joinpath("reading-queue.md").write_text("# Reading queue\n", encoding="utf-8")
+        validator = root / "scripts" / "validate_project.py"
+        valid_result = subprocess.run(
+            [sys.executable, str(validator), str(project_root)],
+            text=True, capture_output=True, check=False,
+        )
+        assert valid_result.returncode == 0, valid_result.stdout + valid_result.stderr
+
+        json_result = subprocess.run(
+            [sys.executable, str(validator), str(project_root), "--json"],
+            text=True, capture_output=True, check=False,
+        )
+        assert json_result.returncode == 0, json_result.stdout + json_result.stderr
+        assert yaml.safe_load(json_result.stdout)["valid"] is True
+
+        final_state["active_capability_profile_id"] = "IL-0001"
+        state_directory.joinpath("research_state.yaml").write_text(
+            yaml.safe_dump({"research_state": final_state}, sort_keys=False), encoding="utf-8",
+        )
+        invalid_pointer_result = subprocess.run(
+            [sys.executable, str(validator), str(project_root)],
+            text=True, capture_output=True, check=False,
+        )
+        assert invalid_pointer_result.returncode != 0
+        assert "must reference a CAP- record" in invalid_pointer_result.stdout
+        final_state["active_capability_profile_id"] = "CAP-0001"
+        state_directory.joinpath("research_state.yaml").write_text(
+            yaml.safe_dump({"research_state": final_state}, sort_keys=False), encoding="utf-8",
+        )
+
+        final_plan["components"][0]["selected_source"]["trust_status"] = "TRUST_UNVERIFIED"
+        state_directory.joinpath("implementation_leverage_registry.yaml").write_text(
+            yaml.safe_dump({"records": [final_plan]}, sort_keys=False), encoding="utf-8",
+        )
+        invalid_result = subprocess.run(
+            [sys.executable, str(validator), str(project_root)],
+            text=True, capture_output=True, check=False,
+        )
+        assert invalid_result.returncode != 0
+        assert "TRUST_REVIEWED" in invalid_result.stdout
+    passed.append("project workspace validator accepts valid state and rejects invalid pointers/untrusted final source")
 
     dossier = root.joinpath("templates/experiment-dossier.md").read_text(encoding="utf-8")
     numbered = {int(n) for n in re.findall(r"^(\d+)\. ", dossier, re.MULTILINE)}

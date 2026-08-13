@@ -19,6 +19,7 @@ This file is the canonical vocabulary. Templates illustrate records; other files
 | `FIT-` | project fit card |
 | `OP-` | opportunity signal |
 | `LT-` | literature-triage entry |
+| `CAP-` | agent capability profile |
 | `IL-` | implementation-leverage plan |
 | `TH-` | threat |
 | `CT-` | contradiction |
@@ -114,9 +115,14 @@ Bibliography records reuse the immutable `P-` paper ID and the existing verifica
 - Fit scope feasibility: `READY`, `HOLD_RESOURCE`, `UNKNOWN`, `NOT_APPLICABLE`.
 - Researchability preflight outcome: `PROCEED`, `HOLD_SCOPE`, `HOLD_RESOURCE`, `REFRAME`.
 - Literature access: `FULL_TEXT_READY`, `ABSTRACT_ONLY`, `SUPPLEMENT_MISSING`, `CODE_MISSING`, `ACCESS_REQUESTED`, `UNAVAILABLE`, `NOT_APPLICABLE`.
+- Capability status: `AVAILABLE`, `LIMITED`, `UNAVAILABLE`, `UNKNOWN`, `NOT_REQUIRED`.
 - Implementation decision: `REUSE_AS_IS`, `ADAPT_EXISTING`, `NEW_MINIMAL`, `DEFERRED`.
 - Implementation source kind: `OFFICIAL_CODE`, `MAINTAINED_LIBRARY`, `REPRODUCTION`, `OTHER_OPEN_SOURCE`.
 - License status: `LICENSE_COMPATIBLE`, `LICENSE_REVIEW_REQUIRED`, `LICENSE_INCOMPATIBLE`, `LICENSE_UNKNOWN`, `NOT_APPLICABLE`.
+- Source trust: `TRUST_UNVERIFIED`, `TRUST_REVIEWED`, `TRUST_BLOCKED`.
+- Source execution status: `NOT_EXECUTED`, `SANDBOX_AUTHORIZED`, `EXECUTED_OUTSIDE_RESEARCH_FORGE`.
+- Dependency visibility: `KNOWN_DIRECT_ONLY`, `KNOWN_TRANSITIVE`, `UNKNOWN`, `NOT_APPLICABLE`.
+- Dependency vulnerability check: `NOT_RUN`, `NO_FINDINGS_RECORDED`, `FINDINGS_RECORDED`, `UNAVAILABLE`, `NOT_APPLICABLE`.
 
 ## Experiments
 

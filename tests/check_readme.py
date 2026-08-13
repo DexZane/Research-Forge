@@ -33,7 +33,7 @@ def check_installation_verifier(guide: str, failures: list[str]) -> None:
         target.mkdir()
         target.joinpath("SKILL.md").write_text("---\nname: research-forge\n---\n", encoding="utf-8")
         target.joinpath("LICENSE").write_text("fixture\n", encoding="utf-8")
-        for directory in ("agents", "domain", "protocols", "runtime", "schemas", "states", "templates"):
+        for directory in ("agents", "domain", "protocols", "runtime", "schemas", "states", "templates", "scripts"):
             target.joinpath(directory).mkdir()
 
         subprocess.run(["git", "-C", str(target), "init", "-q"], check=True)
@@ -141,6 +141,10 @@ def main() -> int:
         "implementation-leverage plan",
         "REUSE_AS_IS",
         "NEW_MINIMAL",
+        "CAP-",
+        "TRUST_REVIEWED",
+        "exports/reading-queue.md",
+        "scripts/validate_project.py",
         "https://raw.githubusercontent.com/DexZane/Research-Forge/main/docs/guide/installation.md",
     )
     for term in required_terms:

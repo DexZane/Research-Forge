@@ -10,7 +10,7 @@
 
 Research Forge is a stateful, adversarial research-direction Skill for AI and deep-learning method research. It turns a vague topic or a favored idea into an evidence-linked `GO`, `HOLD`, `REFINE`, `HOLD_RESOURCE`, or `KILL` decision—before expensive experiments begin.
 
-**Status:** v1.3 protocol implementation. The repository contains deterministic contract checks, but it does not claim an empirical performance advantage over other Skills or guarantee research success.
+**Status:** v1.4 protocol implementation. The repository contains deterministic contract checks, but it does not claim an empirical performance advantage over other Skills or guarantee research success.
 
 ## 中文简介
 
@@ -117,9 +117,13 @@ A promising direction is not scientifically false because compute, data, licensi
 
 After G3 locks the scientific commitment, S15 creates an [implementation-leverage plan](protocols/implementation-leverage.md). For every implementation role, it must choose `REUSE_AS_IS`, `ADAPT_EXISTING`, `NEW_MINIMAL`, or `DEFERRED`. The decision order is strict: reuse a verified compatible open-source component first; adapt it only when the change preserves the frozen mechanism and fair comparison; write a minimal new component only after a recorded source scan shows why reuse and adaptation cannot meet the frozen requirement.
 
-The plan pins repository URL, component locator, revision, license status, evidence, adaptation delta, and fairness control. It prevents a useful engineering shortcut from being relabeled as a scientific contribution, and it prevents “more novel-looking code” from replacing a valid building block.
+The plan pins repository URL, component locator, revision, license/trust status, dependency-assessment limits, evidence, adaptation delta, and fairness control. Research Forge does not clone, install, execute, or download external code/checkpoints while planning. A final reusable component must be `TRUST_REVIEWED` and remain `NOT_EXECUTED`; the downstream experiment host performs its own sandbox and capability preflight.
 
-### 11. GO produces a handoff contract, not a victory message
+### 11. Host capability is checked instead of assumed
+
+S00 creates a `CAP-` capability profile for web search, scholarly metadata, authorized full text, PDF reading, project writes, Python/YAML validation, Git revision inspection, BibTeX validation, isolated execution, and optional Zotero writes. A missing capability becomes access or execution debt, and can yield `HOLD_RESOURCE`; it never becomes evidence that prior work does not exist or that the science is wrong.
+
+### 12. GO produces a handoff contract, not a victory message
 
 After explicit G4 approval, S18 assembles a 30-element experiment-ready dossier with claims, assumptions, controls, metrics, thresholds, failure branches, resource estimates, and exact next actions. The downstream experiment runner may execute the plan but may not silently rewrite its scientific contracts. See the [handoff protocol](runtime/handoff.md).
 
@@ -177,7 +181,7 @@ For a personal Codex installation:
 3. Confirm that `~/.codex/skills/research-forge/SKILL.md` exists directly inside it.
 4. Reload the host so it discovers the Skill.
 
-For another compatible agent host, place the repository in that host’s Skills directory. Keep the internal directory structure intact: `SKILL.md` routes execution, while `protocols/`, `states/`, `schemas/`, `templates/`, `runtime/`, and `domain/` hold separate contracts.
+For another compatible agent host, place the repository in that host’s Skills directory. Keep the internal directory structure intact: `SKILL.md` routes execution, while `protocols/`, `states/`, `schemas/`, `templates/`, `runtime/`, `scripts/`, and `domain/` hold separate contracts.
 
 ### Minimal install package
 
@@ -210,7 +214,7 @@ curl -fsSL https://raw.githubusercontent.com/DexZane/Research-Forge/main/docs/gu
 
 ### Agent compatibility and install locations
 
-Research Forge uses the directory-based Agent Skills layout: keep `SKILL.md` at the root of a `research-forge/` directory, with `protocols/`, `states/`, `domain/`, `templates/`, `schemas/`, and `runtime/` beside it. The research protocol is portable; automatic discovery and invocation are runtime-specific.
+Research Forge uses the directory-based Agent Skills layout: keep `SKILL.md` at the root of a `research-forge/` directory, with `protocols/`, `states/`, `domain/`, `templates/`, `schemas/`, `runtime/`, and `scripts/` beside it. The research protocol is portable; automatic discovery and invocation are runtime-specific.
 
 | Agent runtime | User-level location | Project-level location | Support |
 |---|---|---|---|
@@ -334,9 +338,10 @@ At S18, or when the user explicitly requests an intermediate export, the orchest
 
 ```text
 <research-project>/exports/references.bib
+<research-project>/exports/reading-queue.md
 ```
 
-Import it into Zotero with `File → Import → A file`, select the BibTeX file, and choose a collection. Then use Zotero and a full-text reading workflow for PDF acquisition, annotation, and deep reading. Research Forge does not download paywalled papers, add invented citation fields, or turn BibTeX into scientific evidence.
+Import the BibTeX file into Zotero with `File → Import → A file`, then use the reading queue to prioritize full-text acquisition, annotation, and deep reading. It can suggest workflow tags such as `rf:read-next`, but it does not claim that an import created a Zotero collection, downloaded PDFs, or verified scientific content. Research Forge does not download paywalled papers, add invented citation fields, or turn BibTeX into scientific evidence.
 
 The project registry remains the audit source for provenance, evidence IDs, reading priorities, excluded `P-` records, and conflicts. The single `.bib` artifact is intentionally lightweight so it can be imported without flattening Research Forge’s uncertainty model.
 
@@ -354,6 +359,7 @@ research-forge/
 ├── templates/            # Record and report shapes
 ├── schemas/              # IDs, enums, validity, cross-record constraints
 ├── runtime/              # Boot, context, gates, commitment-safe transactions, recovery, handoff, BibTeX export
+├── scripts/              # Deterministic read-only project-workspace validation
 ├── examples/             # Correct execution patterns
 └── tests/                # Deterministic and scenario acceptance contracts
 ```
@@ -386,6 +392,12 @@ Run the scientific structure and behavior acceptance suite:
 
 ```bash
 python3 tests/run_acceptance.py --skill-root .
+```
+
+Validate a real project workspace before a gate, handoff, or resume:
+
+```bash
+python3 scripts/validate_project.py /absolute/path/to/research-project
 ```
 
 Run the bilingual README check:

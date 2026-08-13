@@ -16,7 +16,9 @@ REQUIRED_FILES = (
     "protocols/bibliography.md",
     "schemas/bibliography-schema.md",
     "templates/bibliography-record.yaml",
+    "templates/paper-entry.yaml",
     "templates/references.bib",
+    "templates/reading-queue.md",
     "runtime/bibliography.md",
 )
 
@@ -46,6 +48,7 @@ def run(root: Path = ROOT) -> list[str]:
         "PMID",
         "provenance",
         "export_eligible",
+        "reading-queue.md",
         "never fabricate",
     )
     protocol_lower = protocol.lower()
@@ -53,7 +56,10 @@ def run(root: Path = ROOT) -> list[str]:
         assert term.lower() in protocol_lower, f"bibliography protocol missing: {term}"
 
     schema = root.joinpath("schemas/bibliography-schema.md").read_text(encoding="utf-8")
-    for term in ("paper_id", "bib_key", "verification_status", "source_ids", "conflict_ids", "dedup_key"):
+    for term in (
+        "paper_id", "bib_key", "verification_status", "source_ids", "conflict_ids", "dedup_key",
+        "reading_plan", "suggested_zotero_tags",
+    ):
         assert term in schema, f"bibliography schema missing: {term}"
 
     search_protocol = root.joinpath("protocols/search.md").read_text(encoding="utf-8")
@@ -68,6 +74,10 @@ def run(root: Path = ROOT) -> list[str]:
     assert record.get("export_eligible") is True
     assert record.get("source_ids")
     assert record.get("conflict_ids") == []
+    assert record["reading_plan"]["priority"] == "IMMEDIATE"
+    assert record["reading_plan"]["suggested_zotero_tags"] == ["rf:read-next"]
+    paper_template = yaml.safe_load(root.joinpath("templates/paper-entry.yaml").read_text(encoding="utf-8"))["paper"]
+    assert paper_template["bibliography"]["reading_plan"]["priority"] == "DEFERRED"
 
     bib_text = root.joinpath("templates/references.bib").read_text(encoding="utf-8")
     entries = _bib_entries(bib_text)
@@ -88,6 +98,7 @@ def run(root: Path = ROOT) -> list[str]:
         "bibliography contract files",
         "metadata verification and provenance terms",
         "verified exportable paper record",
+        "reading queue and Zotero workflow projection",
         "deterministic valid BibTeX example",
     ]
 

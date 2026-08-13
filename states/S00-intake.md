@@ -10,23 +10,23 @@ New topic/idea, explicit project resume, or recovery routing has supplied a vali
 
 ## Reads
 
-User input; existing `PROJECT.md` and state/snapshot only when resuming; project bootstrap template.
+User input; existing `PROJECT.md` and state/snapshot only when resuming; project bootstrap and capability-profile templates.
 
 ## Writes
 
-Project identity, mode, raw request, normalized intake, initial `RQ-` research-question canvas, initial unknowns, user constraints, and `research_state.yaml` navigation fields.
+Project identity, mode, raw request, normalized intake, initial `RQ-` research-question canvas, initial `CAP-` capability profile, initial unknowns, user constraints, and `research_state.yaml` navigation fields.
 
 ## Required Questions
 
-What is the topic/task? Is a specific idea proposed? What symptom, cause, solution, target, resources, and exclusions are stated versus inferred or missing? What potentially observable phenomenon and decision-relevant unit/condition are present?
+What is the topic/task? Is a specific idea proposed? What symptom, cause, solution, target, resources, and exclusions are stated versus inferred or missing? What potentially observable phenomenon and decision-relevant unit/condition are present? What can this host actually search, read, write, validate, inspect, or execute without assuming credentials or permissions?
 
 ## Required Actions
 
-Preserve the original request verbatim; decompose topic/symptom/proposed cause/proposed solution; initialize the RQ canvas without inventing a knowledge gap; label uncertainties; choose mode; create stable project ID and initial decision log.
+Preserve the original request verbatim; decompose topic/symptom/proposed cause/proposed solution; initialize the RQ canvas without inventing a knowledge gap; run capability preflight and create `CAP-` without storing credentials; label uncertainties; choose mode; create stable project ID and initial decision log.
 
 ## Required Protocols
 
-[Reasoning](../protocols/reasoning.md), [Researchability](../protocols/researchability.md), [Boot](../runtime/boot.md), [Integrity](../protocols/integrity.md).
+[Reasoning](../protocols/reasoning.md), [Researchability](../protocols/researchability.md), [Boot](../runtime/boot.md), [Capability Preflight](../runtime/capability-preflight.md), [Integrity](../protocols/integrity.md).
 
 ## Parallelizable Work
 
@@ -38,11 +38,11 @@ Boot validation → intake decomposition → mode selection → initial commit.
 
 ## Required Outputs
 
-`PROJECT.md`, `state/research_state.yaml`, initial `RQ-` canvas, `reports/intake.md`, and initial `RD-` entries for missing decision-critical context.
+`PROJECT.md`, `state/research_state.yaml`, initial `RQ-` canvas, initial `CAP-` profile, `reports/intake.md`, and initial `RD-` entries for missing decision-critical context/capabilities.
 
 ## Exit Conditions
 
-Mode, project identity, user-provided facts/constraints, inferred elements, unknowns, and initial RQ canvas are explicit; route to S01.
+Mode, project identity, user-provided facts/constraints, inferred elements, unknowns, initial RQ canvas, and host capability limits are explicit; route to S01.
 
 ## Rollback Conditions
 
@@ -54,7 +54,7 @@ None; insufficient input produces HOLD for scope clarification, not scientific K
 
 ## Forbidden Actions
 
-Do not claim novelty, choose a method, call a module or score target a research question, search only the user’s favored solution, or convert inferred intent into fact.
+Do not claim novelty, choose a method, call a module or score target a research question, search only the user’s favored solution, convert inferred intent into fact, or install/execute external code to test a host capability.
 
 ## Gate Behavior
 
