@@ -3,8 +3,11 @@
 
 from __future__ import annotations
 
+import os
 import re
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from urllib.parse import unquote
 
@@ -12,6 +15,53 @@ from urllib.parse import unquote
 ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
 INSTALLATION_GUIDE = ROOT / "docs" / "guide" / "installation.md"
+
+
+def check_installation_verifier(guide: str, failures: list[str]) -> None:
+    match = re.search(
+        r"## Verify before reporting success.*?```bash\n(.*?)\n```",
+        guide,
+        flags=re.DOTALL,
+    )
+    if not match:
+        failures.append("installation guide verification block is missing")
+        return
+
+    verification_script = match.group(1)
+    with tempfile.TemporaryDirectory(prefix="research-forge-install-check-") as temporary:
+        target = Path(temporary) / "research-forge"
+        target.mkdir()
+        target.joinpath("SKILL.md").write_text("---\nname: research-forge\n---\n", encoding="utf-8")
+        target.joinpath("LICENSE").write_text("fixture\n", encoding="utf-8")
+        for directory in ("agents", "domain", "protocols", "runtime", "schemas", "states", "templates"):
+            target.joinpath(directory).mkdir()
+
+        subprocess.run(["git", "-C", str(target), "init", "-q"], check=True)
+        subprocess.run(
+            [
+                "git", "-C", str(target),
+                "-c", "user.name=Research Forge Tests",
+                "-c", "user.email=tests@example.invalid",
+                "commit", "--allow-empty", "-qm", "fixture",
+            ],
+            check=True,
+        )
+        environment = os.environ.copy()
+        environment["target"] = str(target)
+        complete = subprocess.run(
+            ["sh"], input=verification_script, text=True,
+            capture_output=True, env=environment, check=False,
+        )
+        if complete.returncode != 0:
+            failures.append("installation verifier rejects a complete package")
+
+        target.joinpath("templates").rename(target.joinpath("templates-missing"))
+        incomplete = subprocess.run(
+            ["sh"], input=verification_script, text=True,
+            capture_output=True, env=environment, check=False,
+        )
+        if incomplete.returncode == 0:
+            failures.append("installation verifier accepts a package missing templates/")
 
 
 def main() -> int:
@@ -102,12 +152,13 @@ def main() -> int:
             "# Research Forge installation guide",
             "`skill-only`",
             "overwrite, delete, or merge an existing",
-            "test -f \"$target/SKILL.md\"",
+            "verification_failed=1",
             "# Research Forge 安装指南（中文）",
             "只安装 raw `SKILL.md`",
         ):
             if term not in guide:
                 failures.append(f"installation guide missing contract: {term}")
+        check_installation_verifier(guide, failures)
 
     chinese_chars = re.findall(r"[\u3400-\u9fff]", text)
     if len(chinese_chars) < 80:
@@ -148,7 +199,7 @@ def main() -> int:
     print(f"- required headings: {len(required_headings)}")
     print(f"- required contract terms: {len(required_terms)}")
     print(f"- Chinese overview characters: {len(chinese_chars)}")
-    print("- Agent installation guide: present with safety and verification contracts")
+    print("- Agent installation guide: complete package passes; missing directory fails")
     print("- prohibited claims: 0")
     print("- unresolved local links: 0")
     return 0

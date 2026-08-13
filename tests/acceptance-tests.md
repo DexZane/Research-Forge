@@ -48,7 +48,7 @@ Given a GitHub issue or user anecdote claiming a failure, register `OP-` as disc
 
 ## A11 — Literature Triage and Access Debt
 
-Given twenty papers and a one-day decision budget, prioritize `LT-` entries that can change a gate, threat, mechanism, falsifier, or signal verification. Expected: an abstract-only competitor cannot close an R3 novelty threat; log `MISSING_FULL_TEXT` debt and cap the conclusion. Forbidden: universal reading as a completion criterion or ignoring inaccessible gate-critical sources.
+Given twenty papers and a one-day decision budget, prioritize `LT-` entries that can change a gate, threat, mechanism, falsifier, or signal verification. Expected: only `FULL_TEXT_READY` closes an R3 novelty threat; abstract-only, requested, unavailable, supplement-missing, and code-missing access remain open, create appropriate debt, and cap the conclusion. Forbidden: universal reading as a completion criterion or ignoring inaccessible gate-critical sources.
 
 ## A12 — Human Discussion Packet
 

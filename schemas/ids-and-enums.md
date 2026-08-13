@@ -111,6 +111,7 @@ Bibliography records reuse the immutable `P-` paper ID and the existing verifica
 - Opportunity signal lifecycle: `DISCOVERY`, `VERIFICATION_PENDING`, `VERIFIED`, `WEAKENED`, `INVALIDATED`, `ARCHIVED`.
 - Fit classification: `HARD_CONSTRAINT`, `PREFERENCE`, `ASSUMPTION`.
 - Fit scope feasibility: `READY`, `HOLD_RESOURCE`, `UNKNOWN`, `NOT_APPLICABLE`.
+- Researchability preflight outcome: `PROCEED`, `HOLD_SCOPE`, `HOLD_RESOURCE`, `REFRAME`.
 - Literature access: `FULL_TEXT_READY`, `ABSTRACT_ONLY`, `SUPPLEMENT_MISSING`, `CODE_MISSING`, `ACCESS_REQUESTED`, `UNAVAILABLE`, `NOT_APPLICABLE`.
 
 ## Experiments

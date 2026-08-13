@@ -22,7 +22,7 @@ Which verified opportunity signal and RQ canvas support this candidate? What pre
 
 ## Required Actions
 
-Express candidates as problems/mechanism questions, not module names; link each candidate to an RQ canvas and at least one verified opportunity signal or explicitly bounded evidence-backed gap; create a proposed signature and draft `CM-` commitment; reject vague signatures; enforce diversity; label novelty `UNVERIFIED`; revive killed ancestors only with new evidence, scope, or mechanism.
+Express candidates as problems/mechanism questions, not module names; link each candidate to an RQ canvas and at least one verified opportunity signal; create a proposed signature and draft `CM-` commitment; reject vague signatures; enforce diversity; label novelty `UNVERIFIED`; revive killed ancestors only with new evidence, scope, or mechanism.
 
 ## Required Protocols
 

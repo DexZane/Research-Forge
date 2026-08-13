@@ -14,7 +14,7 @@ Project/intake, initial RQ canvas, user constraints, resource profile, current u
 
 ## Writes
 
-Completed RQ canvas, `FIT-` project-fit card, minimum/core/extension scope ladder, task/method/time/venue/resource/user-interest boundaries, out-of-scope list, search cutoff, and G1 packet.
+Completed RQ canvas, `FIT-` project-fit card with canonical preflight outcome, minimum/core/extension scope ladder, task/method/time/venue/resource/user-interest boundaries, out-of-scope list, search cutoff, and G1 packet.
 
 ## Required Questions
 
@@ -22,7 +22,7 @@ What phenomenon, unit/condition, knowledge gap, mechanism question, and observab
 
 ## Required Actions
 
-Complete the RQ canvas and FIT card; write three nested scopes; separate scientific scope from user interest and mentor advice; expose conflicts, capability gaps, assumed availability, and missing choices; define what evidence would reopen scope; stage G1 packet and a human-discussion packet when requested.
+Complete the RQ canvas and FIT card; write three nested scopes; record one canonical preflight outcome; separate scientific scope from user interest and mentor advice; expose conflicts, capability gaps, assumed availability, and missing choices; define what evidence would reopen scope; stage G1 packet and a human-discussion packet when requested.
 
 ## Required Protocols
 
@@ -38,11 +38,11 @@ Boundary draft → integrity audit → G1.
 
 ## Required Outputs
 
-`reports/scope.md`, RQ canvas, FIT card, scope ladder, resource profile, exclusions, search cutoff, G1 packet, and optional human-discussion packet.
+`reports/scope.md`, RQ canvas, FIT card with preflight outcome, scope ladder, resource profile, exclusions, search cutoff, G1 packet, and optional human-discussion packet.
 
 ## Exit Conditions
 
-Human explicitly approves an answerable RQ canvas and viable minimum path at G1; transition to S02. Use HOLD_SCOPE, HOLD_RESOURCE, or REFRAME when this condition fails.
+`PROCEED` plus explicit G1 `APPROVED` transitions to S02. `HOLD_SCOPE` or `HOLD_RESOURCE` remains at G1 with gate outcome `HOLD`. `REFRAME` requires gate outcome `REVISE` and re-enters S00 or S01 according to the invalid field.
 
 ## Rollback Conditions
 
@@ -58,4 +58,4 @@ Do not infer gate approval, let target venue prove value, treat preferences or h
 
 ## Gate Behavior
 
-Freeze S02+ work pending G1. Record approval, revision, or hold as a decision.
+Freeze S02+ work pending G1. Record only canonical gate outcomes; do not store a preflight assessment as the gate decision.

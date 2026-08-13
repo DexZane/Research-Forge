@@ -22,7 +22,7 @@ Does each candidate have basic novelty possibility, non-stitching form, a clear 
 
 ## Required Actions
 
-Apply hard gates first; reject candidates with no researchable question, verified/bounded signal, or plausible minimum discriminating path; score scientific novelty, mechanism depth, impact, reviewer clarity, falsifiability, evidence, competition, time/cost, feasibility, generalization, and ceiling; never average away a hard failure. A capability gap or unavailable full project may yield HOLD_RESOURCE, not a scientific KILL.
+Apply hard gates first; reject candidates with no researchable question, no verified `OP-` opportunity signal, or no plausible minimum discriminating path; score scientific novelty, mechanism depth, impact, reviewer clarity, falsifiability, evidence, competition, time/cost, feasibility, generalization, and ceiling; never average away a hard failure. A capability gap or unavailable full project may yield HOLD_RESOURCE, not a scientific KILL.
 
 ## Required Protocols
 

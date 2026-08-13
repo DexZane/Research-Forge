@@ -51,12 +51,31 @@ If the host provides a native installer, it may be used only when it can install
 Run the following after cloning:
 
 ```bash
-test -f "$target/SKILL.md"
-test -f "$target/LICENSE"
-for directory in agents domain protocols runtime schemas states templates; do
-  test -d "$target/$directory"
-done
-git -C "$target" rev-parse --short HEAD
+(
+  if [ -z "${target:-}" ]; then
+    printf '%s\n' 'Set target to the full installation path before verification.' >&2
+    exit 1
+  fi
+
+  verification_failed=0
+  for file in SKILL.md LICENSE; do
+    if [ ! -f "$target/$file" ]; then
+      printf 'Missing required file: %s\n' "$target/$file" >&2
+      verification_failed=1
+    fi
+  done
+  for directory in agents domain protocols runtime schemas states templates; do
+    if [ ! -d "$target/$directory" ]; then
+      printf 'Missing required directory: %s\n' "$target/$directory" >&2
+      verification_failed=1
+    fi
+  done
+
+  if [ "$verification_failed" -ne 0 ]; then
+    exit 1
+  fi
+  git -C "$target" rev-parse --short HEAD
+)
 ```
 
 Then reload or restart the host if its documentation requires it. Confirm only what the host actually exposes: for example, that `research-forge` is listed, or that `/research-forge` can be invoked.

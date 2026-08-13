@@ -73,8 +73,9 @@ V12_REQUIRED_FILES = (
 V12_RUNTIME_CONTRACTS = {
     "runtime/boot.md": ("research-question", "opportunity signals", "literature-triage"),
     "runtime/context-loading.md": ("research-question canvas", "literature-triage", "minimum discriminating paths"),
+    "runtime/gates.md": ("FIT card/preflight outcome", "`PROCEED` may be approved", "`REFRAME` maps to `REVISE`"),
     "runtime/transaction.md": ("candidate opportunity-signal provenance", "Researchability Revision", "gate-critical `LT-`"),
-    "protocols/integrity.md": ("Active `RQ-` and `FIT-` pointers", "abstract-only reading cannot close", "minimum discriminating path"),
+    "protocols/integrity.md": ("Active `RQ-` and `FIT-` pointers", "non-full-text access cannot close", "minimum discriminating path"),
 }
 
 SIGNATURE_FIELDS = (
@@ -178,6 +179,13 @@ def research_question_valid(canvas: dict) -> bool:
     )
 
 
+def preflight_outcome_valid(fit_card: dict) -> bool:
+    """Keep researchability assessment values in the canonical vocabulary."""
+    return fit_card.get("preflight_outcome") in {
+        "PROCEED", "HOLD_SCOPE", "HOLD_RESOURCE", "REFRAME",
+    }
+
+
 def opportunity_signal_valid(signal: dict) -> bool:
     """Prevent an anecdote, limitation, or issue from silently becoming a candidate gap."""
     return (
@@ -190,12 +198,24 @@ def opportunity_signal_valid(signal: dict) -> bool:
     )
 
 
-def triage_closes_required_tier(entry: dict) -> bool:
-    """Abstract access is discovery-only and cannot close a deep-reading requirement."""
-    return not (
-        entry.get("access_state") == "ABSTRACT_ONLY"
-        and entry.get("required_reading_tier") in {"R2", "R3", "R4"}
+def candidate_signal_trace_valid(candidate: dict, signals: dict[str, dict]) -> bool:
+    """Require every active candidate to trace to an RQ canvas and a verified OP signal."""
+    research_question_id = candidate.get("research_question_canvas_id")
+    signal_ids = candidate.get("opportunity_signal_ids", [])
+    return (
+        isinstance(research_question_id, str)
+        and research_question_id.startswith("RQ-")
+        and bool(signal_ids)
+        and any(opportunity_signal_valid(signals.get(signal_id, {})) for signal_id in signal_ids)
     )
+
+
+def triage_closes_required_tier(entry: dict) -> bool:
+    """Fail closed when a required reading tier lacks its required source access."""
+    access_state = entry.get("access_state")
+    if entry.get("required_reading_tier") in {"R2", "R3", "R4"}:
+        return access_state == "FULL_TEXT_READY"
+    return access_state in {"FULL_TEXT_READY", "ABSTRACT_ONLY", "NOT_APPLICABLE"}
 
 
 def check_relative_links(root: Path) -> None:
@@ -251,6 +271,7 @@ def run(root: Path) -> list[str]:
     assert candidate_template["active_commitment_id"].startswith("CM-")
     assert rq_canvas["id"].startswith("RQ-")
     assert fit_card["id"].startswith("FIT-")
+    assert fit_card["preflight_outcome"] is None
     assert opportunity_signal["id"].startswith("OP-")
     assert triage_entry["id"].startswith("LT-")
     assert candidate_template["research_question_canvas_id"].startswith("RQ-")
@@ -354,6 +375,17 @@ def run(root: Path) -> list[str]:
     assert research_question_valid(valid_canvas)
     passed.append("research-question canvas requires an observable minimum path")
 
+    canonical_enums = root.joinpath("schemas/ids-and-enums.md").read_text(encoding="utf-8")
+    researchability_protocol = root.joinpath("protocols/researchability.md").read_text(encoding="utf-8")
+    scope_state = root.joinpath("states/S01-scope.md").read_text(encoding="utf-8")
+    assert "Researchability preflight outcome: `PROCEED`, `HOLD_SCOPE`, `HOLD_RESOURCE`, `REFRAME`" in canonical_enums
+    assert preflight_outcome_valid(dict(fit_card, preflight_outcome="PROCEED"))
+    assert not preflight_outcome_valid(dict(fit_card, preflight_outcome="APPROVED"))
+    for routing_phrase in ("carry unknowns into S02", "remain at G1", "return to S00/S01"):
+        assert routing_phrase not in researchability_protocol
+    assert "`PROCEED` plus explicit G1 `APPROVED` transitions to S02" in scope_state
+    passed.append("preflight outcomes are canonical and routing stays in S01/runtime")
+
     unverified_signal = {
         "lifecycle_status": "DISCOVERY", "source_provenance": "user report", "bounded_observation": "latency is high",
         "alternative_explanations": ["measurement artifact"], "evidence_ids": [], "minimum_verification_action": "profile deployment",
@@ -368,11 +400,29 @@ def run(root: Path) -> list[str]:
     assert opportunity_signal_valid(verified_signal)
     passed.append("opportunity signal requires verification and alternatives")
 
-    abstract_t4 = {"access_state": "ABSTRACT_ONLY", "required_reading_tier": "R3"}
+    untraced_candidate = dict(candidate_template, opportunity_signal_ids=[])
+    unverified_candidate = dict(candidate_template, opportunity_signal_ids=["OP-0001"])
+    verified_candidate = dict(candidate_template, opportunity_signal_ids=["OP-0002"])
+    signals = {"OP-0001": unverified_signal, "OP-0002": verified_signal}
+    assert not candidate_signal_trace_valid(untraced_candidate, signals)
+    assert not candidate_signal_trace_valid(unverified_candidate, signals)
+    assert candidate_signal_trace_valid(verified_candidate, signals)
+    for relative in (
+        "schemas/candidate-schema.md", "schemas/state-schema.md",
+        "protocols/integrity.md", "states/S06-candidate-portfolio.md",
+    ):
+        contract = root.joinpath(relative).read_text(encoding="utf-8")
+        assert "explicitly bounded evidence" not in contract
+    passed.append("active candidates require verified opportunity-signal provenance")
+
+    blocked_access_states = (
+        "ABSTRACT_ONLY", "UNAVAILABLE", "ACCESS_REQUESTED", "SUPPLEMENT_MISSING", "CODE_MISSING",
+    )
     full_text_t4 = {"access_state": "FULL_TEXT_READY", "required_reading_tier": "R3"}
-    assert not triage_closes_required_tier(abstract_t4)
+    for access_state in blocked_access_states:
+        assert not triage_closes_required_tier({"access_state": access_state, "required_reading_tier": "R3"})
     assert triage_closes_required_tier(full_text_t4)
-    passed.append("literature triage prevents abstract-only deep-read closure")
+    passed.append("literature triage fails closed without full-text access")
 
     state_template = yaml.safe_load(root.joinpath("templates/research-state.yaml").read_text(encoding="utf-8"))["research_state"]
     registries = state_template["registries"]

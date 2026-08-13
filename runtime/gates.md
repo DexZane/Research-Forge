@@ -6,7 +6,7 @@ Before a gate, freeze a snapshot, run integrity, write a gate packet, set `WAITI
 
 ## G1 — Scope Lock
 
-After S01. Show the RQ canvas, FIT card, minimum/core/extension scopes, decision-critical unknowns, and questions requiring human input. Options: approve, revise, hold, or reframe. Approval freezes task/method/time/venue/resource/interest boundaries; later changes require S01 re-entry and delta search.
+After S01. Show the RQ canvas, FIT card/preflight outcome, minimum/core/extension scopes, decision-critical unknowns, and questions requiring human input. Gate options are canonical `APPROVED`, `REVISE`, or `HOLD`: `PROCEED` may be approved into S02; `HOLD_SCOPE` and `HOLD_RESOURCE` map to `HOLD`; `REFRAME` maps to `REVISE` and S00/S01 re-entry. Approval freezes task/method/time/venue/resource/interest boundaries; later changes require S01 re-entry and delta search.
 
 ## G2 — Candidate Portfolio Review
 
