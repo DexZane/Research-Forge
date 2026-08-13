@@ -886,6 +886,21 @@ def run(root: Path) -> list[str]:
             yaml.safe_dump({"research_state": final_state}, sort_keys=False), encoding="utf-8",
         )
 
+        final_state["active_implementation_leverage_plan_id"] = "CAP-0001"
+        state_directory.joinpath("research_state.yaml").write_text(
+            yaml.safe_dump({"research_state": final_state}, sort_keys=False), encoding="utf-8",
+        )
+        invalid_plan_pointer_result = subprocess.run(
+            [sys.executable, str(validator), str(project_root)],
+            text=True, capture_output=True, check=False,
+        )
+        assert invalid_plan_pointer_result.returncode != 0
+        assert "must reference an IL- record" in invalid_plan_pointer_result.stdout
+        final_state["active_implementation_leverage_plan_id"] = "IL-0001"
+        state_directory.joinpath("research_state.yaml").write_text(
+            yaml.safe_dump({"research_state": final_state}, sort_keys=False), encoding="utf-8",
+        )
+
         final_plan["components"][0]["selected_source"]["trust_status"] = "TRUST_UNVERIFIED"
         state_directory.joinpath("implementation_leverage_registry.yaml").write_text(
             yaml.safe_dump({"records": [final_plan]}, sort_keys=False), encoding="utf-8",
