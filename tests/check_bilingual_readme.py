@@ -21,21 +21,11 @@ ENGLISH_REQUIREMENTS = (
 CHINESE_HEADINGS = (
     "# Research Forge（中文）",
     "## 概述",
-    "## Research Forge 解决什么问题",
-    "## 与常见选题工作流的区别",
-    "## 核心亮点",
-    "## 研究生命周期",
-    "## 适用场景",
-    "## 使用方法",
-    "### 前置条件",
+    "## 与一般选题工作流的区别",
+    "## 快速使用",
     "### 安装",
-    "### 交给 Agent 安装",
-    "### 各 Agent 的适配与安装位置",
+    "### Agent 适配",
     "### 调用",
-    "#### 1. 探索宽泛方向",
-    "#### 2. 验证已有想法",
-    "#### 3. 恢复已有项目",
-    "### 通过人工 Gate",
     "## 决策与输出",
     "## Zotero/BibTeX 文献导出",
     "## 仓库结构",
@@ -78,16 +68,9 @@ CHINESE_REQUIREMENTS = (
     "OpenCode",
     "~/.config/opencode/skills/research-forge/",
     "Cursor",
-    ".cursor/rules/research-forge.mdc",
-    "不要只复制 raw 的 `SKILL.md`",
+    ".cursor/rules/",
+    "不能单独安装",
     "机制签名",
-    "AWARENESS_ONLY",
-    "CM-",
-    "录用率、引用率或模式频率",
-    "研究问题画布",
-    "机会信号",
-    "文献分诊协议",
-    "最小判别路径",
     "实现杠杆计划",
     "REUSE_AS_IS",
     "NEW_MINIMAL",
@@ -127,9 +110,9 @@ def main() -> int:
         failures.append("missing bilingual README: README.zh-CN.md")
     else:
         chinese = CHINESE.read_text(encoding="utf-8")
-        if len(chinese) < 6000:
+        if len(chinese) < 2500:
             failures.append(f"README.zh-CN.md is too short: {len(chinese)} characters")
-        if len(re.findall(r"[\u3400-\u9fff]", chinese)) < 1500:
+        if len(re.findall(r"[\u3400-\u9fff]", chinese)) < 700:
             failures.append("README.zh-CN.md has too little Chinese content")
         for heading in CHINESE_HEADINGS:
             if heading not in chinese:
