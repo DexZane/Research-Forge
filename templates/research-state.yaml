@@ -1,6 +1,6 @@
 research_state:
   project_id: research-project-0001
-  schema_version: "1.5"
+  schema_version: "1.6"
   state: S00_INTAKE
   state_iteration: 1
   status: ACTIVE
@@ -8,6 +8,7 @@ research_state:
   pending_gate: NONE
   active_research_question_id: null
   active_fit_card_id: null
+  active_baseline_model_id: null
   active_capability_profile_id: null
   active_implementation_leverage_plan_id: null
   active_candidate_ids: []
@@ -27,6 +28,7 @@ research_state:
   registries:
     research_questions: state/research_question_registry.yaml
     fit_cards: state/fit_card_registry.yaml
+    baseline_models: state/baseline_model_registry.yaml
     opportunity_signals: state/opportunity_signal_ledger.yaml
     literature_triage: state/literature_triage_queue.yaml
     capability_profiles: state/capability_profile_registry.yaml
@@ -34,6 +36,7 @@ research_state:
     papers: state/paper_registry.yaml
     awareness_leads: state/awareness_leads.yaml
     innovation_signatures: state/innovation_signature_registry.yaml
+    candidates: state/candidate_registry.yaml
     candidate_commitments: state/candidate_commitment_registry.yaml
     evidence: state/evidence_ledger.yaml
     search_sessions: state/search_registry.yaml

@@ -10,7 +10,7 @@ G4 explicitly approved GO; integrity and freshness checks are current.
 
 ## Reads
 
-All active registries/reports, frozen candidate commitment/signature, active `CAP-` profile, finalized `IL-` implementation-leverage plan, bibliography registry, G4 decision, immutable snapshot, handoff/dossier templates.
+All active registries/reports, selected `BL-` baseline contract, frozen candidate commitment/signature, active `CAP-` profile, finalized `IL-` implementation-leverage plan, bibliography registry, G4 decision, immutable snapshot, handoff/dossier templates.
 
 ## Writes
 
@@ -18,11 +18,11 @@ Final dossier, validated `exports/references.bib`, machine-readable experiment h
 
 ## Required Questions
 
-Can a downstream agent identify the research problem, boundary, hypothesis, alternatives, diagnostics, minimal tests, controls, baselines, data, hooks, thresholds, resources, reuse/adaptation/new-code decisions, current-host capability limits, source revisions/licenses/trust/dependency limits, reviewer risks, and stop conditions without inference?
+Can a downstream agent identify the research problem, selected baseline model/configuration/contract version, boundary, hypothesis, alternatives, diagnostics, minimal tests, controls, stronger baselines, data, hooks, thresholds, resources, reuse/adaptation/new-code decisions, current-host capability limits, source revisions/licenses/trust/dependency limits, reviewer risks, and stop conditions without inference?
 
 ## Required Actions
 
-Finalize the `IL-` plan and assemble all 30 required elements; run final freshness and integrity sweeps; link IDs/versions including the frozen `CM-` commitment, `IS-` signature, and active `CAP-` profile; regenerate bibliography and reading queue; preserve killed claims and uncertainties; state exact E0 action, pinned source revisions/trust/dependency limits, and forbidden scientific changes.
+Finalize the `IL-` plan and assemble all 30 required elements; run final freshness and integrity sweeps; link IDs/versions including the selected `BL-` contract, frozen `CM-` commitment, `IS-` signature, and active `CAP-` profile; regenerate bibliography and reading queue; preserve killed claims and uncertainties; state exact E0 action, pinned source revisions/trust/dependency limits, and forbidden scientific changes.
 
 ## Required Protocols
 

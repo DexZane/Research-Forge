@@ -87,6 +87,13 @@ V14_REQUIRED_FILES = (
     "tests/behavioral-evals.md",
 )
 
+V15_REQUIRED_FILES = (
+    "protocols/baseline-selection.md",
+    "schemas/baseline-profile-schema.md",
+    "templates/baseline-profile.yaml",
+    "templates/baseline-selection-packet.md",
+)
+
 V12_RUNTIME_CONTRACTS = {
     "runtime/boot.md": ("research-question", "opportunity signals", "literature-triage"),
     "runtime/context-loading.md": ("research-question canvas", "literature-triage", "minimum discriminating paths"),
@@ -105,9 +112,18 @@ V13_RUNTIME_CONTRACTS = {
 V14_RUNTIME_CONTRACTS = {
     "runtime/boot.md": ("capability profile", "reading-queue"),
     "runtime/gates.md": ("active `CAP-` capability profile", "source trust/dependency findings"),
-    "runtime/transaction.md": ("active research-question/fit/capability pointers", "Capability Revision"),
+    "runtime/transaction.md": ("active research-question/fit/baseline/capability pointers", "Capability Revision"),
     "runtime/handoff.md": ("active capability profile", "own capability preflight"),
     "protocols/implementation-leverage.md": ("`TRUST_REVIEWED`", "never clone, install, execute"),
+}
+
+V15_RUNTIME_CONTRACTS = {
+    "runtime/boot.md": ("baseline-model", "baseline profile/contract"),
+    "runtime/context-loading.md": ("baseline-selection packet", "baseline-delta provenance"),
+    "runtime/gates.md": ("BASELINE_SELECTION_REQUIRED", "never an auto-selection"),
+    "runtime/transaction.md": ("Baseline Contract Revision", "cannot select a baseline"),
+    "runtime/handoff.md": ("selected baseline model/contract", "baseline contract"),
+    "protocols/baseline-selection.md": ("Do not auto-select", "broader task/mechanism search"),
 }
 
 SIGNATURE_FIELDS = (
@@ -115,7 +131,8 @@ SIGNATURE_FIELDS = (
 )
 
 COMMITMENT_CORE_FIELDS = (
-    "innovation_signature_id", "innovation_signature_version", "core_mechanism",
+    "innovation_signature_id", "innovation_signature_version", "baseline_model_id",
+    "baseline_contract_version", "baseline_delta_statement", "core_mechanism",
     "differentiating_claim", "prediction_ids", "planned_falsifier",
     "falsification_budget", "project_resource_assumptions",
 )
@@ -239,6 +256,50 @@ def candidate_signal_trace_valid(candidate: dict, signals: dict[str, dict]) -> b
         and research_question_id.startswith("RQ-")
         and bool(signal_ids)
         and any(opportunity_signal_valid(signals.get(signal_id, {})) for signal_id in signal_ids)
+    )
+
+
+def selected_baseline_valid(profile: dict) -> bool:
+    """Require a user-selected, verified, exact primary comparison contract."""
+    configuration = profile.get("exact_configuration", {})
+    provenance = profile.get("provenance", {})
+    fit = profile.get("fit_assessment", {})
+    selection = profile.get("user_selection", {})
+    dimensions = {"task", "data", "metric", "resources", "implementation"}
+    return (
+        isinstance(profile.get("id"), str)
+        and profile["id"].startswith("BL-")
+        and profile.get("selection_status") == "SELECTED"
+        and isinstance(profile.get("task_setting"), str)
+        and bool(profile["task_setting"].strip())
+        and all(
+            isinstance(configuration.get(field), str) and bool(configuration[field].strip())
+            for field in (
+                "model_family", "exact_variant", "checkpoint_or_initialization",
+                "input_and_preprocessing", "data_split", "primary_metric_and_evaluation_protocol",
+            )
+        )
+        and provenance.get("source_kind") in {"OFFICIAL_MODEL", "VERIFIED_REPRODUCTION"}
+        and provenance.get("verification_status") == "VERIFIED"
+        and bool(provenance.get("evidence_ids"))
+        and dimensions <= set(fit)
+        and all(fit.get(dimension) in {"MATCHED", "BORDERLINE"} for dimension in dimensions)
+        and isinstance(selection.get("decision_id"), str)
+        and selection["decision_id"].startswith("D-")
+        and isinstance(selection.get("rationale"), str)
+        and bool(selection["rationale"].strip())
+        and isinstance(profile.get("baseline_contract_version"), int)
+        and profile["baseline_contract_version"] > 0
+    )
+
+
+def candidate_baseline_trace_valid(candidate: dict, baseline: dict) -> bool:
+    """Keep candidate deltas pinned to the active baseline without calling them novelty."""
+    return (
+        selected_baseline_valid(baseline)
+        and candidate.get("baseline_model_id") == baseline.get("id")
+        and isinstance(candidate.get("baseline_delta_statement"), str)
+        and bool(candidate["baseline_delta_statement"].strip())
     )
 
 
@@ -442,6 +503,10 @@ def run(root: Path) -> list[str]:
         assert root.joinpath(relative).is_file(), f"missing v1.4 execution contract: {relative}"
     passed.append("capability, trust, reading-queue, validator, and behavioral-eval contracts")
 
+    for relative in V15_REQUIRED_FILES:
+        assert root.joinpath(relative).is_file(), f"missing baseline-first contract: {relative}"
+    passed.append("baseline-first selection contracts")
+
     for relative, required_fragments in V12_RUNTIME_CONTRACTS.items():
         text = root.joinpath(relative).read_text(encoding="utf-8")
         for fragment in required_fragments:
@@ -460,6 +525,12 @@ def run(root: Path) -> list[str]:
             assert fragment in text, f"missing v1.4 runtime integration in {relative}: {fragment}"
     passed.append("capability and source-trust runtime integration")
 
+    for relative, required_fragments in V15_RUNTIME_CONTRACTS.items():
+        text = root.joinpath(relative).read_text(encoding="utf-8")
+        for fragment in required_fragments:
+            assert fragment in text, f"missing baseline-first runtime integration in {relative}: {fragment}"
+    passed.append("baseline-first runtime integration")
+
     for path in root.joinpath("templates").glob("*.yaml"):
         assert isinstance(yaml.safe_load(path.read_text(encoding="utf-8")), dict)
     passed.append("YAML templates parse")
@@ -472,6 +543,7 @@ def run(root: Path) -> list[str]:
     fit_card = yaml.safe_load(root.joinpath("templates/fit-card.yaml").read_text(encoding="utf-8"))["fit_card"]
     opportunity_signal = yaml.safe_load(root.joinpath("templates/opportunity-signal.yaml").read_text(encoding="utf-8"))["opportunity_signal"]
     triage_entry = yaml.safe_load(root.joinpath("templates/literature-triage-entry.yaml").read_text(encoding="utf-8"))["literature_triage_entry"]
+    baseline_profile = yaml.safe_load(root.joinpath("templates/baseline-profile.yaml").read_text(encoding="utf-8"))["baseline_model"]
     capability_profile = yaml.safe_load(root.joinpath("templates/capability-profile.yaml").read_text(encoding="utf-8"))["capability_profile"]
     leverage_plan = yaml.safe_load(root.joinpath("templates/implementation-leverage-plan.yaml").read_text(encoding="utf-8"))["implementation_leverage_plan"]
     assert signature["id"].startswith("IS-")
@@ -491,18 +563,56 @@ def run(root: Path) -> list[str]:
     unavailable_capability["capabilities"][0]["status"] = "AVAILABLE"
     unavailable_capability["capabilities"][0]["check_basis"] = None
     assert not capability_profile_valid(unavailable_capability)
+    selected_baseline = yaml.safe_load(yaml.safe_dump(baseline_profile, sort_keys=False))
+    selected_baseline.update({
+        "selection_status": "SELECTED",
+        "task_setting": "small-object detection on a fixed public benchmark",
+        "baseline_contract_version": 1,
+    })
+    selected_baseline["exact_configuration"].update({
+        "model_family": "Example detector",
+        "exact_variant": "example-small-v1",
+        "checkpoint_or_initialization": "official ImageNet initialization",
+        "input_and_preprocessing": "640-pixel letterbox and documented normalization",
+        "data_split": "official train/validation split",
+        "primary_metric_and_evaluation_protocol": "COCO AP with official evaluator",
+    })
+    selected_baseline["provenance"].update({
+        "official_paper_ids": ["P-0001"],
+        "official_code_or_config_locator": "https://example.invalid/config.yaml",
+        "source_kind": "OFFICIAL_MODEL",
+        "verification_status": "VERIFIED",
+        "evidence_ids": ["EU-0001"],
+    })
+    selected_baseline["fit_assessment"].update({
+        "task": "MATCHED", "data": "MATCHED", "metric": "MATCHED",
+        "resources": "BORDERLINE", "implementation": "MATCHED",
+        "limitations": ["Resource fit requires a documented reduced batch size."],
+    })
+    selected_baseline["user_selection"].update({
+        "decision_id": "D-0001", "selected_by": "HUMAN",
+        "rationale": "It is the requested reproducible primary comparison.",
+        "selected_at": "2026-08-14T00:00:00Z",
+    })
+    assert selected_baseline_valid(selected_baseline)
+    assert not selected_baseline_valid(dict(selected_baseline, selection_status="VERIFIED"))
     assert leverage_plan["id"].startswith("IL-")
     assert leverage_plan["decision_policy"] == "REUSE_ADAPT_NEW_MINIMAL"
     assert candidate_template["research_question_canvas_id"].startswith("RQ-")
+    assert candidate_template["baseline_model_id"].startswith("BL-")
     passed.append("signature, commitment, and awareness-lead template links")
     passed.append("researchability, opportunity, and triage template links")
     passed.append("capability profile template links")
+    passed.append("baseline profile template links")
     passed.append("implementation-leverage template links")
 
     behavioral_evals = root.joinpath("tests/behavioral-evals.md").read_text(encoding="utf-8")
-    for case in ("B1", "B2", "B3", "B4", "B5", "B6", "TRUST_UNVERIFIED", "HOLD_RESOURCE"):
+    for case in (
+        "B1", "B2", "B3", "B4", "B5", "B6", "B7", "TRUST_UNVERIFIED",
+        "HOLD_RESOURCE", "BASELINE_SELECTION_REQUIRED",
+    ):
         assert case in behavioral_evals
-    passed.append("behavioral eval contract covers capability, source trust, novelty, Zotero, and handoff")
+    passed.append("behavioral eval contract covers capability, source trust, novelty, Zotero, handoff, and baseline selection")
 
     for state_file in STATE_FILES:
         text = root.joinpath("states", state_file).read_text(encoding="utf-8")
@@ -561,6 +671,8 @@ def run(root: Path) -> list[str]:
     previous_commitment = {
         "id": "CM-0001", "candidate_id": "C-0001", "commitment_version": 1,
         "innovation_signature_id": "IS-0001", "innovation_signature_version": 1,
+        "baseline_model_id": "BL-0001", "baseline_contract_version": 1,
+        "baseline_delta_statement": "Intervene only on assignment after the locked baseline encoder.",
         "core_mechanism": "change routing distribution", "differentiating_claim": "diagnostic difference",
         "prediction_ids": ["PR-0001"], "planned_falsifier": "no diagnostic change",
         "falsification_budget": {"maximum_cost_tier": "F1"}, "project_resource_assumptions": ["one GPU"],
@@ -577,6 +689,18 @@ def run(root: Path) -> list[str]:
     )
     assert not commitment_revision_valid(previous_commitment, silent_change)
     assert commitment_revision_valid(previous_commitment, valid_revision)
+    baseline_change = dict(previous_commitment, baseline_contract_version=2)
+    baseline_revision = dict(
+        baseline_change,
+        id="CM-0003",
+        commitment_version=2,
+        supersedes_commitment_id="CM-0001",
+        change_reason="The selected baseline configuration changed after user review.",
+        changed_core_fields=["baseline_contract_version"],
+        affected_dependent_ids=["DM-0001", "EX-0001", "PV-0001"],
+    )
+    assert not commitment_revision_valid(previous_commitment, baseline_change)
+    assert commitment_revision_valid(previous_commitment, baseline_revision)
     passed.append("semantic commitment revision invalidates dependents")
 
     innovation_protocol = root.joinpath("protocols/innovation-signature.md").read_text(encoding="utf-8")
@@ -609,7 +733,7 @@ def run(root: Path) -> list[str]:
     assert not preflight_outcome_valid(dict(fit_card, preflight_outcome="APPROVED"))
     for routing_phrase in ("carry unknowns into S02", "remain at G1", "return to S00/S01"):
         assert routing_phrase not in researchability_protocol
-    assert "`PROCEED` plus explicit G1 `APPROVED` transitions to S02" in scope_state
+    assert "`PROCEED` plus one explicit selected and verified `BL-` contract" in scope_state
     passed.append("preflight outcomes are canonical and routing stays in S01/runtime")
 
     unverified_signal = {
@@ -633,13 +757,21 @@ def run(root: Path) -> list[str]:
     assert not candidate_signal_trace_valid(untraced_candidate, signals)
     assert not candidate_signal_trace_valid(unverified_candidate, signals)
     assert candidate_signal_trace_valid(verified_candidate, signals)
+    traced_baseline_candidate = dict(
+        verified_candidate,
+        baseline_delta_statement="Change only the assignment rule relative to the selected baseline.",
+    )
+    assert candidate_baseline_trace_valid(traced_baseline_candidate, selected_baseline)
+    assert not candidate_baseline_trace_valid(
+        dict(traced_baseline_candidate, baseline_model_id="BL-9999"), selected_baseline,
+    )
     for relative in (
         "schemas/candidate-schema.md", "schemas/state-schema.md",
         "protocols/integrity.md", "states/S06-candidate-portfolio.md",
     ):
         contract = root.joinpath(relative).read_text(encoding="utf-8")
         assert "explicitly bounded evidence" not in contract
-    passed.append("active candidates require verified opportunity-signal provenance")
+    passed.append("active candidates require verified opportunity-signal and baseline provenance")
 
     blocked_access_states = (
         "ABSTRACT_ONLY", "UNAVAILABLE", "ACCESS_REQUESTED", "SUPPLEMENT_MISSING", "CODE_MISSING",
@@ -802,12 +934,13 @@ def run(root: Path) -> list[str]:
     registries = state_template["registries"]
     assert state_template["active_research_question_id"] is None
     assert state_template["active_fit_card_id"] is None
+    assert state_template["active_baseline_model_id"] is None
     assert state_template["active_capability_profile_id"] is None
     assert state_template["active_implementation_leverage_plan_id"] is None
     assert state_template["bibliography"]["reading_queue_path"] == "exports/reading-queue.md"
     for key in (
-        "research_questions", "fit_cards", "opportunity_signals", "literature_triage",
-        "capability_profiles", "implementation_leverage",
+        "research_questions", "fit_cards", "baseline_models", "opportunity_signals", "literature_triage",
+        "capability_profiles", "implementation_leverage", "candidates",
     ):
         assert key in registries
     passed.append("researchability registry pointers")
@@ -820,15 +953,19 @@ def run(root: Path) -> list[str]:
         exports_directory.mkdir()
         final_state = {
             "project_id": "research-project-0001",
-            "schema_version": "1.5",
+            "schema_version": "1.6",
             "state": "S18_EXPERIMENT_DOSSIER",
             "state_iteration": 1,
             "status": "ACTIVE",
             "mode": "EXPLORATION",
             "pending_gate": "NONE",
+            "active_baseline_model_id": "BL-0001",
+            "active_candidate_ids": ["C-0001"],
             "active_capability_profile_id": "CAP-0001",
             "active_implementation_leverage_plan_id": "IL-0001",
             "registries": {
+                "baseline_models": "state/baseline_model_registry.yaml",
+                "candidates": "state/candidate_registry.yaml",
                 "capability_profiles": "state/capability_profile_registry.yaml",
                 "implementation_leverage": "state/implementation_leverage_registry.yaml",
             },
@@ -844,6 +981,17 @@ def run(root: Path) -> list[str]:
         )
         state_directory.joinpath("capability_profile_registry.yaml").write_text(
             yaml.safe_dump({"records": [capability_profile]}, sort_keys=False), encoding="utf-8",
+        )
+        state_directory.joinpath("baseline_model_registry.yaml").write_text(
+            yaml.safe_dump({"records": [selected_baseline]}, sort_keys=False), encoding="utf-8",
+        )
+        active_candidate = {
+            "id": "C-0001",
+            "baseline_model_id": "BL-0001",
+            "baseline_delta_statement": "Change only the assignment rule relative to the selected baseline.",
+        }
+        state_directory.joinpath("candidate_registry.yaml").write_text(
+            yaml.safe_dump({"records": [active_candidate]}, sort_keys=False), encoding="utf-8",
         )
         final_plan = {
             "id": "IL-0001",
@@ -870,6 +1018,51 @@ def run(root: Path) -> list[str]:
         )
         assert json_result.returncode == 0, json_result.stdout + json_result.stderr
         assert yaml.safe_load(json_result.stdout)["valid"] is True
+
+        final_state["active_baseline_model_id"] = "CAP-0001"
+        state_directory.joinpath("research_state.yaml").write_text(
+            yaml.safe_dump({"research_state": final_state}, sort_keys=False), encoding="utf-8",
+        )
+        invalid_baseline_pointer_result = subprocess.run(
+            [sys.executable, str(validator), str(project_root)],
+            text=True, capture_output=True, check=False,
+        )
+        assert invalid_baseline_pointer_result.returncode != 0
+        assert "must reference a BL- record" in invalid_baseline_pointer_result.stdout
+        final_state["active_baseline_model_id"] = "BL-0001"
+        state_directory.joinpath("research_state.yaml").write_text(
+            yaml.safe_dump({"research_state": final_state}, sort_keys=False), encoding="utf-8",
+        )
+
+        selected_baseline["selection_status"] = "VERIFIED"
+        state_directory.joinpath("baseline_model_registry.yaml").write_text(
+            yaml.safe_dump({"records": [selected_baseline]}, sort_keys=False), encoding="utf-8",
+        )
+        unselected_baseline_result = subprocess.run(
+            [sys.executable, str(validator), str(project_root)],
+            text=True, capture_output=True, check=False,
+        )
+        assert unselected_baseline_result.returncode != 0
+        assert "user-selected, verified baseline contract" in unselected_baseline_result.stdout
+        selected_baseline["selection_status"] = "SELECTED"
+        state_directory.joinpath("baseline_model_registry.yaml").write_text(
+            yaml.safe_dump({"records": [selected_baseline]}, sort_keys=False), encoding="utf-8",
+        )
+
+        active_candidate["baseline_model_id"] = "BL-9999"
+        state_directory.joinpath("candidate_registry.yaml").write_text(
+            yaml.safe_dump({"records": [active_candidate]}, sort_keys=False), encoding="utf-8",
+        )
+        mismatched_candidate_baseline_result = subprocess.run(
+            [sys.executable, str(validator), str(project_root)],
+            text=True, capture_output=True, check=False,
+        )
+        assert mismatched_candidate_baseline_result.returncode != 0
+        assert "baseline_model_id must match active baseline" in mismatched_candidate_baseline_result.stdout
+        active_candidate["baseline_model_id"] = "BL-0001"
+        state_directory.joinpath("candidate_registry.yaml").write_text(
+            yaml.safe_dump({"records": [active_candidate]}, sort_keys=False), encoding="utf-8",
+        )
 
         final_state["active_capability_profile_id"] = "IL-0001"
         state_directory.joinpath("research_state.yaml").write_text(
@@ -911,7 +1104,7 @@ def run(root: Path) -> list[str]:
         )
         assert invalid_result.returncode != 0
         assert "TRUST_REVIEWED" in invalid_result.stdout
-    passed.append("project workspace validator accepts valid state and rejects invalid pointers/untrusted final source")
+    passed.append("project workspace validator accepts valid state and rejects invalid baseline/pointers/untrusted final source")
 
     dossier = root.joinpath("templates/experiment-dossier.md").read_text(encoding="utf-8")
     numbered = {int(n) for n in re.findall(r"^(\d+)\. ", dossier, re.MULTILINE)}

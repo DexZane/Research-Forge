@@ -75,6 +75,8 @@ CHINESE_REQUIREMENTS = (
     "REUSE_AS_IS",
     "NEW_MINIMAL",
     "CAP-",
+    "BL-",
+    "不会自己挑一个",
     "TRUST_REVIEWED",
     "exports/reading-queue.md",
     "scripts/validate_project.py",

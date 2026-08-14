@@ -17,14 +17,14 @@ Research Forge 是一个面向 AI / 深度学习方法研究的 Agent Skill。�
 Research Forge moves an AI-method direction through a controlled path:
 
 ```text
-topic or idea → evidence → novelty survivor → hypothesis → falsification → experiment-ready decision
+topic or idea → baseline contract → evidence → novelty survivor → hypothesis → falsification → experiment-ready decision
 ```
 
-It keeps the project in a separate `research-project workspace`, records S00–S18 state, evidence, claims, threats, hypotheses, decisions, and exports. Four human gates prevent silent escalation:
+It first records the user's exact baseline model or, if none is supplied, searches 2–5 direction-matched baseline options and waits for the user to select one. It keeps the project in a separate `research-project workspace`, records S00–S18 state, evidence, claims, threats, hypotheses, decisions, and exports. Four human gates prevent silent escalation:
 
 | Gate | Question |
 |---|---|
-| `G1_SCOPE_LOCK` | Is the question bounded and researchable? |
+| `G1_SCOPE_LOCK` | Is the question bounded, researchable, and anchored to a user-selected baseline? |
 | `G2_PORTFOLIO_REVIEW` | Which candidates deserve deeper attack? |
 | `G3_HYPOTHESIS_LOCK` | Is there a falsifiable mechanism to test? |
 | `G4_PROJECT_LAUNCH` | `GO`, `HOLD`, `REFINE`, `HOLD_RESOURCE`, or `KILL`? |
@@ -34,6 +34,7 @@ It keeps the project in a separate `research-project workspace`, records S00–S
 Most topic-selection prompts optimize for plausible ideas. Research Forge optimizes for *defensible decisions*:
 
 - Treat absence of search access as access debt, never proof that prior work is absent.
+- Make a primary baseline an explicit, version-pinned comparison contract; never silently pick or substitute it.
 - Separate evidence from claims and known mechanisms from hypotheses.
 - Attack novelty with T0–T5 threats and require R0–R4 reading before strong conclusions.
 - Freeze the scientific commitment before implementation planning.
@@ -83,13 +84,14 @@ Use `/research-forge` where the host supports slash commands, then give it a dir
 ```text
 Use EXPLORATION mode for robust tiny-object detection on edge devices.
 Constraints: public datasets, two consumer GPUs, six weeks.
+Baseline: ExampleDetector-S v1 with its official public configuration.
 Project workspace: /absolute/path/to/tiny-object-research
 
 Build competing mechanism candidates. Search to reject them. Stop at every human gate.
 Do not treat the starting observation as a verified cause.
 ```
 
-Use `IDEA_VALIDATION` when you already have a specific idea, or resume from its workspace when continuing an existing project.
+Use `IDEA_VALIDATION` when you already have a specific idea, or resume from its workspace when continuing an existing project. If you omit the baseline, Research Forge searches direction-matched options, presents them at G1, and stops until you choose a `BL-` profile. Baseline-specific search never replaces broad task/mechanism prior-art search.
 
 ## Decisions and outputs
 
@@ -101,6 +103,7 @@ It also includes:
 - `exports/reading-queue.md`, a Zotero-oriented priority queue for deep reading;
 - an implementation-leverage plan that separates infrastructure reuse from the scientific contribution; and
 - a `CAP-` host-capability profile. Missing search, full text, Git, sandbox, or Zotero access is recorded as debt or a capability limit, not hidden.
+- a selected `BL-` baseline model/contract, with exact configuration, evidence, fit limits, and a bounded candidate delta.
 
 ## Zotero/BibTeX reference export
 

@@ -10,7 +10,7 @@ Valid diagnostic metrics and locked hypothesis version exist.
 
 ## Reads
 
-Locked hypothesis version, active draft commitment, alternatives/predictions, diagnostics, baseline/confounder data, resources and existing outputs.
+Locked hypothesis version, active draft commitment, selected `BL-` baseline contract, alternatives/predictions, diagnostics, baseline/confounder data, resources and existing outputs.
 
 ## Writes
 
@@ -22,7 +22,7 @@ Can F0/F1 answer first? Which experiment distinguishes core from strongest alter
 
 ## Required Actions
 
-Choose cheapest killer; define variables, controls, measures, expected true/false patterns, kill condition, cost; prefer intervention; freeze primary metrics/settings/thresholds and the related `CM-` commitment before results.
+Choose cheapest killer; define variables, controls, measures, expected true/false patterns, kill condition, cost; apply the selected baseline contract and stronger-baseline controls; prefer intervention; freeze primary metrics/settings/thresholds and the related `CM-` commitment before results.
 
 ## Required Protocols
 

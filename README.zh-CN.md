@@ -10,7 +10,7 @@
 
 ## 概述
 
-Research Forge 是面向 AI / 深度学习方法研究的 Agent Skill。它把模糊主题或已有想法推进为可辩护的实验决策：先建证据，再主动攻击 novelty，提出可证伪机制，最后决定项目应当 `GO`、`HOLD`、`REFINE`、`HOLD_RESOURCE` 还是 `KILL`。
+Research Forge 是面向 AI / 深度学习方法研究的 Agent Skill。它先要求明确一个精确 baseline model；若用户没有提供，就从研究方向搜索 2–5 个候选并停下来让用户选择。随后它把模糊主题或已有想法推进为可辩护的实验决策：先建证据，再主动攻击 novelty，提出可证伪机制，最后决定项目应当 `GO`、`HOLD`、`REFINE`、`HOLD_RESOURCE` 还是 `KILL`。
 
 它不替你包装一个看似新颖的模块；它帮你在高成本训练前，尽早发现一个方向究竟值得做、该怎么证明、又会怎样失败。
 
@@ -19,6 +19,7 @@ Research Forge 是面向 AI / 深度学习方法研究的 Agent Skill。它把�
 常见选题流程倾向于收集“看起来可行”的点子。Research Forge 关注“能否经受反驳的决策”：
 
 - 用 S00–S18 状态机保存研究记忆，而不是每次从头聊；
+- 将主 baseline 固定为有版本、有证据、有配置的 `BL-` 比较契约；不自动选择，也不静默替换；
 - 分离 Evidence、Claim、Threat、Hypothesis 与 Decision，避免把猜测写成事实；
 - 用 T0–T5 对抗式 threat 和 R0–R4 阅读层级审查新颖性；
 - 在代码规划前冻结科学承诺，并以机制签名、候选承诺、最小证伪实验约束漂移；
@@ -72,13 +73,14 @@ Research Forge 遵循目录型 Agent Skills：`SKILL.md` 位于 Skill 根目录�
 Use EXPLORATION mode.
 Topic: robust tiny-object detection for edge deployment.
 Constraints: public datasets, two consumer GPUs, six-week validation window.
+Baseline: ExampleDetector-S v1 with its official public configuration.
 Project workspace: /absolute/path/to/tiny-object-research
 
 Build competing mechanism candidates. Search to reject them. Stop at every human gate.
 Do not treat the starting observation as a verified cause.
 ```
 
-已有具体方案时用 `IDEA_VALIDATION`；已有项目时提供其 `research-project workspace` 路径以恢复状态。
+已有具体方案时用 `IDEA_VALIDATION`；已有项目时提供其 `research-project workspace` 路径以恢复状态。若没有提供 baseline，Research Forge 会按方向搜索候选，在 G1 提供选择包并停下等待；它不会自己挑一个。baseline 只固定实验比较对象，不能将先前工作检索缩窄为该模型的改进论文。
 
 ## 决策与输出
 
@@ -89,6 +91,7 @@ S18 的 experiment-ready dossier 包含：范围、证据与威胁轨迹、残�
 - `exports/references.bib`：仅导出 `verification_status: VERIFIED` 的文献；
 - `exports/reading-queue.md`：供 Zotero 导入后安排精读优先级和标签；
 - `CAP-`：当前主机的能力档案与未解决债务；
+- `BL-`：用户选择的 baseline 模型/配置契约、证据、适配限制与候选相对差异；
 - implementation-leverage plan：记录复用、适配或新代码的理由、来源、版本、许可证、信任和依赖边界。
 
 ## Zotero/BibTeX 文献导出

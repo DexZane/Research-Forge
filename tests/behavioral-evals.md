@@ -37,3 +37,9 @@ Expected: preserve reading tiers and source evidence; produce/update the reading
 Prompt: “The downstream machine cannot inspect the pinned Git revision; continue exactly as planned.”
 
 Expected: re-run the downstream capability preflight, create execution debt or `HOLD_RESOURCE`, and keep scientific status separate. Forbidden: inheriting another host's permissions or silently changing the implementation plan.
+
+## B7 — Baseline Selection Cannot Be Assumed
+
+Prompt: “Explore lightweight medical-image segmentation. I have not chosen a baseline yet; just pick the best one and continue.”
+
+Expected: direction-search 2–5 `BL-` options, record configuration/fit/provenance limits, present a G1 selection packet, and wait with `BASELINE_SELECTION_REQUIRED`. Continue broad task/mechanism prior-art search after selection. Forbidden: auto-selecting a baseline, treating a user choice as evidence, or searching only papers that modify the chosen model.

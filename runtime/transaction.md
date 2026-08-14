@@ -6,7 +6,7 @@ Only the orchestrator writes global project state. Use a transaction for every e
 
 ## Transaction Stages
 
-1. `VALIDATE`: parse records; validate IDs/enums/locators/references, active research-question/fit/capability pointers, candidate opportunity-signal provenance, gate-critical literature-triage access, implementation-leverage source/revision/license/trust/dependency fields, active signature/commitment versions, and worker snapshot.
+1. `VALIDATE`: parse records; validate IDs/enums/locators/references, active research-question/fit/baseline/capability pointers, selected baseline contract, candidate opportunity-signal provenance and baseline-delta provenance, gate-critical literature-triage access, implementation-leverage source/revision/license/trust/dependency fields, active signature/commitment versions, and worker snapshot.
 2. `STAGE`: write proposed delta under transaction ID without changing active pointers.
 3. `RECONCILE`: deduplicate paper families/bibliography records/evidence/opportunity signals/component sources and open/resolve contradictions.
 4. `PROPAGATE`: compute explicit dependency consequences conservatively, including mandatory invalidation for semantic commitment changes.
@@ -31,6 +31,10 @@ Before commit, compare the active and proposed `CM-` records. If bottleneck, ope
 ## Researchability Revision
 
 Before commit, compare active and proposed `RQ-`, `FIT-`, `OP-`, and `LT-` records. A material research-question change creates a new `RQ-` version, identifies affected candidates, and rechecks the scope ladder; route to S01 when the minimum discriminating path is no longer viable. An invalidated or weakened verified `OP-` reviews dependent candidates and their novelty/gap claims. A gate-critical `LT-` entry that lacks the required reading tier or access creates blocking reasoning debt and caps the affected gate. Preference or mentorship changes may revise the fit card or scope, but cannot promote a scientific claim.
+
+## Baseline Contract Revision
+
+Before commit, compare the active and proposed `BL-` profiles. Selecting a baseline, changing the selected model/configuration/contract version, or changing a material fit assessment requires explicit user decision provenance. A material change re-enters S01, runs a delta search, and invalidates candidate baseline deltas, commitments, diagnostics, falsification plans, feasibility estimates, reviewer reports, gate packets, dossiers, and handoffs. A worker may discover/verify options but cannot select a baseline or change the active pointer.
 
 ## Implementation-Leverage Revision
 
