@@ -1,5 +1,11 @@
 # Baseline Fairness Protocol
 
+## Primary Baseline Contract
+
+Before S02, resolve one active `BL-` profile through the [Baseline-First Selection Protocol](baseline-selection.md). Pin its exact model/variant, initialization or checkpoint policy, data/split, input/preprocessing, metric/evaluation protocol, provenance, fit limits, and baseline-contract version. A model family name alone (for example, “YOLO” or “Transformer”) is not an adequate baseline.
+
+The primary baseline anchors candidate deltas and experiment comparison. It does not establish novelty, restrict literature search to the baseline family, or replace stronger-baseline checks. If the user supplied it, verify rather than silently trust it; if S01 searched it, wait for the user to select it. A baseline/configuration change re-enters S01 and invalidates dependent comparisons.
+
 ## Core Budget Matching
 
 Before attributing a gain to a mechanism, match or explicitly account for:
@@ -43,6 +49,7 @@ Report both theoretical and measured cost when relevant. Latency claims require 
 ## Pre-gate Checklist
 
 - Every claimed gain has a valid comparison.
+- The active `BL-` profile and exact baseline contract version are named in each candidate, diagnostic, experiment, and handoff.
 - Major unmatched budgets are visible.
 - Tuning/search effort is accounted for.
 - Metric implementation and checkpoint selection match.

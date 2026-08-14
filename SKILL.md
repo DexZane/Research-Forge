@@ -1,6 +1,6 @@
 ---
 name: research-forge
-description: Use when evaluating, challenging, or maturing an AI or deep-learning method research direction, vague topic, or existing idea before costly experiments, especially for literature mapping, novelty risk, mechanistic hypotheses, falsification design, reviewer attack, project triage, reuse-first open-source component planning, or an experiment-ready handoff.
+description: Use when evaluating, challenging, or maturing an AI or deep-learning method research direction, vague topic, or existing idea before costly experiments, especially for baseline-model selection, baseline-relative literature mapping, novelty risk, mechanistic hypotheses, falsification design, reviewer attack, project triage, reuse-first open-source component planning, or an experiment-ready handoff.
 ---
 
 # Research Forge
@@ -66,7 +66,7 @@ Read [runtime/boot.md](runtime/boot.md). For an existing project, load in this o
 8. search saturation/freshness state
 9. bibliography registry/export status
 10. active innovation signatures and candidate commitments
-11. active RQ canvas, FIT card, opportunity signals, literature triage queue, and capability profile
+11. active RQ canvas, FIT card, baseline profile/contract, opportunity signals, literature triage queue, and capability profile
 12. active implementation-leverage plan, selected source revisions, trust/dependency assessments, when present
 13. bibliography export and reading-queue status
 14. last major decisions and pending gate
@@ -116,6 +116,7 @@ Load a protocol when the state or decision needs it:
 | Query graph, freshness, saturation | [protocols/search.md](protocols/search.md) |
 | Bibliographic capture, deduplication, and Zotero export | [protocols/bibliography.md](protocols/bibliography.md) and [runtime/bibliography.md](runtime/bibliography.md) |
 | R0–R4 reading depth | [protocols/reading.md](protocols/reading.md) |
+| Baseline-first selection and baseline-relative research contract | [protocols/baseline-selection.md](protocols/baseline-selection.md) |
 | Research-question scope, project fit, and minimum path | [protocols/researchability.md](protocols/researchability.md) |
 | Source-grounded problem signals | [protocols/opportunity-signals.md](protocols/opportunity-signals.md) |
 | Decision-first reading order and access debt | [protocols/literature-triage.md](protocols/literature-triage.md) |
@@ -146,7 +147,7 @@ For the reviewer panel, novelty, mechanism, and experiment reviewers must produc
 
 Treat global-state updates as transactions:
 
-1. Validate shape, IDs, provenance, epistemic status, capability profile, and implementation source trust.
+1. Validate shape, IDs, provenance, epistemic status, baseline profile/contract, capability profile, and implementation source trust.
 2. Stage proposed evidence and records.
 3. Reconcile duplicates and contradictions.
 4. Propagate claim/threat/candidate consequences conservatively.
@@ -160,7 +161,7 @@ Only the orchestrator commits. Follow [runtime/transaction.md](runtime/transacti
 
 ## Human Gates
 
-- `G1_SCOPE_LOCK`: approve task, method, time, venue, resource, and interest boundaries.
+- `G1_SCOPE_LOCK`: select and approve the primary baseline contract plus task, method, time, venue, resource, and interest boundaries. If no baseline was supplied, stop for an explicit human selection from direction-searched options.
 - `G2_PORTFOLIO_REVIEW`: inspect survivors, killed candidates, strongest threats, cost, and uncertainty; select at most 1–3 finalists.
 - `G3_HYPOTHESIS_LOCK`: inspect genealogy, killed claims, residual gap, method-free hypothesis, alternatives, and falsifiers.
 - `G4_PROJECT_LAUNCH`: choose GO, HOLD, KILL, or REVISE after the project decision packet.
@@ -182,7 +183,7 @@ Complete only when:
 - the novelty boundary is stable and qualified;
 - no unresolved fatal threat or reviewer issue remains;
 - the core hypothesis is method-free, falsifiable, and distinguished from alternatives;
-- diagnostics, controls, fair baselines, resource estimates, pre-registered decision rules, and a pinned implementation-leverage plan exist;
+- a selected, version-pinned primary baseline, diagnostics, controls, fair stronger baselines, resource estimates, pre-registered decision rules, and a pinned implementation-leverage plan exist;
 - current-host capabilities and unresolved execution limitations are explicit;
 - evidence, claims, threats, contradictions, state, reports, and snapshots are synchronized;
 - the S18 dossier contains all 30 required elements and an exact next action.

@@ -20,6 +20,7 @@ This file is the canonical vocabulary. Templates illustrate records; other files
 | `OP-` | opportunity signal |
 | `LT-` | literature-triage entry |
 | `CAP-` | agent capability profile |
+| `BL-` | primary baseline model profile |
 | `IL-` | implementation-leverage plan |
 | `TH-` | threat |
 | `CT-` | contradiction |
@@ -116,6 +117,10 @@ Bibliography records reuse the immutable `P-` paper ID and the existing verifica
 - Researchability preflight outcome: `PROCEED`, `HOLD_SCOPE`, `HOLD_RESOURCE`, `REFRAME`.
 - Literature access: `FULL_TEXT_READY`, `ABSTRACT_ONLY`, `SUPPLEMENT_MISSING`, `CODE_MISSING`, `ACCESS_REQUESTED`, `UNAVAILABLE`, `NOT_APPLICABLE`.
 - Capability status: `AVAILABLE`, `LIMITED`, `UNAVAILABLE`, `UNKNOWN`, `NOT_REQUIRED`.
+- Baseline selection source: `USER_INPUT`, `DIRECTION_SEARCH`.
+- Baseline selection status: `USER_PROPOSED`, `DISCOVERED`, `VERIFIED`, `SELECTED`, `UNSUITABLE`, `NOT_SELECTED`.
+- Baseline fit: `MATCHED`, `BORDERLINE`, `MISMATCH`, `UNKNOWN`.
+- Baseline provenance source kind: `OFFICIAL_MODEL`, `VERIFIED_REPRODUCTION`.
 - Implementation decision: `REUSE_AS_IS`, `ADAPT_EXISTING`, `NEW_MINIMAL`, `DEFERRED`.
 - Implementation source kind: `OFFICIAL_CODE`, `MAINTAINED_LIBRARY`, `REPRODUCTION`, `OTHER_OPEN_SOURCE`.
 - License status: `LICENSE_COMPATIBLE`, `LICENSE_REVIEW_REQUIRED`, `LICENSE_INCOMPATIBLE`, `LICENSE_UNKNOWN`, `NOT_APPLICABLE`.

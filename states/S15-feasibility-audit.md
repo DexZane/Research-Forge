@@ -6,11 +6,11 @@ Determine whether falsification and full project execution are feasible while ke
 
 ## Entry Conditions
 
-Falsification plan, frozen candidate commitment, baseline requirements, and diagnostic hooks are defined.
+Falsification plan, frozen candidate commitment, selected `BL-` baseline contract/requirements, and diagnostic hooks are defined.
 
 ## Reads
 
-Experiments, frozen commitment budget assumptions, diagnostics, baselines/confounders, datasets, code/checkpoint sources, resource profile, active capability profile, licenses, and candidate open-source component sources.
+Experiments, frozen commitment budget assumptions, selected baseline configuration, diagnostics, baselines/confounders, datasets, code/checkpoint sources, resource profile, active capability profile, licenses, and candidate open-source component sources.
 
 ## Writes
 
@@ -22,7 +22,7 @@ What compute, data, engineering, dependency, time, storage, API, licensing, repr
 
 ## Required Actions
 
-Audit baseline reproducibility and code at R4 when needed; identify source revisions/licenses/trust/dependency limits and compose a draft `IL-` plan using `REUSE_AS_IS` → `ADAPT_EXISTING` → `NEW_MINIMAL` without executing third-party code; recheck host capability limits; estimate ranges; identify F0/F1 alternatives; separate scientific `GO/HOLD/KILL/REFINE` from execution `READY/HOLD_RESOURCE/BLOCKED`.
+Audit the selected baseline reproducibility/configuration and code at R4 when needed; identify source revisions/licenses/trust/dependency limits and compose a draft `IL-` plan using `REUSE_AS_IS` → `ADAPT_EXISTING` → `NEW_MINIMAL` without executing third-party code; recheck host capability limits; estimate ranges; identify F0/F1 alternatives; separate scientific `GO/HOLD/KILL/REFINE` from execution `READY/HOLD_RESOURCE/BLOCKED`.
 
 ## Required Protocols
 

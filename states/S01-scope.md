@@ -10,23 +10,23 @@ S00 intake is valid and mode is explicit.
 
 ## Reads
 
-Project/intake, initial RQ canvas, active `CAP-` capability profile, user constraints, resource profile, current unknowns.
+Project/intake, initial RQ canvas, user-proposed `BL-` profile or baseline-selection debt, active `CAP-` capability profile, user constraints, resource profile, current unknowns.
 
 ## Writes
 
-Completed RQ canvas, `FIT-` project-fit card with canonical preflight outcome, minimum/core/extension scope ladder, task/method/time/venue/resource/user-interest boundaries, capability/dependency limits, out-of-scope list, search cutoff, and G1 packet.
+Completed RQ canvas, `FIT-` project-fit card with canonical preflight outcome, selected `BL-` baseline contract or direction-searched baseline-selection packet, minimum/core/extension scope ladder, task/method/time/venue/resource/user-interest boundaries, capability/dependency limits, out-of-scope list, search cutoff, and G1 packet.
 
 ## Required Questions
 
-What phenomenon, unit/condition, knowledge gap, mechanism question, and observable outcome make the question answerable? What is the cheapest plausible discriminating path? Which task/setting, method class, publication horizon/venues, dates, compute/data/engineering budget, mentor/team availability, host capabilities, and preferences constrain work? Which are hard constraints versus preferences versus assumptions?
+What phenomenon, unit/condition, knowledge gap, mechanism question, and observable outcome make the question answerable? Which exact baseline model/variant/configuration will anchor comparisons? If none was supplied, which 2–5 direction-searched baselines are plausible and which `BL-` ID does the user select? What is the cheapest plausible discriminating path? Which task/setting, method class, publication horizon/venues, dates, compute/data/engineering budget, mentor/team availability, host capabilities, and preferences constrain work? Which are hard constraints versus preferences versus assumptions?
 
 ## Required Actions
 
-Complete the RQ canvas and FIT card; evaluate the active capability profile against the minimum discriminating path; write three nested scopes; record one canonical preflight outcome; separate scientific scope from user interest and mentor advice; expose conflicts, capability gaps, assumed availability, and missing choices; define what evidence would reopen scope; stage G1 packet and a human-discussion packet when requested.
+Complete the RQ canvas and FIT card; verify a user-proposed baseline or search 2–5 baseline options from the declared direction; require explicit human baseline selection and create/lock the active `BL-` contract; evaluate the active capability profile against the minimum discriminating path; write three nested scopes; record one canonical preflight outcome; separate scientific scope from user interest and mentor advice; expose conflicts, capability gaps, assumed availability, and missing choices; define what evidence would reopen scope; stage G1 packet and a human-discussion packet when requested.
 
 ## Required Protocols
 
-[Reasoning](../protocols/reasoning.md), [Researchability](../protocols/researchability.md), [Collaboration](../protocols/collaboration.md), [Resources](../protocols/resources.md), [Capability Preflight](../runtime/capability-preflight.md), [Gates](../runtime/gates.md), [Integrity](../protocols/integrity.md).
+[Reasoning](../protocols/reasoning.md), [Baseline Selection](../protocols/baseline-selection.md), [Baseline Fairness](../protocols/baseline-fairness.md), [Researchability](../protocols/researchability.md), [Collaboration](../protocols/collaboration.md), [Resources](../protocols/resources.md), [Capability Preflight](../runtime/capability-preflight.md), [Gates](../runtime/gates.md), [Integrity](../protocols/integrity.md).
 
 ## Parallelizable Work
 
@@ -38,11 +38,11 @@ Boundary draft → integrity audit → G1.
 
 ## Required Outputs
 
-`reports/scope.md`, RQ canvas, FIT card with preflight outcome, capability profile/debt consequences, scope ladder, resource profile, exclusions, search cutoff, G1 packet, and optional human-discussion packet.
+`reports/scope.md`, RQ canvas, FIT card with preflight outcome, selected `BL-` profile or baseline-selection packet, capability profile/debt consequences, scope ladder, resource profile, exclusions, search cutoff, G1 packet, and optional human-discussion packet.
 
 ## Exit Conditions
 
-`PROCEED` plus explicit G1 `APPROVED` transitions to S02. `HOLD_SCOPE` or `HOLD_RESOURCE` remains at G1 with gate outcome `HOLD`. `REFRAME` requires gate outcome `REVISE` and re-enters S00 or S01 according to the invalid field.
+`PROCEED` plus one explicit selected and verified `BL-` contract and G1 `APPROVED` transitions to S02. No user baseline choice sets G1 to `HOLD` with `BASELINE_SELECTION_REQUIRED`. `HOLD_SCOPE` or `HOLD_RESOURCE` remains at G1 with gate outcome `HOLD`. `REFRAME` requires gate outcome `REVISE` and re-enters S00 or S01 according to the invalid field.
 
 ## Rollback Conditions
 
@@ -54,7 +54,7 @@ No scientific KILL; use HOLD if no feasible or coherent scope can be approved.
 
 ## Forbidden Actions
 
-Do not infer gate approval, let target venue prove value, treat preferences or human advice as evidence, or hide an unavailable dependency inside the minimum scope.
+Do not infer gate approval, auto-select a searched baseline, let target venue prove value, treat preferences or human advice as evidence, or hide an unavailable dependency inside the minimum scope.
 
 ## Gate Behavior
 

@@ -5,6 +5,8 @@
 - Decision requested:
 - Options available:
 - Research question canvas and scope ladder:
+- Selected baseline `BL-` contract, configuration, and fit limits:
+- Direction-searched baseline options and explicit user selection, when applicable:
 - Project fit, capability gaps, and assumed dependencies:
 - Opportunity signals and evidence limits:
 - Gate-critical literature/access debt:

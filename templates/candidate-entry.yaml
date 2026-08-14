@@ -7,6 +7,8 @@ candidate:
   mechanism_question: null
   initial_gap: null
   research_question_canvas_id: RQ-0001
+  baseline_model_id: BL-0001
+  baseline_delta_statement: null
   opportunity_signal_ids: []
   innovation_signature_id: IS-0001
   active_commitment_id: CM-0001

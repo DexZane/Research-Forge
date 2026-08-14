@@ -39,7 +39,7 @@
 21. Diagnostic metrics
 22. Minimal falsification experiments
 23. Controls
-24. Baselines
+24. Selected baseline contract and stronger-baseline controls
 25. Datasets
 26. Internal variables/hooks
 27. GO/HOLD/KILL/REFINE thresholds

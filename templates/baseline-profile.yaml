@@ -1,0 +1,36 @@
+baseline_model:
+  id: BL-0001
+  display_name: Example baseline model
+  selection_source: USER_INPUT
+  selection_status: USER_PROPOSED
+  task_setting: null
+  exact_configuration:
+    model_family: null
+    exact_variant: null
+    checkpoint_or_initialization: null
+    training_recipe_or_reproduction: null
+    input_and_preprocessing: null
+    data_split: null
+    primary_metric_and_evaluation_protocol: null
+  provenance:
+    official_paper_ids: []
+    official_code_or_config_locator: null
+    source_kind: OFFICIAL_MODEL
+    verification_status: UNVERIFIED
+    evidence_ids: []
+  fit_assessment:
+    task: UNKNOWN
+    data: UNKNOWN
+    metric: UNKNOWN
+    resources: UNKNOWN
+    implementation: UNKNOWN
+    limitations: []
+  known_limitations: []
+  user_selection:
+    decision_id: null
+    selected_by: null
+    rationale: null
+    selected_at: null
+  baseline_contract_version: 1
+  lifecycle_status: DRAFT
+  version: 1

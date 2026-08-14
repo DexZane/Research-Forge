@@ -2,7 +2,7 @@
 
 ## Required Fields
 
-`project_id`, `schema_version`, `state`, `state_iteration`, `status`, `mode`, `pending_gate`, active/critical ID lists, active RQ/FIT/capability/implementation-leverage pointers, search status/cutoff, scientific/execution decisions, publication tier, snapshot/transaction pointers, version, and timestamp.
+`project_id`, `schema_version`, `state`, `state_iteration`, `status`, `mode`, `pending_gate`, active/critical ID lists, active RQ/FIT/baseline/capability/implementation-leverage pointers, search status/cutoff, scientific/execution decisions, publication tier, snapshot/transaction pointers, version, and timestamp.
 
 ## Legal Forward Transitions
 
@@ -20,7 +20,8 @@ Any state may return to the earliest invalid dependency when a decision record c
 - T4/T5 critical IDs require threat records meeting threat schema.
 - Active hypothesis IDs require G3 at or after S13.
 - Active candidate IDs resolve to current `IS-` signature and `CM-` commitment records; frozen commitments resolve from S14 onward.
-- G1 approval requires an active `RQ-` canvas, a `FIT-` card with preflight outcome `PROCEED`, and a minimum-completable scope with all decision-critical unknowns either bounded or recorded as debt.
+- G1 approval requires an active `RQ-` canvas, a `FIT-` card with preflight outcome `PROCEED`, one active selected/verified `BL-` baseline contract, and a minimum-completable scope with all decision-critical unknowns either bounded or recorded as debt. If no baseline is supplied, G1 remains `HOLD` until the human selects a direction-searched `BL-` option.
+- From S02 onward, the active `BL-` profile resolves, is `SELECTED`, pins a non-`UNKNOWN` exact configuration/fit contract, and is referenced by active candidates. Baseline/configuration changes re-enter S01 and invalidate dependent candidates, commitments, diagnostics, experiments, feasibility estimates, reviewer packets, and handoffs.
 - From S01 onward, an active `CAP-` profile resolves and records current-host limits without storing credentials or treating them as scientific evidence.
 - S06 candidates resolve to an RQ canvas and at least one verified `OP-` signal.
 - From S15 onward, an active `IL-` plan resolves to the active frozen candidate commitment; S18 has no `DEFERRED` component decision and pins all reused/adapted source revisions with compatible license and trust-reviewed, non-executed source status.

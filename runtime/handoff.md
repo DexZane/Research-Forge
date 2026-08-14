@@ -6,11 +6,11 @@ G4 explicitly approved GO; S18 dossier validates; final freshness/integrity chec
 
 ## Package
 
-Deliver human dossier plus `experiment-handoff.yaml` with project/snapshot/version, candidate, frozen commitment/signature versions, active capability profile, finalized implementation-leverage plan ID, pinned source revisions/trust/dependency limits, locked hypotheses/predictions/diagnostics, first E0 experiment, controls, fair baselines, datasets, hooks, preregistered decisions, resource assumptions, unknowns, exact next action, and links to the validated `exports/references.bib` and `exports/reading-queue.md`.
+Deliver human dossier plus `experiment-handoff.yaml` with project/snapshot/version, candidate, frozen commitment/signature versions, selected baseline model/contract version, active capability profile, finalized implementation-leverage plan ID, pinned source revisions/trust/dependency limits, locked hypotheses/predictions/diagnostics, first E0 experiment, controls, fair stronger baselines, datasets, hooks, preregistered decisions, resource assumptions, unknowns, exact next action, and links to the validated `exports/references.bib` and `exports/reading-queue.md`.
 
 ## Downstream Contract
 
-The experiment/coding agent may implement and execute the specified experiments only after its own capability preflight and authorized sandbox check, then record environment/code/data versions and return evidence-linked results. It must follow each pinned `REUSE_AS_IS`, `ADAPT_EXISTING`, or `NEW_MINIMAL` component decision; it must not silently change novelty boundary, frozen candidate commitment/signature, locked hypotheses, primary predictions/metrics, decision thresholds, source trust/dependency limits, or the implementation-leverage plan.
+The experiment/coding agent may implement and execute the specified experiments only after its own capability preflight and authorized sandbox check, then record environment/code/data versions and return evidence-linked results. It must follow each pinned `REUSE_AS_IS`, `ADAPT_EXISTING`, or `NEW_MINIMAL` component decision and the selected baseline model/contract; it must not silently change novelty boundary, frozen candidate commitment/signature, baseline contract, locked hypotheses, primary predictions/metrics, decision thresholds, source trust/dependency limits, or the implementation-leverage plan.
 
 If implementation reveals an invalid assumption, inaccessible hook, unsuitable source revision/license, adaptation that changes a fair comparison, new prior art, confounder, or required scientific change, stop and route back to Research Forge recovery/rollback/gate.
 

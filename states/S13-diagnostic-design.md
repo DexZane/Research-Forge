@@ -10,7 +10,7 @@ G3 locked a hypothesis version, alternatives, predictions, and falsifiers.
 
 ## Reads
 
-Locked hypotheses/predictions, domain evaluation module, baseline artifacts/hooks, resource profile.
+Locked hypotheses/predictions, selected `BL-` baseline contract/artifacts/hooks, domain evaluation module, resource profile.
 
 ## Writes
 
@@ -18,7 +18,7 @@ Diagnostic metric records, alternative operationalizations, ceiling/oracle defin
 
 ## Required Questions
 
-What does each metric measure? Does it apply to baselines? What do boundaries/extrema mean? Which prediction and alternative does it distinguish? What confounds it?
+What does each metric measure? Does it apply to the selected baseline and stronger-baseline controls under the locked configuration? What do boundaries/extrema mean? Which prediction and alternative does it distinguish? What confounds it?
 
 ## Required Actions
 

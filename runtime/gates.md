@@ -6,7 +6,7 @@ Before a gate, freeze a snapshot, run integrity, write a gate packet, set `WAITI
 
 ## G1 — Scope Lock
 
-After S01. Show the RQ canvas, FIT card/preflight outcome, active `CAP-` capability profile, minimum/core/extension scopes, decision-critical unknowns, and questions requiring human input. Gate options are canonical `APPROVED`, `REVISE`, or `HOLD`: `PROCEED` may be approved into S02; `HOLD_SCOPE` and `HOLD_RESOURCE` map to `HOLD`; `REFRAME` maps to `REVISE` and S00/S01 re-entry. Approval freezes task/method/time/venue/resource/interest boundaries; later changes require S01 re-entry and delta search.
+After S01. Show the RQ canvas, FIT card/preflight outcome, active `BL-` baseline contract or direction-searched baseline options, active `CAP-` capability profile, minimum/core/extension scopes, decision-critical unknowns, and questions requiring human input. If no baseline was supplied, require explicit human selection; `BASELINE_SELECTION_REQUIRED` is a G1 `HOLD`, never an auto-selection. Gate options are canonical `APPROVED`, `REVISE`, or `HOLD`: `PROCEED` may be approved into S02 only with one selected/verified baseline; `HOLD_SCOPE` and `HOLD_RESOURCE` map to `HOLD`; `REFRAME` maps to `REVISE` and S00/S01 re-entry. Approval freezes the baseline contract and task/method/time/venue/resource/interest boundaries; later changes require S01 re-entry and delta search.
 
 ## G2 — Candidate Portfolio Review
 

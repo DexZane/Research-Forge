@@ -4,6 +4,9 @@ candidate_commitment:
   candidate_version: 1
   innovation_signature_id: IS-0001
   innovation_signature_version: 1
+  baseline_model_id: BL-0001
+  baseline_contract_version: 1
+  baseline_delta_statement: null
   core_mechanism: null
   differentiating_claim: null
   prediction_ids: []

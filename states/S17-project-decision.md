@@ -10,7 +10,7 @@ Reviewer panel and all prerequisite registries are synchronized.
 
 ## Reads
 
-Hard-gate evidence, current frozen commitment/signature, scorecards, meta-review, resources, active capability profile, source trust/dependency limits, novelty boundary, hypotheses, falsification plan, risks, contradictions/debt.
+Hard-gate evidence, selected `BL-` baseline contract, current frozen commitment/signature, scorecards, meta-review, resources, active capability profile, source trust/dependency limits, novelty boundary, hypotheses, falsification plan, risks, contradictions/debt.
 
 ## Writes
 
@@ -18,7 +18,7 @@ Hard-gate evidence, current frozen commitment/signature, scorecards, meta-review
 
 ## Required Questions
 
-Do novelty, clear mechanistic question, falsifiability, absence of fatal prior art, optimization space, diagnostic access, integrity, reviewer-fatal gates, and execution capability/source-trust requirements pass? What uncertainty remains?
+Do novelty, clear mechanistic question, falsifiability, absence of fatal prior art, optimization space, selected baseline validity/fairness, diagnostic access, integrity, reviewer-fatal gates, and execution capability/source-trust requirements pass? What uncertainty remains?
 
 ## Required Actions
 

@@ -2,7 +2,7 @@
 
 ## Required Fields
 
-`C-` ID, genealogy parents/relation, mechanism-oriented title, research/mechanism question, initial gap, RQ canvas, opportunity-signal provenance, innovation signature, active core commitment, predictions, closest work, threats, risks, implementation guess, novelty/residual/status, evidence, version, and kill reason when archived.
+`C-` ID, genealogy parents/relation, mechanism-oriented title, research/mechanism question, initial gap, RQ canvas, selected baseline profile and bounded baseline delta, opportunity-signal provenance, innovation signature, active core commitment, predictions, closest work, threats, risks, implementation guess, novelty/residual/status, evidence, version, and kill reason when archived.
 
 ## Validity
 
@@ -10,6 +10,7 @@
 - Active candidate has at least one observable preliminary prediction and risk.
 - Active candidate has one proposed `IS-` signature and one active `CM-` commitment; the signature must pass the specificity gate.
 - Active candidate links an `RQ-` canvas and at least one verified `OP-` signal.
+- S06+ candidates link the active selected `BL-` profile and state what changes relative to the baseline without treating baseline reuse as novelty.
 - Candidate core mechanisms, predictions, falsifiers, and budget assumptions change only through the commitment-integrity protocol.
 - Novelty begins `UNVERIFIED`; only S10 can assign a bounded survivor status.
 - Candidate lineage uses `ORIGIN`, `REFINES`, `NARROWS`, `PIVOTS`, `MERGES`, `SPLITS`, or `REVIVES`.
