@@ -12,18 +12,20 @@ Parallelize independent queries, research lines, paper reads, code checks, or fi
 
 Never let parallel workers create parallel truth. Deduplicate and reconcile centrally.
 
-## Task Packet
+## Task Packet & Subagent Context Isolation
 
-Every dispatch contains:
+To prevent token bloat and context degradation across multi-turn workflows, workers and subagents must run with isolated, minimal context. Do not dump the entire global state or full project history into a worker prompt.
+
+Every dispatch packet (see [templates/worker-task-packet.yaml](../templates/worker-task-packet.yaml)) contains strictly:
 
 - task ID and worker type;
-- decision question and search/reading intent;
+- specific decision question and search/reading intent;
+- minimal targeted context: relevant candidate signature (`IS-`), baseline profile (`BL-`), and target paper/code locators only;
 - exact scope, cutoff date, and exclusions;
-- input record IDs and immutable snapshot version;
-- permitted tools/actions and forbidden global writes;
-- required output schema;
+- permitted tools/actions and forbidden global writes (workers never write global state);
+- required output schema (compact structured YAML/JSON);
 - evidence/primary-source requirements;
-- dependencies, deadline/budget, and stop condition;
+- dependencies, budget, and stop condition;
 - escalation conditions.
 
 ## Worker Return

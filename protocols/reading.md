@@ -45,6 +45,8 @@ Use R4 when implementation affects novelty, fairness, feasibility, reproducibili
 - Backbone anchor or matrix entry: at least R2.
 - Preliminary T4/T5: upgrade to R3 before formal threat status.
 - Implementation-critical T4/T5 or feasibility issue: R4.
+- Automated retrieval: delegate PDF acquisition to `nature-downloader` or `academic-mcp`, and deep bilingual / structured extraction to `nature-reader` when present.
+- Source inaccessible via tools: prompt human to provide text at `<project>/inputs/papers/`; once supplied as `USER_SUPPLIED_PRIMARY`, verify text completeness and proceed with R2/R3 audit.
 - Source inaccessible: retain `UNVERIFIED`, open debt, and limit judgment.
 
 ## Paper–Code Contradiction

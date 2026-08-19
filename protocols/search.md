@@ -44,7 +44,7 @@ Route by purpose:
 - surveys for taxonomy and leads only;
 - blogs/social posts for leads only.
 
-Verify venue and publication year; distinguish preprint date, online date, conference year, and journal year.
+When available, delegate scholarly query execution to active academic MCP servers (`paper-search-mcp`, `academic-mcp`, `semanticscholar-mcp`) or companion skills (`nature-academic-search`, `anysearch`), recording query provenance in `SS-` search sessions. Verify venue and publication year; distinguish preprint date, online date, conference year, and journal year.
 
 ## Discovery and Chaining
 
@@ -86,7 +86,7 @@ Track coverage over task, failure mode, mechanism, mathematical object, historic
 
 ## Decision-First Triage and Access
 
-Maintain the `LT-` queue defined in [Literature Triage](literature-triage.md). Prioritize sources that can change a gate, boundary, falsifier, opportunity-signal verification, or core mechanism judgment. Record full-text, supplement, and code access; lack of authorized access is debt and a confidence cap, never evidence that the source is irrelevant.
+Maintain the `LT-` queue defined in [Literature Triage](literature-triage.md). Prioritize sources that can change a gate, boundary, falsifier, opportunity-signal verification, or core mechanism judgment. Record full-text, supplement, and code access; lack of authorized access is debt and a confidence cap, never evidence that the source is irrelevant. When automated search or retrieval tools are unavailable, guide the user to deposit target papers into `<project>/inputs/papers/` to unblock critical triage paths.
 
 ## Reproducibility
 

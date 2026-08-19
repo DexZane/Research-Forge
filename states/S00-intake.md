@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Parse the research input, recover existing context if present, and choose `EXPLORATION` or `IDEA_VALIDATION` without judging novelty.
+Parse the research input, recover existing context if present, and choose `EXPLORATION`, `IDEA_VALIDATION`, or `FAST_AUDIT` without judging novelty.
 
 ## Entry Conditions
 
@@ -22,7 +22,7 @@ What is the topic/task? Is a specific idea proposed? Which exact baseline model/
 
 ## Required Actions
 
-Preserve the original request verbatim; decompose topic/symptom/proposed cause/proposed solution; create a `BL-` record with `USER_PROPOSED` status when the user names a baseline, otherwise record baseline selection as decision-critical unknown; initialize the RQ canvas without inventing a knowledge gap; run capability preflight and create `CAP-` without storing credentials; label uncertainties; choose mode; create stable project ID and initial decision log.
+Preserve the original request verbatim; decompose topic/symptom/proposed cause/proposed solution; create a `BL-` record with `USER_PROPOSED` status when the user names a baseline, otherwise record baseline selection as decision-critical unknown; initialize the RQ canvas without inventing a knowledge gap; run capability preflight and create `CAP-` without storing credentials; label uncertainties; choose mode (`EXPLORATION`, `IDEA_VALIDATION`, or `FAST_AUDIT`); create stable project ID and initial decision log.
 
 ## Required Protocols
 
@@ -42,7 +42,7 @@ Boot validation → intake decomposition → mode selection → initial commit.
 
 ## Exit Conditions
 
-Mode, project identity, user-provided facts/constraints, baseline input status, inferred elements, unknowns, initial RQ canvas, and host capability limits are explicit; route to S01.
+Mode, project identity, user-provided facts/constraints, baseline input status, inferred elements, unknowns, initial RQ canvas, and host capability limits are explicit; route to S01 (in `FAST_AUDIT` mode, S01 scope lock transitions directly into adversarial audit sequence S09→S10→S12→S14→S16).
 
 ## Rollback Conditions
 

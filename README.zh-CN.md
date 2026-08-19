@@ -80,7 +80,79 @@ Build competing mechanism candidates. Search to reject them. Stop at every human
 Do not treat the starting observation as a verified cause.
 ```
 
-已有具体方案时用 `IDEA_VALIDATION`；已有项目时提供其 `research-project workspace` 路径以恢复状态。若没有提供 baseline，Research Forge 会按方向搜索候选，在 G1 提供选择包并停下等待；它不会自己挑一个。baseline 只固定实验比较对象，不能将先前工作检索缩窄为该模型的改进论文。
+若没有提供 baseline，Research Forge 会按方向搜索候选，在 G1 提供选择包并停下等待；它不会自己挑一个。baseline 只固定实验比较对象，不能将先前工作检索缩窄为该模型的改进论文。早期行为应当是：S00 把观察记录为未核验信息，G1 锁定研究边界，S02–S08 建立并攻击多样候选组合，然后由 G2 选择 finalists。
+
+#### 2. 验证已有想法
+
+当你已经有候选方法或新颖性主张时，使用 `IDEA_VALIDATION`。
+
+```text
+/research-forge
+
+Use IDEA_VALIDATION mode.
+Candidate idea: replace the YOLO feature-fusion block with a state-space module
+to improve tiny-object context modeling.
+Claimed mechanism: longer-range spatial interactions recover context lost by
+local fusion.
+Constraints: preserve real-time inference and use the same training data.
+Project workspace: /absolute/path/to/ssm-yolo-audit
+
+Preserve the original idea, generate alternative mechanisms, attack the claim
+with the strongest prior art, and identify the residual contribution after
+innovation peeling. Stop at every human gate.
+```
+
+该模式不会假定想法新颖。它会保留原始候选，使后续的 refinement、被杀死的主张和替代机制候选都能够追踪。
+
+#### 3. 恢复已有项目
+
+从项目根目录恢复，而不是依靠记忆重新口述研究历史。
+
+```text
+/research-forge
+
+Resume the Research Forge project at:
+/absolute/path/to/tiny-object-research
+
+Validate saved state and the latest immutable snapshot, load blocking threats,
+contradictions, reasoning debt, search freshness, and the pending gate, then
+continue from the current valid state. Do not silently reconstruct uncertain data.
+```
+
+运行时会按固定顺序加载 `state/research_state.yaml`、快照、活跃候选与假设、T4/T5 威胁、开放矛盾、阻塞债务、搜索状态和近期决策。
+
+#### 4. 快速对抗审计
+
+当你在顶会截稿前或灵感初期需要对一个具体想法或预印本草稿进行 10–15 分钟快速压力测试时，使用 `FAST_AUDIT`。
+
+```text
+/research-forge
+
+Use FAST_AUDIT mode.
+Candidate idea: replace multi-head attention with state-space recurrence in diffusion transformers.
+Claimed mechanism: linear-time sequence compression for high-resolution synthesis.
+Target baseline: DiT-XL/2 on ImageNet 512x512.
+Project workspace: /absolute/path/to/fast-audit-mamba-dit
+
+Run an accelerated adversarial triage: scan closest prior art, peel non-novel claims,
+attack with alternative explanations, pre-register one cheapest killer falsifier,
+and produce a fast-audit risk report.
+```
+
+该模式跳过宽泛的候选组合构建（S02–S08），直接审计单一目标想法：运行对抗新颖性扫描（S09）、创新残余剥离（S10）、替代机制攻击（S12）、廉价杀手设计（S14）与三方快速盲审（S16），输出结构化的[快速审计报告](templates/fast-audit-report.md)。详见[快速审计示例](examples/fast-audit-mode.md)。
+
+### 通过人工 Gate
+
+Research Forge 必须在每个 Gate 停下来，等待明确决定：
+
+| Gate | 人类决定 |
+|---|---|
+| `G1_SCOPE_LOCK` | 批准或修改任务、方法、时间、场所、资源和兴趣边界 |
+| `G2_PORTFOLIO_REVIEW` | 审查 survivors、kills、威胁、成本和不确定性，最多选择 1–3 个 finalists |
+| `G3_HYPOTHESIS_LOCK` | 锁定存活的无方法假设、替代解释、预测和证伪条件 |
+| `G4_PROJECT_LAUNCH` | 根据 project-decision packet 选择 GO、HOLD、KILL 或 REVISE |
+
+沉默不是批准。你可以批准、要求修改、暂缓项目或拒绝建议的状态转移。在 `G4_PROJECT_LAUNCH` 获得明确 GO 之前，S18 不可用。
 
 ## 决策与输出
 

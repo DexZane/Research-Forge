@@ -1,0 +1,34 @@
+# Record shape for user-supplied literature or primary artifact
+source_drop:
+  id: P-0001
+  source_type: USER_SUPPLIED_PRIMARY
+  file_path: inputs/papers/P-0001.md
+  format: MARKDOWN  # [MARKDOWN | PDF | TEXT | CODE]
+  supplied_by: HUMAN
+  supplied_at: "2026-08-19T00:00:00Z"
+  metadata:
+    title: Example User-Supplied Paper Title
+    authors:
+      - First Author
+      - Second Author
+    year: 2025
+    venue: NeurIPS 2025
+    identifiers:
+      doi: 10.1000/182
+      arxiv: "2501.00000"
+      url: https://arxiv.org/abs/2501.00000
+  reading_scope:
+    tier: R3
+    sections_available:
+      - ABSTRACT
+      - INTRODUCTION
+      - METHOD
+      - EXPERIMENTS
+      - APPENDIX
+  verification:
+    verification_status: VERIFIED
+    verified_by: ORCHESTRATOR
+    verification_method: DIRECT_PRIMARY_TEXT_AUDIT
+  reasoning_debt_resolved:
+    - RD-0001
+  notes: Primary text supplied directly by human to resolve CAPABILITY_GAP in automated PDF extraction.

@@ -11,10 +11,11 @@ Advance an AI-method research direction from an idea to an evidence-grounded pro
 
 ## Scope
 
-Use two entry modes:
+Use three entry modes:
 
 - `EXPLORATION`: begin from a topic, task, or observed failure; build 8–15 diverse candidates before narrowing.
 - `IDEA_VALIDATION`: begin from a proposed idea; preserve the original candidate but generate refined and alternative-mechanism candidates.
+- `FAST_AUDIT`: begin from a proposed idea or draft; run an accelerated adversarial triage focusing directly on novelty threat scan, residual innovation peeling, hypothesis/alternative-explanation attack, single cheapest killer design, and rapid reviewer risk audit.
 
 Operate on AI/deep-learning method papers. Load [domain/ai-methods/index.md](domain/ai-methods/index.md) and only the domain modules relevant to the current question.
 

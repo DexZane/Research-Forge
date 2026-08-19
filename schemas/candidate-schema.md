@@ -19,4 +19,4 @@
 
 ## Portfolio Invariants
 
-Exploration mode S06 has 8–15 diverse candidates before S07. Idea-validation mode includes original, refined, and alternative-mechanism candidates. G2 selects at most 1–3 finalists. Pareto domination removes depth-search priority but does not erase history. S14 requires the finalist's active commitment to be frozen and linked to a preregistered falsification plan.
+Exploration mode S06 has 8–15 diverse candidates before S07. Idea-validation mode includes original, refined, and alternative-mechanism candidates. Fast-audit mode focuses on a single candidate idea, executing an accelerated adversarial threat, residual-gap, hypothesis-attack, and cheap-falsifier check. G2 selects at most 1–3 finalists (bypassed in Fast-audit mode where the single target is audited directly). Pareto domination removes depth-search priority but does not erase history. S14 requires the finalist's active commitment to be frozen and linked to a preregistered falsification plan.

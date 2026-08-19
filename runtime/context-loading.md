@@ -16,10 +16,12 @@ Load IDs and decision-relevant fields, not entire project history. Always includ
 | S13–S15 | selected baseline contract, locked hypothesis/commitment version, diagnostics, experiments, baselines/confounders, resources/code evidence, implementation-leverage source scan, trust/dependency assessments, and component decisions |
 | S16–S17 | immutable dossier, active commitment/signature, independent reviewer reports/meta-review, hard gates, risks |
 | S18 | G4 decision, selected baseline contract, all active dossier IDs/versions, frozen commitment, finalized implementation-leverage plan/pinned source revisions/trust, freshness/integrity results, bibliography export/reading queue status, handoff template |
+| FAST_AUDIT | intake, single candidate signature/commitment, locked baseline profile, targeted competitor queries/evidence, residual gap, single cheapest killer, rapid reviewer summary |
 
 ## Loading Rules
 
 - Load full primary-source passages only for the current decision; otherwise use evidence summaries plus locators.
+- For worker/subagent dispatch, transmit only the minimal targeted entity fields (see [templates/worker-task-packet.yaml](../templates/worker-task-packet.yaml)), never full multi-state ledgers.
 - Include killed/superseded records only when genealogy, rollback, or reviewer risk needs them.
 - A stale report cannot override a newer registry; mark synchronization debt.
 - If the context cannot fit, prioritize fatal threats, blocking integrity, and decision dependencies over broad background.

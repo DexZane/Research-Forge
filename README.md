@@ -91,7 +91,79 @@ Build competing mechanism candidates. Search to reject them. Stop at every human
 Do not treat the starting observation as a verified cause.
 ```
 
-Use `IDEA_VALIDATION` when you already have a specific idea, or resume from its workspace when continuing an existing project. If you omit the baseline, Research Forge searches direction-matched options, presents them at G1, and stops until you choose a `BL-` profile. Baseline-specific search never replaces broad task/mechanism prior-art search.
+If you omit the baseline, Research Forge searches direction-matched options, presents them at G1, and stops until you choose a `BL-` profile. Baseline-specific search never replaces broad task/mechanism prior-art search. Expected early behavior: S00 records the observation as unverified, G1 locks the research boundary, and S02–S08 build and attack a diverse candidate portfolio before G2 selects finalists.
+
+#### 2. Validate an existing idea
+
+Use `IDEA_VALIDATION` when you already have a candidate method or novelty claim.
+
+```text
+/research-forge
+
+Use IDEA_VALIDATION mode.
+Candidate idea: replace the YOLO feature-fusion block with a state-space module
+to improve tiny-object context modeling.
+Claimed mechanism: longer-range spatial interactions recover context lost by
+local fusion.
+Constraints: preserve real-time inference and use the same training data.
+Project workspace: /absolute/path/to/ssm-yolo-audit
+
+Preserve the original idea, generate alternative mechanisms, attack the claim
+with the strongest prior art, and identify the residual contribution after
+innovation peeling. Stop at every human gate.
+```
+
+The mode does not assume the idea is novel. It preserves the original candidate so that later refinements, killed claims, and alternative-mechanism candidates remain traceable.
+
+#### 3. Resume a project
+
+Resume from the project root rather than restating the research history from memory.
+
+```text
+/research-forge
+
+Resume the Research Forge project at:
+/absolute/path/to/tiny-object-research
+
+Validate saved state and the latest immutable snapshot, load blocking threats,
+contradictions, reasoning debt, search freshness, and the pending gate, then
+continue from the current valid state. Do not silently reconstruct uncertain data.
+```
+
+The runtime loads `state/research_state.yaml`, snapshots, active candidates and hypotheses, T4/T5 threats, open contradictions, blocking debt, search status, and recent decisions in a fixed recovery order.
+
+#### 4. Run a fast audit
+
+Use `FAST_AUDIT` when you need an accelerated 10–15 minute adversarial gut-check on a specific idea or pre-submission draft before investing in a full project lifecycle.
+
+```text
+/research-forge
+
+Use FAST_AUDIT mode.
+Candidate idea: replace multi-head attention with state-space recurrence in diffusion transformers.
+Claimed mechanism: linear-time sequence compression for high-resolution synthesis.
+Target baseline: DiT-XL/2 on ImageNet 512x512.
+Project workspace: /absolute/path/to/fast-audit-mamba-dit
+
+Run an accelerated adversarial triage: scan closest prior art, peel non-novel claims,
+attack with alternative explanations, pre-register one cheapest killer falsifier,
+and produce a fast-audit risk report.
+```
+
+This mode skips wide candidate generation (S02–S08) and directly audits the single candidate through novelty threat scan (S09), innovation peeling (S10), hypothesis attack (S12), cheapest killer design (S14), and fast reviewer sweep (S16), producing a structured [Fast Audit Report](templates/fast-audit-report.md). See [examples/fast-audit-mode.md](examples/fast-audit-mode.md).
+
+### Work through the human gates
+
+Research Forge must stop and ask for an explicit decision at each gate:
+
+| Gate | Human decision |
+|---|---|
+| `G1_SCOPE_LOCK` | Approve or revise task, method, time, venue, resource, and interest boundaries |
+| `G2_PORTFOLIO_REVIEW` | Review survivors, kills, threats, cost, and uncertainty; select at most 1–3 finalists |
+| `G3_HYPOTHESIS_LOCK` | Lock a surviving method-free hypothesis, alternatives, predictions, and falsifiers |
+| `G4_PROJECT_LAUNCH` | Choose GO, HOLD, KILL, or REVISE from the project-decision packet |
+
+Silence is not approval. You can approve, request revisions, hold the project, or reject the proposed transition. S18 is unavailable until `G4_PROJECT_LAUNCH` receives an explicit GO.
 
 ## Decisions and outputs
 

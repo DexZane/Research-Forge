@@ -1,0 +1,36 @@
+# Standard lightweight dispatch packet for subagents
+task_packet:
+  task_id: TSK-0001
+  worker_type: NOVELTY_ATTACKER  # [SEARCH | READER | CODE_VERIFIER | ANALYST | NOVELTY_ATTACKER | HYPOTHESIS_ATTACKER | REVIEWER_N | REVIEWER_M | REVIEWER_E]
+  decision_question: "Does prior art P-0005 establish the claimed selective scanning mechanism in equal or broader form?"
+  
+  # Minimal context subset (do NOT dump entire global state)
+  minimal_context:
+    active_candidate_id: C-0001
+    innovation_signature:
+      id: IS-0001
+      bottleneck: "quadratic context accumulation in local fusion"
+      operation: "state-space selective recurrence"
+      changed_object: "cross-scale feature aggregation graph"
+      critical_condition: "dense multi-scale feature pyramids"
+      predicted_contrast: "lower memory ceiling with matched receptive field"
+    locked_baseline_id: BL-0001
+    target_prior_art_id: P-0005
+    target_prior_art_title: "Selective State Space Models for Visual Feature Representation"
+    target_prior_art_text_locator: "inputs/papers/P-0005.md#Section 3"
+    
+  task_constraints:
+    scope: "AI/CV method papers only"
+    cutoff_date: "2026-08-19"
+    required_reading_tier: R3
+    forbidden_actions:
+      - "Do NOT modify global research_state.yaml or threat ledgers directly."
+      - "Do NOT execute external Python or third-party code."
+      
+  expected_return_schema:
+    proposed_threat_level: "T0 | T1 | T2 | T3 | T4 | T5"
+    overlap_dimensions: []
+    exact_evidence_quotes: []
+    surviving_residual_gap: "STRING"
+    confidence: "HIGH | MEDIUM | LOW"
+    confidence_rationale: "STRING"

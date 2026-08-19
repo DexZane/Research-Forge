@@ -36,6 +36,31 @@ Use only `AVAILABLE`, `LIMITED`, `UNAVAILABLE`, `UNKNOWN`, or `NOT_REQUIRED`. Do
 
 Record scientific and execution consequences separately. A host limitation may produce `HOLD_RESOURCE`, never a scientific KILL.
 
+## Tool & Companion Skill Auto-Discovery Matrix
+
+During BOOT / S00 Preflight, the orchestrator inspects the host's active tool registry and installed companion skills. When detected, capabilities are promoted to `AVAILABLE` with specific `check_basis` provenance:
+
+| Capability | Detected Native MCPs / Tools | Detected Companion Skills | Promoted Status & Provenance |
+|---|---|---|---|
+| `SCHOLARLY_METADATA` | `paper-search`, `academic-mcp`, `semanticscholar`, `arxiv`, `pubmed`, `crossref`, `doi-mcp` | `nature-academic-search`, `anysearch` | `AVAILABLE` (`check_basis: "mcp:<name>"` or `"companion_skill:<name>"`) |
+| `AUTHORIZED_FULL_TEXT` | `academic-mcp`, `paper-search` (with fulltext download) | `nature-downloader` | `AVAILABLE` (`check_basis: "mcp:academic-mcp"` or `"companion_skill:nature-downloader"`) |
+| `PDF_TEXT_EXTRACTION` | Local PDF parser / converter tools | `nature-reader` | `AVAILABLE` (`check_basis: "companion_skill:nature-reader"`) |
+| `BIBTEX_VALIDATION` & Verification | `doi-mcp`, `academic-mcp` | `nature-ref-verifier`, `nature-citation` | `AVAILABLE` (`check_basis: "companion_skill:nature-ref-verifier"`) |
+| `WEB_SEARCH` | `search_web`, `google_search`, `brave_search`, `tavily` | `anysearch` | `AVAILABLE` (`check_basis: "native_tool:<name>"`) |
+
+When companion skills or MCP tools are detected, the orchestrator routes subtasks directly to them during S02–S05 (landscape/backbone) and S09 (adversarial novelty). If none are available, the preflight marks them `LIMITED` / `UNAVAILABLE` and prompts the user for manual ingestion or MCP configuration.
+
+## Human Ingestion Fallback Protocol
+
+When automated tools for scholarly metadata, full-text retrieval, or PDF parsing are `LIMITED` or `UNAVAILABLE`:
+
+1. **Standard Ingestion Directory Structure**: The project workspace maintains dedicated input directories:
+   - `<project>/inputs/papers/<P-ID>.md` or `<project>/inputs/papers/<P-ID>.pdf` (for primary paper texts and appendices);
+   - `<project>/inputs/code/<repo-name>/` (for inspected official implementations or configs).
+2. **Transparent User Prompting**: When an R3/R4 deep-read or T4/T5 threat audit is blocked by a capability gap, the orchestrator explicitly requests:
+   > *"Automated full-text retrieval for prior art `P-<xxxx>` is limited. Please provide the paper text, markdown export, or place the PDF at `<project>/inputs/papers/P-<xxxx>.pdf` to enable deep verification."*
+3. **Structured Ingestion Record**: Upon user delivery, record a [templates/manual-source-drop.yaml](../templates/manual-source-drop.yaml) entry, assign `source_type: USER_SUPPLIED_PRIMARY`, verify text coverage, and resolve the corresponding `CAPABILITY_GAP` reasoning debt.
+
 ## Integrity and Handoff
 
 At G1, show capability limits that affect the minimum discriminating path. At G4/S18, record the active `CAP-` profile and all unresolved capability debt in the handoff. A downstream agent must re-run the preflight in its own host; it cannot inherit another host's permissions or execution authorization.

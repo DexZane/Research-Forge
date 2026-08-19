@@ -8,9 +8,9 @@
 
 Dispatch only if the task is independent, bounded, based on a frozen snapshot, and has a schema/stop condition. Keep global transitions, conflict reconciliation, threat formalization, peeling, gates, and commits with the orchestrator.
 
-## Task Packet
+## Task Packet & Compact Payload
 
-Include task ID/type, decision question, intent, scope/cutoff/exclusions, snapshot/version, input IDs, exact permitted actions, forbidden global writes, evidence/reading requirements, output fields, dependencies, budget, stop/escalation conditions.
+Dispatch with minimal context (see [templates/worker-task-packet.yaml](../templates/worker-task-packet.yaml)): include task ID/type, decision question, intent, scope/cutoff/exclusions, minimal relevant entity IDs/signatures, exact permitted actions, forbidden global writes, evidence/reading requirements, compact return schema, dependencies, budget, stop/escalation conditions. Never transmit the full state ledger to a subagent.
 
 ## Return Contract
 
